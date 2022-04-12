@@ -1,0 +1,114 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+    background-color: var(--blue);
+    margin-bottom: 20px;
+}
+
+.wrapper .firstBox {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    height: auto;
+    border-bottom: 1px solid var(--white);
+}
+
+.wrapper .firstBox .logo img {
+    width: 100px;
+}
+
+.wrapper .firstBox .search {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-left: 15px;
+}
+
+.wrapper .firstBox .search input {
+    width: 100%;
+    font-size: 16px;
+}
+
+.wrapper .firstBox .search .searchBtn {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--darkBlue);
+    color: var(--white);
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.wrapper .firstBox button {
+    background: none;
+    color: var(--white);
+    border: 1px solid var(--white);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 130px;
+    transition: all 0.3s linear;
+    padding: 7px;
+}
+
+.wrapper .firstBox button:hover {
+    background-color: var(--white);
+    color: var(--blue);
+    transition: all 0.3s linear;
+}
+
+.wrapper .secondBox {
+    position: relative;
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.wrapper .secondBox svg {
+    color: var(--white);
+    display: none;
+    cursor: pointer;
+}
+
+.wrapper .secondBox a {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 3px;
+    transition: all 0.5s linear;
+    font-weight: 500;
+    gap: 3px;
+    min-width: fit-content;
+}
+
+.wrapper .secondBox a:hover {
+    background-color: var(--white);
+    color: var(--blue);
+    transition: all 0.5s linear;
+}
+
+
+
+
+/* Media Queries */
+
+@media only screen and (max-width: 600px) {
+    .wrapper .secondBox svg {
+        display: block;
+    }
+
+}

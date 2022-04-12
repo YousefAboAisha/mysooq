@@ -1,0 +1,44 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+    background-color: var(--darkBlue);
+}
+
+.wrapper .box {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.wrapper .box .right {
+    display: flex;
+}
+
+.wrapper .box .right a {
+    border-left: 1px solid rgba(238, 238, 238, 0.664);
+    font-family: var(--secondFont);
+    font-size: 14px;
+    padding: 5px 15px;
+    transition: all 0.3s linear;
+}
+
+.wrapper .box .right a:hover {
+    color: var(--blue);
+    transition: all 0.3s linear;
+}
+
+.wrapper .box button {
+    color: var(--blue);
+    background-color: var(--white);
+    font-weight: 600;
+    min-width: fit-content;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 2px;
+}
