@@ -2,32 +2,33 @@ import { Grid } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import PageTitle from "../../Components/PageTitle/pageTitle";
-import Form from "./addForm/form";
-import AddFormAdds from "./addFormAdds/addFormAdds";
+import Content from "./content/content";
+import AboutAdds from "./aboutAdds/aboutAdds";
 
 const Wrapper = styled.div`
   position: relative;
   margin-bottom: 50px;
+  height: auto;
 `;
 
-const NewAddLayout = () => {
+const ContactLayout = () => {
   return (
     <Wrapper>
       <Grid item lg={12} mb={2}>
-        <PageTitle title={"إضافة إعلان جديد"} />
+        <PageTitle title={"اتصل بنا"} />
       </Grid>
 
       <Grid container spacing={0} wrap="wrap-reverse">
         <Grid item lg={8} md={12} xs={12} p={1}>
-          <Form />
+          <Content />
         </Grid>
 
         <Grid item lg={4} md={12} xs={12} p={1}>
-          <AddFormAdds />
+          <AboutAdds />
         </Grid>
       </Grid>
     </Wrapper>
   );
 };
 
-export default NewAddLayout;
+export default ContactLayout;

@@ -18,6 +18,9 @@ function App() {
   );
   const Jobs = lazy(() => import("./Containers/Jobs/jobs"));
   const NewAdd = lazy(() => import("./Containers/NewAdd/newAddLayout"));
+  const Contactus = lazy(() => import("./Containers/Contactus/contactLayout"));
+  const About = lazy(() => import("./Containers/About/aboutLayout"));
+  const Policy = lazy(() => import("./Containers/Policy/policy"));
 
   return (
     <BrowserRouter>
@@ -34,6 +37,9 @@ function App() {
             <Route path="freelancers" element={<Freelancers />} />
             <Route path="jobs" element={<Jobs />} />
             <Route path="newadd" element={<NewAdd />} />
+            <Route path="contact" element={<Contactus />} />
+            <Route path="about" element={<About />} />
+            <Route path="userpolicy" element={<Policy />} />
             <Route element={<Navigate to="/" />} />
           </Routes>
         </div>

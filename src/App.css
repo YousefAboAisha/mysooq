@@ -97,6 +97,16 @@ select {
   resize: none;
 }
 
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #979797;
+}
+
+select:disabled {
+  color: #707070;
+}
+
 svg {
   cursor: pointer;
 }

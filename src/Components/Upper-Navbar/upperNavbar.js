@@ -9,11 +9,11 @@ function UpperNavbar() {
     <div className={classes.wrapper}>
       <div className={classes.box}>
         <div className={classes.right}>
-          <Link to={"/"}>عن الموقع</Link>
-          <Link to={"/"}>اتفاقية الاستخدام</Link>
-          <Link to={"/"}>اتصل</Link>
+          <Link to={"about"}>عن الموقع</Link>
+          <Link to={"userpolicy"}>اتفاقية الاستخدام</Link>
+          <Link to={"contact"}>اتصل</Link>
         </div>
-        <Link to={"/newadd"}>
+        <Link to={"newadd"}>
           <button>
             أضف إعلانك
             <Add />
