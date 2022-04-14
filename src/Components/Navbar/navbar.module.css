@@ -25,7 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 70%;
     margin-left: 15px;
 }
 
@@ -56,10 +56,11 @@
     border-radius: 2px;
     display: flex;
     align-items: center;
+    transition: all 0.3s linear;
+    padding: 8px;
     gap: 5px;
     min-width: 130px;
-    transition: all 0.3s linear;
-    padding: 7px;
+    font-size: 14px;
 }
 
 .wrapper .firstBox button:hover {
@@ -73,18 +74,42 @@
     display: flex;
     width: 90%;
     margin: 0 auto;
+    justify-content: space-between;
     align-items: center;
     gap: 15px;
     padding: 15px 0;
+    overflow-x: hidden;
 }
+
+.wrapper .secondBox .wrap {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    scroll-behavior: smooth;
+}
+
+.secondBox .wrap::-webkit-scrollbar {
+    height: 3px;
+    display: none;
+}
+
+
+/* Track */
+.secondBox .wrap::-webkit-scrollbar-track {
+    background: var(--blue);
+}
+
+
 
 .wrapper .secondBox svg {
     color: var(--white);
-    display: none;
     cursor: pointer;
+    transition: all 0.5s linear;
 }
 
-.wrapper .secondBox a {
+.wrapper .secondBox .wrap a {
     display: flex;
     align-items: center;
     padding: 8px 12px;
@@ -93,22 +118,27 @@
     font-weight: 500;
     gap: 3px;
     min-width: fit-content;
+    scroll-snap-align: start;
 }
 
-.wrapper .secondBox a:hover {
+.wrapper .secondBox .wrap a:hover {
     background-color: var(--white);
     color: var(--blue);
     transition: all 0.5s linear;
 }
 
+.wrapper .secondBox .wrap a:hover svg {
+    color: var(--blue);
+    transition: all 0.5s linear;
+}
 
-
+.secondBox .arrow {
+    display: none;
+}
 
 /* Media Queries */
-
-@media only screen and (max-width: 600px) {
-    .wrapper .secondBox svg {
+@media only screen and (max-width: 800px) {
+    .secondBox .arrow {
         display: block;
     }
-
 }

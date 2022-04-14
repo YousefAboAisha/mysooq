@@ -5,42 +5,48 @@ import logo from "../../Media/logo.svg";
 import { Link } from "react-router-dom";
 import paypal from "../../Media/paypal.svg";
 
+const FooterSection = styled.div`
+  position: relative;
+  min-height: 300px;
+  width: 100%;
+  background-color: var(--blue);
+  padding: 10px;
+`;
+
+const Sections = styled.div`
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
+  & a:hover {
+    color: var(--darkBlue);
+  }
+  & a {
+    width: fit-content;
+  }
+`;
+
+const BottomSection = styled.div`
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--white);
+  gap: 10px;
+`;
+
+const SocialSection = styled.div`
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 5px;
+`;
+
 function Footer() {
-  const FooterSection = styled.div`
-    position: relative;
-    min-height: 300px;
-    width: 100%;
-    background-color: var(--blue);
-    padding: 10px;
-  `;
-
-  const Sections = styled.div`
-    position: relative;
-    display: flex;
-    flex-flow: column wrap;
-    gap: 10px;
-  `;
-
-  const BottomSection = styled.div`
-    position: relative;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: var(--white);
-    gap: 10px;
-  `;
-
-  const SocialSection = styled.div`
-    position: relative;
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    gap: 5px;
-  `;
-
   return (
     <FooterSection>
       <Grid
@@ -56,14 +62,7 @@ function Footer() {
         pb={2}
       >
         {/* Right Grid  */}
-        <Grid
-          item
-          lg={6}
-          md={12}
-          xs={12}
-          direction="column"
-          alignItems="center"
-        >
+        <Grid item lg={6} md={12} xs={12} alignItems="center">
           <Sections>
             <img src={logo} alt={"logo"} width="120" height="120" />
             <h2 style={{ color: "white", marginBottom: "10px" }}> ماي سوق</h2>

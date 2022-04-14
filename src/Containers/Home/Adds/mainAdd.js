@@ -39,8 +39,12 @@ function MainAdd() {
         src={add}
         alt={add}
         width="100%"
-        height="430"
-        style={{ objectFit: "cover", objectPosition: "50% 50%" }}
+        height="450"
+        style={{
+          objectFit: "cover",
+          objectPosition: "50% 50%",
+          borderRadius: "5px",
+        }}
       />
       <InfoBox>
         <span>هذا نص تلقائي</span>

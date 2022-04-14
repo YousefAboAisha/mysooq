@@ -2,6 +2,24 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ArrowForwardIosOutlined } from "@mui/icons-material";
 
+const Btn = styled.div`
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  bottom: 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  cursor: pointer;
+  color: var(--blue);
+  background-color: var(--white);
+  left: 20px;
+  transition: all 2.5s linear;
+  border: 1px solid #c2c2c2;
+`;
+
 function ScrollTopBtn() {
   const [showScroll, setShowScroll] = useState(false);
 
@@ -18,24 +36,6 @@ function ScrollTopBtn() {
   };
 
   window.addEventListener("scroll", checkScroll);
-
-  const Btn = styled.div`
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    bottom: 20px;
-    border-radius: 5px;
-    z-index: 1000;
-    cursor: pointer;
-    color: var(--blue);
-    background-color: var(--white);
-    left: 20px;
-    transition: all 2.5s linear;
-    border: 1px solid #c2c2c2;
-  `;
 
   return (
     <Btn style={{ opacity: showScroll ? "1" : "0" }} onClick={scrolltop}>

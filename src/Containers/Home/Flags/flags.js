@@ -101,7 +101,7 @@ function Flags() {
     scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
-      height: 5px;
+      height: 3px;
     }
 
     /* Track */

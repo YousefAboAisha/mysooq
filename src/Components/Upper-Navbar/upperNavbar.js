@@ -13,10 +13,12 @@ function UpperNavbar() {
           <Link to={"/"}>اتفاقية الاستخدام</Link>
           <Link to={"/"}>اتصل</Link>
         </div>
-        <button>
-          أضف إعلانك
-          <Add />
-        </button>
+        <Link to={"/newadd"}>
+          <button>
+            أضف إعلانك
+            <Add />
+          </button>
+        </Link>
       </div>
       <Navbar />
     </div>

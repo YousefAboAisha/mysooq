@@ -7,12 +7,12 @@ const Wrapper = styled.div`
   height: 1000px;
 `;
 
-function Services() {
+function RealEstates() {
   return (
     <Wrapper>
-      <PageTitle title={"خدمات"} />
+      <PageTitle title={"عقارات"} />
     </Wrapper>
   );
 }
 
-export default Services;
+export default RealEstates;

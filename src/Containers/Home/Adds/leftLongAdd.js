@@ -15,8 +15,8 @@ function LeftLongAdd() {
       <img
         src={add}
         alt={add}
-        height="430"
-        width={"100%"}
+        width={"390"}
+        height="450"
         style={{ objectFit: "cover", objectPosition: "50% 50%" }}
       />
     </ImageBox>
