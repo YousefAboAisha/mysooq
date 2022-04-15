@@ -16,7 +16,7 @@ const Btn = styled.div`
   color: var(--blue);
   background-color: var(--white);
   left: 20px;
-  transition: all 2.5s linear;
+  transition: all 0.5s ease-in-out;
   border: 1px solid #c2c2c2;
 `;
 

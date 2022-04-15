@@ -20,7 +20,7 @@ const PoStyledListcy = () => {
   return (
     <Wrapper>
       <Grid item lg={12} mb={2}>
-        <PageTitle title={"اتصل بنا"} />
+        <PageTitle title={"سياسة الاستخدام"} />
       </Grid>
 
       <Grid item lg={12} mb={2}>

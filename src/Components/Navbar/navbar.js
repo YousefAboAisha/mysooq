@@ -8,7 +8,7 @@ import {
   ArrowForwardIosOutlined,
   ArrowBackIosOutlined,
 } from "@mui/icons-material/";
-import Links from "../../Routes/routes";
+import Links from "../../Links/links";
 
 function Navbar() {
   const ref = useRef();

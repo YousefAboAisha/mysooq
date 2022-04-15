@@ -34,7 +34,7 @@ function HomeLayout() {
         </Grid>
 
         {/* Main Big Add */}
-        <Grid item lg={8} md={12} xs={12} p={1}>
+        <Grid item lg={8} md={12} xs={12} p={1} pr={0}>
           <MainAdd />
         </Grid>
 
@@ -49,7 +49,7 @@ function HomeLayout() {
         </Grid>
 
         {/* Adds Cards */}
-        <Grid container rowSpacing={2} columnSpacing={2}>
+        <Grid container rowSpacing={2} columnSpacing={2} pr={0}>
           <Cards />
           <Cards />
           <Cards />

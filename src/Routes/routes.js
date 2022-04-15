@@ -1,114 +1,44 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import {
-  HomeOutlined,
-  MapsHomeWorkOutlined,
-  DirectionsCarOutlined,
-  BusinessCenterOutlined,
-  MiscellaneousServicesOutlined,
-  PersonSearchOutlined,
-  PersonPinOutlined,
-} from "@mui/icons-material/";
-import styled from "styled-components";
-import "./routes.css";
+import { lazy } from "react";
+import { Routes, Route, Navigate } from "react-router";
 
-const Wrap = styled.div`
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 3px;
+export const Home = lazy(() => import("../Containers/Home/homeLayout"));
+export const RealEstates = lazy(() =>
+  import("../Containers/RealEstates/realEstatesLayout")
+);
 
-  & a {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    border-radius: 3px;
-    font-weight: 500;
-    gap: 3px;
-    min-width: fit-content;
-    scroll-snap-align: start;
-    transition: all 0.5s linear;
-  }
+export const Cars = lazy(() => import("../Containers/Cars/cars"));
+export const Trades = lazy(() => import("../Containers/Trades/trades"));
+export const Services = lazy(() => import("../Containers/Services/services"));
+export const Freelancers = lazy(() =>
+  import("../Containers/Freelancers/freelancers")
+);
 
-  & a:hover {
-    background-color: var(--white);
-    color: var(--blue);
-    transition: all 0.5s linear;
-  }
+export const Jobs = lazy(() => import("../Containers/Jobs/jobs"));
+export const NewAdd = lazy(() => import("../Containers/NewAdd/newAddLayout"));
+export const Contactus = lazy(() =>
+  import("../Containers/Contactus/contactLayout")
+);
 
-  & a:hover svg {
-    color: var(--blue);
-    transition: all 0.5s linear;
-  }
+export const About = lazy(() => import("../Containers/About/aboutLayout"));
+export const Policy = lazy(() => import("../Containers/Policy/policy"));
 
-  &::-webkit-scrollbar {
-    height: 3px;
-    display: none;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: var(--blue);
-  }
-`;
-
-function Routes() {
-  const location = useLocation();
-  console.log(location.pathname);
-
-  const links = [
-    {
-      path: "/",
-      icon: <HomeOutlined />,
-      name: "الرئيسية",
-    },
-    {
-      path: "/realestates",
-      icon: <MapsHomeWorkOutlined />,
-      name: "عقارات",
-    },
-    {
-      path: "/cars",
-      icon: <DirectionsCarOutlined />,
-      name: "سيارات",
-    },
-    {
-      path: "/trades",
-      icon: <BusinessCenterOutlined />,
-      name: "مصالح تجارية",
-    },
-    {
-      path: "/services",
-      icon: <MiscellaneousServicesOutlined />,
-      name: "خدمات",
-    },
-    {
-      path: "/freelancers",
-      icon: <PersonSearchOutlined />,
-      name: "باحثين عن عمل",
-    },
-    {
-      path: "/jobs",
-      icon: <PersonPinOutlined />,
-      name: " وظائف شاغرة",
-    },
-  ];
-
+const Routers = () => {
   return (
-    <Wrap>
-      {links.map((elem, index) => {
-        return (
-          <Link
-            to={elem.path}
-            key={index}
-            className={`/${elem.path}` === location ? "active" : ""}
-          >
-            {elem.name} {elem.icon}
-          </Link>
-        );
-      })}
-    </Wrap>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="realestates" element={<RealEstates />} />
+      <Route path="cars" element={<Cars />} />
+      <Route path="trades" element={<Trades />} />
+      <Route path="services" element={<Services />} />
+      <Route path="freelancers" element={<Freelancers />} />
+      <Route path="jobs" element={<Jobs />} />
+      <Route path="newadd" element={<NewAdd />} />
+      <Route path="contact" element={<Contactus />} />
+      <Route path="about" element={<About />} />
+      <Route path="userpolicy" element={<Policy />} />
+      <Route element={<Navigate to="/" />} />
+    </Routes>
   );
-}
+};
 
-export default Routes;
+export default Routers;

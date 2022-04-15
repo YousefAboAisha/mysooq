@@ -15,7 +15,7 @@ const ContactLayout = () => {
   return (
     <Wrapper>
       <Grid item lg={12} mb={2}>
-        <PageTitle title={"اتصل بنا"} />
+        <PageTitle title={"عن الموقع"} />
       </Grid>
 
       <Grid container spacing={0} wrap="wrap-reverse">

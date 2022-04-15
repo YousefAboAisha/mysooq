@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import add from "../../../Media/mainAdd.png";
-import {
-  ArrowForwardIosOutlined,
-  ArrowBackIosOutlined,
-} from "@mui/icons-material/";
+import Slider from "../../../Components/Slider/slider";
 
 function MainAdd() {
   const ImageBox = styled.div`
@@ -14,45 +10,9 @@ function MainAdd() {
     align-items: center;
   `;
 
-  const InfoBox = styled.div`
-    position: absolute;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    bottom: 0;
-    right: 0;
-    background-color: rgb(0, 0, 0, 0.7);
-    color: var(--white);
-    padding: 10px;
-    border-radius: 0 0 5px 5px;
-  `;
-
-  const ArrowsBox = styled.div`
-    position: relative;
-    display: flex;
-    gap: 15px;
-  `;
-
   return (
     <ImageBox>
-      <img
-        src={add}
-        alt={add}
-        width="100%"
-        height="450"
-        style={{
-          objectFit: "cover",
-          objectPosition: "50% 50%",
-          borderRadius: "5px",
-        }}
-      />
-      <InfoBox>
-        <span>هذا نص تلقائي</span>
-        <ArrowsBox>
-          <ArrowForwardIosOutlined />
-          <ArrowBackIosOutlined />
-        </ArrowsBox>
-      </InfoBox>
+      <Slider />
     </ImageBox>
   );
 }
