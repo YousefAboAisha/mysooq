@@ -57,8 +57,8 @@
     display: flex;
     align-items: center;
     transition: all 0.3s linear;
-    padding: 6px;
     gap: 5px;
+    padding: 6px;
     min-width: 130px;
     font-size: 14px;
 }
@@ -140,5 +140,17 @@
 @media only screen and (max-width: 800px) {
     .secondBox .arrow {
         display: block;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .wrapper .firstBox button {
+        padding: 8px 6px;
+        min-width: 100px;
+        font-size: 11px;
+    }
+
+    .wrapper .firstBox button svg {
+        font-size: 15px;
     }
 }

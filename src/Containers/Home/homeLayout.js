@@ -6,7 +6,7 @@ import LeftAdd from "./Adds/leftAdd";
 import MainAdd from "./Adds/mainAdd";
 import LeftLongAdd from "./Adds/leftLongAdd";
 import Heading from "../../Components/Heading/heading";
-import Cards from "./Cards/cards";
+import Cards from "./homeCards/homeCards";
 import BlueButton from "../../Components/BlueButton/blueButton";
 
 function HomeLayout() {

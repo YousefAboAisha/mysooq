@@ -102,6 +102,7 @@ function Flags() {
 
     &::-webkit-scrollbar {
       height: 3px;
+      display: none;
     }
 
     /* Track */

@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Carousel from "react-elastic-carousel";
 import image from "../../Media/mainAdd.png";
 import styled from "styled-components";
-import "./slider.css";
 
 const Image = styled.img`
   object-fit: cover;
@@ -10,6 +9,68 @@ const Image = styled.img`
   object-position: 50% 50%;
   width: 100%;
   height: 100%;
+`;
+
+const StyledCarousel = styled(Carousel)`
+  & .rec.rec-arrow {
+    border-radius: 50%;
+    font-size: 13px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    line-height: 30px;
+    position: absolute;
+    z-index: 10000;
+    background-color: rgb(104, 103, 103);
+    color: var(--white);
+  }
+
+  & .rec.rec-arrow:nth-of-type(1) {
+    left: 10%;
+    bottom: 10%;
+  }
+
+  & .rec.rec-arrow:nth-of-type(2) {
+    left: 3%;
+    bottom: 10%;
+  }
+
+  & .ictPXa,
+  & .fqikaj,
+  & .jdHdoM {
+    background-color: var(--blue);
+    box-shadow: unset;
+  }
+
+  & .kAqtYR,
+  & .ictPXa {
+    transform: translateY(-5px);
+  }
+
+  & .ZRTri,
+  & .fqikaj {
+    background: transparent;
+    box-shadow: 0 0 1px 2px rgb(0 0 0 / 50%);
+  }
+
+  /* round buttons on hover */
+  & .rec.rec-arrow:hover,
+  & .rec.rec-arrow:active {
+    border-radius: 50%;
+    background-color: var(--blue);
+  }
+
+  @media only screen and (max-width: 750px) {
+    .rec.rec-arrow:nth-of-type(1) {
+      left: 70px;
+      bottom: 50px;
+    }
+
+    .rec.rec-arrow:nth-of-type(2) {
+      left: 30px;
+      bottom: 50px;
+    }
+  }
 `;
 
 const Slider = () => {
@@ -29,7 +90,7 @@ const Slider = () => {
   let resetTimeout;
 
   return (
-    <Carousel
+    <StyledCarousel
       ref={carouselRef}
       easing={"cubic-bezier(1,.8,.8,1)"}
       disableArrowsOnEnd={false}
@@ -51,7 +112,7 @@ const Slider = () => {
           <Image src={item.img} alt={"Add"} />
         </div>
       ))}
-    </Carousel>
+    </StyledCarousel>
   );
 };
 

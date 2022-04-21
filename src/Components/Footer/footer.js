@@ -11,6 +11,7 @@ const FooterSection = styled.div`
   width: 100%;
   background-color: var(--blue);
   padding: 10px;
+  margin-top: 70px;
 `;
 
 const Sections = styled.div`
@@ -18,9 +19,11 @@ const Sections = styled.div`
   display: flex;
   flex-flow: column wrap;
   gap: 10px;
+
   & a:hover {
     color: var(--darkBlue);
   }
+
   & a {
     width: fit-content;
   }
@@ -32,7 +35,7 @@ const BottomSection = styled.div`
   margin: 0 auto;
   margin-top: 15px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   color: var(--white);
   gap: 10px;
@@ -44,6 +47,11 @@ const SocialSection = styled.div`
   flex-flow: row wrap;
   align-items: center;
   gap: 5px;
+  @media only screen and (max-width: 500px) {
+    & h5 {
+      font-size: 12px;
+    }
+  }
 `;
 
 function Footer() {
