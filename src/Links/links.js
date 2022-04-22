@@ -103,7 +103,7 @@ const Links = () => {
             key={index}
             className={`/${elem.path}` === location ? "active" : ""}
           >
-            {elem.name} {elem.icon}
+            {elem.icon} {elem.name}
           </Link>
         );
       })}
