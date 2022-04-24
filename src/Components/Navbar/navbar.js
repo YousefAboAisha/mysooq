@@ -33,10 +33,12 @@ function Navbar() {
           </div>
         </div>
 
-        <button>
-          <ExitToAppOutlined />
-          تسجيل الدخول
-        </button>
+        <Link to={"/signup"}>
+          <button>
+            <ExitToAppOutlined />
+            تسجيل الدخول
+          </button>
+        </Link>
       </div>
 
       <div className={classes.secondBox}>

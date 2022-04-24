@@ -22,6 +22,8 @@ export const Contactus = lazy(() =>
 export const About = lazy(() => import("../Containers/About/aboutLayout"));
 export const Policy = lazy(() => import("../Containers/Policy/policy"));
 export const Add = lazy(() => import("../Containers/AddDetails/addDetails"));
+export const Signup = lazy(() => import("../Containers/Signup/signup"));
+export const Signin = lazy(() => import("../Containers/Signin/signin"));
 
 const Routers = () => {
   return (
@@ -39,6 +41,8 @@ const Routers = () => {
       <Route path="userpolicy" element={<Policy />} />
       <Route path="userpolicy" element={<Policy />} />
       <Route path="add" element={<Add />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="signin" element={<Signin />} />
       <Route element={<Navigate to="/" />} />
     </Routes>
   );
