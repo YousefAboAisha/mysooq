@@ -21,8 +21,8 @@
 .wrapper .box .right a {
     border-left: 1px solid rgba(238, 238, 238, 0.664);
     font-family: var(--secondFont);
-    font-size: 14px;
-    padding: 5px 15px;
+    font-size: 13px;
+    padding: 5px 10px;
     transition: all 0.3s linear;
 }
 
@@ -41,15 +41,14 @@
     gap: 4px;
     border-radius: 2px;
     padding: 6px;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.3s linear;
 }
 
 
 @media only screen and (max-width: 500px) {
     .wrapper .box .right a {
-        font-size: 13px;
-        padding: 5px 10px;
+        font-size: 12px;
     }
 
     .wrapper .box button {

@@ -19,7 +19,7 @@ function Cards() {
   `;
 
   return (
-    <Grid item lg={3} md={6} xs={12}>
+    <Grid item lg={3} md={4} sm={6} xs={12}>
       <Item>
         <img
           src={add}

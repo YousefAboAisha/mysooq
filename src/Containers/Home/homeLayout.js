@@ -29,12 +29,12 @@ function HomeLayout() {
         </Grid>
 
         {/* Heading Tag */}
-        <Grid item lg={12} md={12} xs={12} pr={1} mt={4}>
+        <Grid item lg={12} md={12} xs={12} pr={1} mt={{ lg: 0, xs: 5 }}>
           <Heading title={"إعلانات مميزة"} />
         </Grid>
 
         {/* Main Big Add */}
-        <Grid item lg={8} md={12} xs={12} p={1} pr={0}>
+        <Grid item lg={8} md={12} xs={12} p={1} pr={0} mb={{ xs: 5 }}>
           <MainAdd />
         </Grid>
 
@@ -44,12 +44,25 @@ function HomeLayout() {
         </Grid>
 
         {/* Heading Tag */}
-        <Grid item lg={12} md={12} xs={12} pr={1} mt={5} mb={2}>
+        <Grid
+          item
+          lg={12}
+          md={12}
+          xs={12}
+          pr={1}
+          mb={{ xs: 2, lg: 0 }}
+          mt={{ lg: 0, xs: 5 }}
+        >
           <Heading title={"أحدث الإعلانات"} />
         </Grid>
 
         {/* Adds Cards */}
-        <Grid container rowSpacing={2} columnSpacing={2} pr={0}>
+        <Grid
+          container
+          rowSpacing={{ lg: 4, md: 4, xs: 3 }}
+          columnSpacing={{ lg: 4, md: 4, xs: 3 }}
+          pr={0}
+        >
           <Cards />
           <Cards />
           <Cards />

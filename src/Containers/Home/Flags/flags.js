@@ -97,6 +97,7 @@ function Flags() {
     overflow-x: auto;
     padding: 0 10px;
     padding-bottom: 10px;
+    margin: 0 15px;
     gap: 10px;
     scroll-behavior: smooth;
 
@@ -130,6 +131,11 @@ function Flags() {
     gap: 3px;
     padding: 5px;
     scroll-snap-align: start;
+
+    & img {
+      width: 60px;
+      height: 60px;
+    }
   `;
 
   const BoldSpan = styled.span`

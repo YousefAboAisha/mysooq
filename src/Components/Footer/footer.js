@@ -7,11 +7,18 @@ import paypal from "../../Media/paypal.svg";
 
 const FooterSection = styled.div`
   position: relative;
-  min-height: 300px;
   width: 100%;
   background-color: var(--blue);
   padding: 10px;
   margin-top: 70px;
+
+  & h4 {
+    font-size: 16px;
+  }
+
+  & h2 {
+    font-size: 1.5em;
+  }
 `;
 
 const Sections = styled.div`
@@ -37,8 +44,26 @@ const BottomSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-flow: row wrap;
   color: var(--white);
   gap: 10px;
+
+  @media only screen and (max-width: 500px) {
+    & {
+      margin-bottom: 30px;
+    }
+
+    & span {
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  & h5 {
+    font-size: 13px;
+  }
 `;
 
 const SocialSection = styled.div`
@@ -47,10 +72,9 @@ const SocialSection = styled.div`
   flex-flow: row wrap;
   align-items: center;
   gap: 5px;
-  @media only screen and (max-width: 500px) {
-    & h5 {
-      font-size: 12px;
-    }
+
+  & a i {
+    font-size: 18px;
   }
 `;
 
@@ -116,11 +140,10 @@ function Footer() {
           <img src={paypal} alt="paypal" />
         </SocialSection>
 
-        <div> جميع الحقوق محفوظة 2006 - 2022 ©</div>
+        <span>Sam@mysooq.net</span>
 
         <SocialSection>
-          <h5>تابعنا :</h5>
-          <SocialSection>
+          <SocialSection style={{ gap: "12px" }}>
             <a
               target="_blank"
               href="https://www.facebook.com/yousef.aboesha.9/"

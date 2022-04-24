@@ -9,7 +9,8 @@
   position: relative;
   width: 100%;
   margin: 0 auto;
-  background-color: rgb(247, 247, 247);
+  background-color: #F6F6F6;
+  overflow-x: hidden;
 }
 
 
@@ -25,7 +26,7 @@
   --seal: #dff6f0;
   --white: #FFFFFF;
   --black: #000000;
-  --darkBlue: #347279;
+  --darkBlue: #008896;
   --mainFont: "Tajawal", sans-serif;
   --secondFont: "Cairo", sans-serif;
 }
@@ -110,3 +111,9 @@ select:disabled {
 svg {
   cursor: pointer;
 }
+
+/* @media only screen and (max-width: 600px) {
+  .App {
+    width: 100%;
+  }
+} */

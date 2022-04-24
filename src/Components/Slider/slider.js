@@ -3,12 +3,34 @@ import Carousel from "react-elastic-carousel";
 import image from "../../Media/mainAdd.png";
 import styled from "styled-components";
 
+const ImageBox = styled.div`
+  position: relative;
+  height: 630px;
+
+  & span {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    padding: 1em 3em 1em 5em;
+    height: 60px;
+    width: 100%;
+    background-color: rgb(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    color: var(--white);
+  }
+`;
+
 const Image = styled.img`
   object-fit: cover;
   aspect-ratio: 4/2.28;
   object-position: 50% 50%;
   width: 100%;
   height: 100%;
+
+  @media only screen and (max-width: 800px) {
+    height: 100%;
+  }
 `;
 
 const StyledCarousel = styled(Carousel)`
@@ -27,12 +49,12 @@ const StyledCarousel = styled(Carousel)`
 
   & .rec.rec-arrow:nth-of-type(1) {
     left: 10%;
-    bottom: 10%;
+    bottom: 7.5%;
   }
 
   & .rec.rec-arrow:nth-of-type(2) {
     left: 3%;
-    bottom: 10%;
+    bottom: 7.5%;
   }
 
   & .ictPXa,
@@ -75,14 +97,54 @@ const StyledCarousel = styled(Carousel)`
 
 const Slider = () => {
   const items = [
-    { id: 1, title: "item #1", img: image },
-    { id: 2, title: "item #2", img: image },
-    { id: 3, title: "item #3", img: image },
-    { id: 4, title: "item #4", img: image },
-    { id: 6, title: "item #5", img: image },
-    { id: 7, title: "item #5", img: image },
-    { id: 8, title: "item #5", img: image },
-    { id: 9, title: "item #5", img: image },
+    {
+      id: 1,
+      title: "item #1",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
+    {
+      id: 2,
+      title: "item #2",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
+    {
+      id: 3,
+      title: "item #3",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
+    {
+      id: 4,
+      title: "item #4",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
+    {
+      id: 6,
+      title: "item #5",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
+    {
+      id: 7,
+      title: "item #5",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
+    {
+      id: 8,
+      title: "item #5",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
+    {
+      id: 9,
+      title: "item #5",
+      img: image,
+      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
+    },
   ];
 
   const carouselRef = useRef(null);
@@ -108,9 +170,10 @@ const Slider = () => {
       }}
     >
       {items.map((item) => (
-        <div key={item.id}>
+        <ImageBox key={item.id}>
           <Image src={item.img} alt={"Add"} />
-        </div>
+          <span>{item.info}</span>
+        </ImageBox>
       ))}
     </StyledCarousel>
   );

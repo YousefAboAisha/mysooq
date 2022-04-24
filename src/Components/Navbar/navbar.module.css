@@ -116,9 +116,10 @@
     border-radius: 3px;
     transition: all 0.5s linear;
     font-weight: 500;
-    gap: 3px;
+    gap: 5px;
     min-width: fit-content;
     scroll-snap-align: start;
+    margin: 0 0 0 10px;
 }
 
 .wrapper .secondBox .wrap a:hover {
