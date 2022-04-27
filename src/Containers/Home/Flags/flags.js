@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import img from "../../../Media/flag.png";
 import styled from "styled-components";
 import {
@@ -6,7 +6,29 @@ import {
   ArrowForwardIosOutlined,
 } from "@mui/icons-material";
 
+import axios from "axios";
+
 function Flags() {
+  const [Data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://localhost:44387/api/Countries/GetAll")
+      .then((res) => {
+        const arr = [];
+        for (const elem in res.data) {
+          arr.push(res.data[elem]);
+        }
+        setData(arr);
+        console.log(Data[3]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  console.log(Data[3]);
+
   const contries = [
     {
       flag: img,
