@@ -6,15 +6,15 @@ import LeftAdd from "./Adds/leftAdd";
 import MainAdd from "./Adds/mainAdd";
 import LeftLongAdd from "./Adds/leftLongAdd";
 import Heading from "../../Components/Heading/heading";
-import Cards from "./homeCards/homeCards";
 import BlueButton from "../../Components/BlueButton/blueButton";
+import RecentAdds from "./RecentAdds/recentAdds";
+
+const Wrapper = styled.div`
+  position: relative;
+  margin: 0 auto;
+`;
 
 function HomeLayout() {
-  const Wrapper = styled.div`
-    position: relative;
-    margin: 0 auto;
-  `;
-
   return (
     <Wrapper>
       <Grid container spacing={0}>
@@ -57,25 +57,8 @@ function HomeLayout() {
         </Grid>
 
         {/* Adds Cards */}
-        <Grid
-          container
-          rowSpacing={{ lg: 4, md: 4, xs: 3 }}
-          columnSpacing={{ lg: 4, md: 4, xs: 3 }}
-          pr={0}
-        >
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-          <Cards />
-        </Grid>
+        <RecentAdds />
+
         <Grid
           container
           direction="row"

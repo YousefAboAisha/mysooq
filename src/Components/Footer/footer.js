@@ -28,7 +28,8 @@ const Sections = styled.div`
   gap: 10px;
 
   & a:hover {
-    color: var(--darkBlue);
+    color: #222;
+    transition: all 0.3s linear;
   }
 
   & a {
@@ -147,6 +148,7 @@ function Footer() {
             <a
               target="_blank"
               href="https://www.facebook.com/yousef.aboesha.9/"
+              rel="noreferrer"
             >
               <i className="fab fa-facebook"></i>
             </a>
@@ -154,15 +156,24 @@ function Footer() {
             <a
               target="_blank"
               href="https://www.linkedin.com/in/yousef-aboesha-9b40b4193/"
+              rel="noreferrer"
             >
               <i className="fab fa-linkedin"></i>
             </a>
 
-            <a target="_blank" href="https://twitter.com/_abuAisha">
+            <a
+              target="_blank"
+              href="https://twitter.com/_abuAisha"
+              rel="noreferrer"
+            >
               <i className="fab fa-twitter"></i>
             </a>
 
-            <a target="_blank" href="https://github.com/YousefAboAisha">
+            <a
+              target="_blank"
+              href="https://github.com/YousefAboAisha"
+              rel="noreferrer"
+            >
               <i className="fab fa-github"></i>
             </a>
           </SocialSection>

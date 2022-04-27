@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Halfbox, BoldSpan } from "../NewAdd/addForm/form";
 import styled from "styled-components";
 import BlueButton from "../../Components/BlueButton/blueButton";
@@ -114,41 +114,73 @@ const Register = styled.div`
 `;
 
 const Signup = () => {
+  const [UserName, setUserName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [ConfirmedPassword, setConfirmedPassword] = useState("");
+  const [PhoneNumber, setPhoneNumber] = useState("");
+  const [Country, setCountry] = useState("");
+
   return (
     <Wrap>
       <Heading title={"إنشاء حساب"} />
       <Halfbox>
         <Box>
           <BoldSpan>اسم المستخدم</BoldSpan>
-          <input type="text" placeholder="اسم المستخدم" />
+          <input
+            type="text"
+            placeholder="اسم المستخدم"
+            onChange={(e) => setUserName(e.target.value)}
+            value={UserName}
+          />
         </Box>
 
         <Box>
           <BoldSpan>البريد الالكتروني</BoldSpan>
-          <input type="email" placeholder="Mysooq@gmail.com" />
+          <input
+            type="email"
+            placeholder="Mysooq@gmail.com"
+            onChange={(e) => setEmail(e.target.value)}
+            value={Email}
+          />
         </Box>
       </Halfbox>
 
       <Halfbox>
         <Box>
           <BoldSpan>كلمة المرور</BoldSpan>
-          <input type="password" placeholder="***********" />
+          <input
+            type="password"
+            placeholder="***********"
+            onChange={(e) => setPassword(e.target.value)}
+            value={Password}
+          />
         </Box>
 
         <Box>
           <BoldSpan>تأكيد كلمة المرور</BoldSpan>
-          <input type="password" placeholder="***********" />
+          <input
+            type="password"
+            placeholder="***********"
+            onChange={(e) => setConfirmedPassword(e.target.value)}
+            value={ConfirmedPassword}
+          />
         </Box>
       </Halfbox>
       <Halfbox>
         <Box>
           <BoldSpan>رقم التليفون</BoldSpan>
-          <input type="text" placeholder="0592551405" />
+          <input
+            type="text"
+            placeholder="0592551405"
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={PhoneNumber}
+          />
         </Box>
 
         <Box>
           <BoldSpan>الدولة</BoldSpan>
-          <select>
+          <select onChange={(e) => setCountry(e.target.value)} value={Country}>
             <option value="" disabled selected>
               اختر دولة
             </option>

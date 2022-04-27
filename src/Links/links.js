@@ -10,7 +10,6 @@ import {
   PersonPinOutlined,
 } from "@mui/icons-material/";
 import styled from "styled-components";
-import "./links.css";
 
 const Wrap = styled.div`
   position: relative;

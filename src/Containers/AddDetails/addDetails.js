@@ -1,14 +1,15 @@
 import { Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PageTitle from "../../Components/PageTitle/pageTitle";
 import Heading from "../../Components/Heading/heading";
+import { useParams } from "react-router-dom";
 import {
   LocationOnOutlined,
   FacebookOutlined,
   Instagram,
-  WhatsappOutlined,
   Twitter,
+  YouTube,
 } from "@mui/icons-material";
 import img from "../../Media/mainAdd.png";
 import img2 from "../../Media/cardAdd.png";
@@ -94,6 +95,25 @@ const Social = styled.div`
 
 function AddDetails() {
   const [mainImg, setMainImg] = useState(img);
+  const [Add, setAdd] = useState([]);
+  const { id } = useParams();
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `https://localhost:44387/api/Business/GetOne?id=${id}`,
+      {
+        method: "GET",
+      }
+    );
+    const result = await response.json();
+    if (result) setAdd(result.data);
+  };
+
+  console.log(Add);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const extraPhotos = [
     { src: img, id: 1 },
@@ -102,99 +122,98 @@ function AddDetails() {
     { src: img2, id: 4 },
   ];
 
-  const social = [
-    { icon: <Instagram />, link: "" },
-    { icon: <Twitter />, link: "" },
-    { icon: <FacebookOutlined />, link: "" },
-    { icon: <WhatsappOutlined />, link: "" },
-  ];
-
   return (
     <Wrapper>
       <PageTitle title={"تفاصيل الإعلان"} />
-      <Grid container>
+      <Grid container columnSpacing={3}>
         <Grid item lg={6} xs={12} mt={2}>
           <Grid item lg={12} md={12} xs={12}>
-            <h3>هدفنا تأمين افضل و امهر عاملات التنظيف والترتيب من اجلكم </h3>
+            <h3>{Add.name}</h3>
             <Box>
               <Icon />
-              <span> فلسطين </span>
+              <span> {Add.countryName} </span>
               <span> - </span>
-              <span> غزة </span>
+              <span> {Add.cityName} </span>
             </Box>
           </Grid>
 
           <Grid item lg={12} xs={12} mt={1.8}>
             <Heading title={"تفاصيل الإعلان"} />
-            <p>
-              هدفنا تأميـن افضل و امهـر عاملات التنـظيف والتـرتيب مـن اجلكم
-              لدينا عاملات لـتقديم خدمـة التـنظيف و التـرتيـب الـيومي يـتوفر
-              خـادمات على مـستوى عالـي لتنظيف المنازل والمكاتـب والعيادات يـتوفر
-              خادمـات مـن جنسـيـات عربـية ذوات خبرة عالـية لتنظـيف المنازل
-            </p>
+            <p>{Add.description}</p>
           </Grid>
 
           <Grid item lg={12} xs={12} mt={1.8}>
             <Heading title={"تصنيف الإعلان"} />
-            <span> مصالح تجارية </span>
+            <span> {Add.serviceName} </span>
             <span> - </span>
-            <span> منتجات لتنظيف المنازل </span>
+            <span>{Add.subTypeName} </span>
           </Grid>
 
-          <Grid container lg={12} md={12} xs={12} mt={1.8}>
+          <Grid container mt={1.8}>
             <Grid item lg={12} xs={12}>
               <Heading title={"بيانات المعلن"} />
             </Grid>
 
             <Grid item lg={6} md={6} xs={12} mb={1}>
               <span>اسم المعلن: </span>
-              <span>يوسف رشاد أبو عيشة</span>
+              <span>{Add.userName}</span>
             </Grid>
 
             <Grid item lg={6} md={6} xs={12} mb={1}>
               <span>رقم الهاتف: </span>
-              <span style={{ direction: "ltr" }}>0592-55-1405</span>
+              <span>{Add.userName}</span>
             </Grid>
 
             <Grid item lg={12}>
               <span>البريد الالكتروني: </span>
-              <span>yousef.aboesha@hotmail.com</span>
+              <span>{Add.email}</span>
             </Grid>
           </Grid>
 
           <Grid item lg={12} xs={12} mt={1.8} mb={5}>
             <Heading title={"رابط فيديو الإعلان"} />
-            <span>https://www.youtube.com/watch?v=O_Ugc8cSgzc</span>
+            <span> {Add.youtube} </span>
           </Grid>
         </Grid>
 
-        <Grid lg={6} md={12} xs={12}>
+        <Grid item lg={6} md={12} xs={12}>
           <ImagesBox>
             <img
               src={mainImg}
-              alt={"main image"}
+              alt={"main"}
               width="100%"
               height={"350px"}
               style={{ objectFit: "cover", borderRadius: "10px" }}
             />
+
             <Images>
               {extraPhotos.map((elem, index) => {
                 return (
                   <div key={index}>
-                    <img src={elem.src} onClick={() => setMainImg(elem.src)} />
+                    <img
+                      src={elem.src}
+                      onClick={() => setMainImg(elem.src)}
+                      alt="alt"
+                    />
                   </div>
                 );
               })}
             </Images>
           </ImagesBox>
+
           <Social>
-            {social.map((elem, index) => {
-              return (
-                <a key={index} href={elem.link}>
-                  {elem.icon}
-                </a>
-              );
-            })}
+            <a href={Add.instagram}>
+              <Instagram />
+            </a>
+            <a href={Add.facebook}>
+              <FacebookOutlined />
+            </a>
+            <a href={Add.twitter}>
+              <Twitter />
+            </a>
+            <a href={Add.youtube}>
+              <YouTube />
+            </a>
           </Social>
         </Grid>
       </Grid>

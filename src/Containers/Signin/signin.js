@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, BoldSpan } from "../NewAdd/addForm/form";
 import styled from "styled-components";
 import BlueButton from "../../Components/BlueButton/blueButton";
@@ -140,21 +140,42 @@ const InnerBox = styled.div`
 `;
 
 const Signin = () => {
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [IsRemembered, setIsRemembered] = useState(false);
+
+  console.log(IsRemembered);
+
   return (
     <Wrap>
       <Heading title={"تسجيل الدخول"} />
       <Box>
-        <BoldSpan>كلمة المرور</BoldSpan>
-        <input type="password" placeholder="***********" />
+        <BoldSpan>البريد الالكتروني</BoldSpan>
+        <input
+          type="email"
+          placeholder="Mysooq@gmail.com"
+          onChange={(e) => setEmail(e.target.value)}
+          value={Email}
+        />
       </Box>
 
       <Box>
-        <BoldSpan>البريد الالكتروني</BoldSpan>
-        <input type="email" placeholder="Mysooq@gmail.com" />
+        <BoldSpan>كلمة المرور</BoldSpan>
+        <input
+          type="password"
+          placeholder="***********"
+          onChange={(e) => setPassword(e.target.value)}
+          value={Password}
+        />
       </Box>
+
       <InnerBox>
         <div>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            onChange={(e) => setIsRemembered(e.target.checked)}
+            value={IsRemembered}
+          />
           <label>تذكرني لاحقاً</label>
         </div>
         <span>هل نسيت كلمة المرور؟</span>
