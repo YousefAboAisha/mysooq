@@ -5,6 +5,7 @@ import PageTitle from "../../Components/PageTitle/pageTitle";
 import Cards from "./realEstatesCards/realEstatesCards";
 import { Box } from "../NewAdd/addForm/form";
 import Heading from "../../Components/Heading/heading";
+import Spinner from "../../Components/Spinner/spinner";
 
 const Wrapper = styled.div`
   position: relative;
@@ -31,6 +32,13 @@ const Btn = styled.button`
   border-radius: 3px;
   font-family: var(--secondFont);
   font-size: 14px;
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: #01687d;
+    transition: all 0.2s linear;
+  }
+
   @media only screen and (max-width: 600px) {
     & {
       min-width: 50px;
@@ -38,7 +46,7 @@ const Btn = styled.button`
   }
 `;
 
-function RealEstates() {
+const RealEstates = () => {
   return (
     <Wrapper>
       <PageTitle title={"عقارات"} />
@@ -95,6 +103,6 @@ function RealEstates() {
       </Grid>
     </Wrapper>
   );
-}
+};
 
 export default RealEstates;

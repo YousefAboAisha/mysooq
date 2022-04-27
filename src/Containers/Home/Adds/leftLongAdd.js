@@ -2,14 +2,14 @@ import React from "react";
 import add from "../../../Media/leftAdd2.png";
 import styled from "styled-components";
 
-function LeftLongAdd() {
-  const ImageBox = styled.div`
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `;
+const ImageBox = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
+function LeftLongAdd() {
   return (
     <ImageBox>
       <img

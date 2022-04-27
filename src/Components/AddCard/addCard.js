@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
-import add from "../../../Media/cardAdd.png";
+import add from "../../Media/cardAdd.png";
+import { useParams, useNavigate } from "react-router-dom";
 
-function Cards() {
+const Card = () => {
   const Item = styled.div`
     position: relative;
     max-height: 400px;
@@ -18,23 +19,34 @@ function Cards() {
     border-radius: 10px;
   `;
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  console.log(id);
+
+  const clickHandler = (id) => {
+    navigate(`/add/${id}`);
+  };
+
   return (
     <Grid item lg={3} md={4} sm={6} xs={12}>
       <Item>
         <img
+          onClick={() => clickHandler(2)}
           src={add}
-          alt={add}
+          alt={"add"}
           width="100%"
           height={"402"}
           style={{
             objectFit: "cover",
             objectPosition: "50% 50%",
             borderRadius: "10px",
+            cursor: "pointer",
           }}
         />
       </Item>
     </Grid>
   );
-}
+};
 
-export default Cards;
+export default Card;

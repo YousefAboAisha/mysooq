@@ -1,8 +1,9 @@
 import { Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PageTitle from "../../Components/PageTitle/pageTitle";
 import Heading from "../../Components/Heading/heading";
+import { useParams } from "react-router-dom";
 import {
   LocationOnOutlined,
   FacebookOutlined,
@@ -12,6 +13,7 @@ import {
 } from "@mui/icons-material";
 import img from "../../Media/mainAdd.png";
 import img2 from "../../Media/cardAdd.png";
+import axios from "axios";
 
 const Wrapper = styled.div`
   position: relative;
@@ -94,6 +96,26 @@ const Social = styled.div`
 
 function AddDetails() {
   const [mainImg, setMainImg] = useState(img);
+  const [Add, setAdd] = useState([]);
+  const { id } = useParams();
+
+  const fetchData = async () => {
+    const response = await fetch(
+      `http://alirafeqpro-001-site1.gtempurl.com/api/Business/GetOne?id=${id}`,
+      {
+        method: "GET",
+        mode: "no-cors",
+      }
+    );
+    const result = await response.json();
+    if (result) setAdd(result.data);
+  };
+
+  console.log(id);
+
+  useEffect(() => {
+    fetchData();
+  });
 
   const extraPhotos = [
     { src: img, id: 1 },
@@ -141,7 +163,7 @@ function AddDetails() {
             <span> منتجات لتنظيف المنازل </span>
           </Grid>
 
-          <Grid container lg={12} md={12} xs={12} mt={1.8}>
+          <Grid container mt={1.8}>
             <Grid item lg={12} xs={12}>
               <Heading title={"بيانات المعلن"} />
             </Grid>
@@ -168,7 +190,7 @@ function AddDetails() {
           </Grid>
         </Grid>
 
-        <Grid lg={6} md={12} xs={12}>
+        <Grid item lg={6} md={12} xs={12}>
           <ImagesBox>
             <img
               src={mainImg}

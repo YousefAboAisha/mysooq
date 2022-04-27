@@ -112,8 +112,8 @@ svg {
   cursor: pointer;
 }
 
-/* @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
   .App {
-    width: 100%;
+    width: 95%;
   }
-} */
+}

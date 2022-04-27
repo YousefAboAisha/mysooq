@@ -27,7 +27,7 @@
 }
 
 .wrapper .box .right a:hover {
-    color: var(--blue);
+    color: #222;
     transition: all 0.3s linear;
 }
 
@@ -47,6 +47,11 @@
 
 
 @media only screen and (max-width: 500px) {
+
+    .wrapper .box {
+        width: 100%;
+    }
+
     .wrapper .box .right a {
         font-size: 12px;
     }
@@ -54,5 +59,6 @@
     .wrapper .box button {
         padding: 6px;
         font-size: 11px;
+        margin-left: 10px;
     }
 }

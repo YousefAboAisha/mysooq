@@ -114,23 +114,23 @@
     align-items: center;
     padding: 8px 12px;
     border-radius: 3px;
-    transition: all 0.5s linear;
     font-weight: 500;
     gap: 5px;
     min-width: fit-content;
     scroll-snap-align: start;
     margin: 0 0 0 10px;
+    transition: all 0.5s ease-in-out;
 }
 
 .wrapper .secondBox .wrap a:hover {
     background-color: var(--white);
     color: var(--blue);
-    transition: all 0.5s linear;
+    transition: all 0.5s ease-in-out;
 }
 
 .wrapper .secondBox .wrap a:hover svg {
     color: var(--blue);
-    transition: all 0.5s linear;
+    transition: all 0.5s ease-in-out;
 }
 
 .secondBox .arrow {
@@ -145,6 +145,11 @@
 }
 
 @media only screen and (max-width: 500px) {
+
+    .wrapper .box {
+        width: 100%;
+    }
+
     .wrapper .firstBox button {
         padding: 8px 6px;
         min-width: 100px;

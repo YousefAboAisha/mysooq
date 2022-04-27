@@ -39,11 +39,10 @@ const Routers = () => {
       <Route path="contact" element={<Contactus />} />
       <Route path="about" element={<About />} />
       <Route path="userpolicy" element={<Policy />} />
-      <Route path="userpolicy" element={<Policy />} />
-      <Route path="add" element={<Add />} />
+      <Route path="add/:id" element={<Add />} />
       <Route path="signup" element={<Signup />} />
       <Route path="signin" element={<Signin />} />
-      <Route element={<Navigate to="/" />} />
+      <Route path={"*"} element={<Navigate to="/" />} />
     </Routes>
   );
 };
