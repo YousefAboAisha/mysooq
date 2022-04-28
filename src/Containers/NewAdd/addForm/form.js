@@ -62,8 +62,8 @@ const Form = () => {
   const [AddTitle, setAddTitle] = useState("");
   const [AddType, setAddType] = useState("");
   const [AddSubType, setAddSubType] = useState("");
-  const [Price, setPrice] = useState("");
-  const [Currency, setCurrency] = useState("");
+  const [Price, setPrice] = useState(""); // مش هتبعتو
+  const [Currency, setCurrency] = useState(""); // مش هتبعتو
   const [mainAddImage, setmainAddImage] = useState("");
   const [AddDetails, setAddDetails] = useState("");
   const [AddPublisher, setAddPublisher] = useState("");
@@ -106,13 +106,58 @@ const Form = () => {
 
   // **************************************
 
+  // const data = {
+  //   userName: AddTitle,
+  //   service: AddType,
+  //   subtype: AddSubType,
+  //   // MainImage: mainAddImage,
+  //   description: AddDetails,
+  //   name: AddPublisher,
+  //   country: Country,
+  //   city: City,
+  //   email: Email,
+  //   phone1: PhoneNumber,
+  //   // Images: AddImages,
+  //   youtube: YLink,
+  //   facebook: FLink,
+  //   twitter: TLink,
+  //   instagram: ILink,
+  //   areaId: 1,
+  //   dstatusId: 1,
+  //   fax: "",
+  //   website: "",
+  //   address: "",
+  // };
+
+  const data = {
+    service: 1,
+    country: 9,
+    subtype: 8,
+    city: 8,
+    areaId: 23,
+    description: "string",
+    phone1: "string",
+    statusId: 0,
+    name: "string",
+    fax: "",
+    email: "test@test.com",
+    website: "",
+    address: "string",
+    userName: "mo",
+    facebook: "www.facebook.com",
+    instagram: "www.instagram.com",
+    youtube: "wwww.youtube.com",
+    twitter: "www.twitter.com",
+  };
+
+  console.log(data);
+
   const clickHandler = (e) => {
     setLoading(true);
     e.preventDefault();
+
     axios
-      .post(
-        `http://alirafeqpro-001-site1.gtempurl.com/api/Business/Create?service=200&${Country}=17&${AddSubType}=100&CITY=${City}&AREAId=100&Description=${AddDetails}&Phone1=${PhoneNumber}&StatusId=100&Name=${AddTitle}&Fax=0592551405&Email=${Email}&Website=faw.com&Address=Tal%20Al%20Hawa&UserName=${AddPublisher}&Facebook=${FLink}&Instagram=${ILink}&Youtube=${YLink}&Twitter=${TLink}`
-      )
+      .post("https://localhost:44387/api/Business/Create", data)
       .then((res) => {
         console.log(res.data);
         setLoading(false);
@@ -122,6 +167,8 @@ const Form = () => {
         setLoading(false);
       });
   };
+
+  console.log(City);
 
   console.log(Country);
 
@@ -250,6 +297,9 @@ const Form = () => {
               defaultValue=""
               required
             >
+              <option value="" selected disabled hidden>
+                الدولة
+              </option>
               {Countries.map((country, index) => {
                 return (
                   <option value={country.id} key={index}>
@@ -268,6 +318,9 @@ const Form = () => {
               onChange={(e) => setCity(e.target.value)}
               value={City}
             >
+              <option value="" selected disabled hidden>
+                المدينة
+              </option>
               {Cities.map((city, index) => {
                 return (
                   <option value={city.id} key={index}>

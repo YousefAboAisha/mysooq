@@ -120,7 +120,10 @@ function Flags() {
           {Countries.map((elem, index) => {
             return (
               <Card key={index}>
-                <img src={img} alt={elem.altname} />
+                <img
+                  src={"../../../Media/large/" + elem.id + ".jpg"}
+                  alt={elem.altname}
+                />
                 <BoldSpan>{elem.name}</BoldSpan>
               </Card>
             );

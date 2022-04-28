@@ -29,12 +29,12 @@ const Routers = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="realestates" element={<RealEstates />} />
-      <Route path="cars" element={<Cars />} />
-      <Route path="trades" element={<Trades />} />
-      <Route path="services" element={<Services />} />
-      <Route path="freelancers" element={<Freelancers />} />
-      <Route path="jobs" element={<Jobs />} />
+      <Route path="realestates" element={<RealEstates id={6} />} />
+      <Route path="cars" element={<Cars />} id={8} />
+      <Route path="trades" element={<Trades />} id={1} />
+      <Route path="services" element={<Services />} id={2} />
+      <Route path="freelancers" element={<Freelancers />} id={4} />
+      <Route path="jobs" element={<Jobs />} id={5} />
       <Route path="newadd" element={<NewAdd />} />
       <Route path="contact" element={<Contactus />} />
       <Route path="about" element={<About />} />
