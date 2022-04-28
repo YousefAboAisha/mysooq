@@ -77,12 +77,40 @@ const Form = () => {
   const [TLink, setTLink] = useState("");
   const [ILink, setILink] = useState("");
   const [Loading, setLoading] = useState();
+  const [Countries, setCountries] = useState([]);
+  const [Cities, setCities] = useState([]);
+  const [Subtypes, setSubtypes] = useState([]);
 
   const countryURL = "https://localhost:44387/api/Countries/GetAll";
   const cityURL = `https://localhost:44387/api/Cities/GetAllForOneCountry?countryId=${Country}`;
+  const SubtypeURL = `https://localhost:44387/api/SubTupe/GetAllForService?siteServiceID=${AddSubType}`;
 
-  const [Countries, setCountries] = useState([]);
-  const [Cities, setCities] = useState([]);
+  const services = [
+    {
+      name: "عقارات",
+      id: 6,
+    },
+    {
+      name: "سيارات",
+      id: 8,
+    },
+    {
+      name: "مصالح تجارية",
+      id: 1,
+    },
+    {
+      name: "خدمات",
+      id: 2,
+    },
+    {
+      name: "باحثين عن عمل",
+      id: 4,
+    },
+    {
+      name: "وظائف شاغرة",
+      id: 5,
+    },
+  ];
 
   // Fetching Countries
   const fetchCountriesData = async () => {
@@ -97,10 +125,20 @@ const Form = () => {
     if (result) setCities(result.data["$values"]);
   };
 
+  const fetchSubTypesData = async () => {
+    const response = await fetch(SubtypeURL);
+    const result = await response.json();
+    if (result) setSubtypes(result.data["$values"]);
+  };
+
   useEffect(() => {
     fetchCountriesData();
     fetchCitiesData();
   }, [Country]);
+
+  useEffect(() => {
+    fetchSubTypesData();
+  }, []);
 
   console.log(Cities);
 
@@ -129,26 +167,24 @@ const Form = () => {
   //   address: "",
   // };
 
-  const data = {
-    service: 1,
-    country: 9,
-    subtype: 8,
-    city: 8,
-    areaId: 23,
-    description: "string",
-    phone1: "string",
-    statusId: 0,
-    name: "string",
-    fax: "",
-    email: "test@test.com",
-    website: "",
-    address: "string",
-    userName: "mo",
-    facebook: "www.facebook.com",
-    instagram: "www.instagram.com",
-    youtube: "wwww.youtube.com",
-    twitter: "www.twitter.com",
+  const data = new FormData();
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
   };
+
+  data.append("Title", AddTitle);
+  data.append("Type", AddType);
+  data.append("Subtype", AddSubType);
+  data.append("Details", AddDetails);
+  data.append("Publisher", AddPublisher);
+  data.append("Country", Country);
+  data.append("City", City);
+  data.append("Email", Email);
+  data.append("PhoneNumber", PhoneNumber);
+  data.append("youtube", YLink);
+  data.append("Facebook", FLink);
+  data.append("Twitter", TLink);
+  data.append("Instagram", ILink);
 
   console.log(data);
 
@@ -157,7 +193,7 @@ const Form = () => {
     e.preventDefault();
 
     axios
-      .post("https://localhost:44387/api/Business/Create", data)
+      .post("https://localhost:44387/api/Business/Create", data, config)
       .then((res) => {
         console.log(res.data);
         setLoading(false);
@@ -194,12 +230,17 @@ const Form = () => {
               onChange={(e) => setAddType(e.target.value)}
               value={AddType}
             >
-              <option value="" disabled>
+              <option value="" selected disabled hidden>
                 تصنيف الإعلان
               </option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+
+              {services.map((elem, index) => {
+                return (
+                  <option key={index} value={elem.id}>
+                    {elem.name}
+                  </option>
+                );
+              })}
             </select>
             <LightSpan>اختر تصنيفاً للإعلان الذي تريد نشره</LightSpan>
           </Box>
@@ -211,12 +252,16 @@ const Form = () => {
               value={AddSubType}
               defaultValue=""
             >
-              <option value="" disabled>
+              <option value="" selected disabled hidden>
                 التصنيف الفرعي للإعلان
               </option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+              {Subtypes.map((elem, index) => {
+                return (
+                  <option kry={index} value={elem.id}>
+                    {elem.title}
+                  </option>
+                );
+              })}
             </select>
             <LightSpan>اختر تصنيفاً فرعياً للإعلان الذي تريد نشره</LightSpan>
           </Box>
@@ -241,7 +286,7 @@ const Form = () => {
               value={Currency}
               defaultValue=""
             >
-              <option value="" disabled>
+              <option value="" selected disabled hidden>
                 العملة
               </option>
               <option>1</option>
@@ -295,7 +340,7 @@ const Form = () => {
               onChange={(e) => setCountry(e.target.value)}
               value={Country}
               defaultValue=""
-              required
+              // required
             >
               <option value="" selected disabled hidden>
                 الدولة

@@ -39,14 +39,16 @@ const Btn = styled.button`
 
 const PageHeader = ({ id }) => {
   const URL = `https://localhost:44387/api/SubTupe/GetAllForService?siteServiceID=${id}`;
-  const [Adds, setAdds] = useState([]);
+  const [Subtypes, setSubtypes] = useState([]);
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
+  const [Countries, setCountries] = useState([]);
+  const [Cities, setCities] = useState([]);
 
   const fetchData = async () => {
     const response = await fetch(URL);
     const result = await response.json();
-    if (result) setAdds(result.data["$values"]);
+    if (result) setSubtypes(result.data["$values"]);
   };
 
   useEffect(() => {
@@ -55,9 +57,6 @@ const PageHeader = ({ id }) => {
 
   const countryURL = "https://localhost:44387/api/Countries/GetAll";
   const cityURL = `https://localhost:44387/api/Cities/GetAllForOneCountry?countryId=${Country}`;
-
-  const [Countries, setCountries] = useState([]);
-  const [Cities, setCities] = useState([]);
 
   // Fetching Countries
   const fetchCountriesData = async () => {
@@ -85,7 +84,7 @@ const PageHeader = ({ id }) => {
             <option value="" selected disabled hidden>
               الأقسام الفرعية
             </option>
-            {Adds.map((elem, index) => {
+            {Subtypes.map((elem, index) => {
               return (
                 <option kry={index} value={elem.id}>
                   {elem.title}
