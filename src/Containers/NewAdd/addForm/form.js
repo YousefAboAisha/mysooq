@@ -84,6 +84,7 @@ const Form = () => {
   const countryURL = "https://localhost:44387/api/Countries/GetAll";
   const cityURL = `https://localhost:44387/api/Cities/GetAllForOneCountry?countryId=${Country}`;
   const SubtypeURL = `https://localhost:44387/api/SubTupe/GetAllForService?siteServiceID=${AddSubType}`;
+  const createURL = "https://localhost:44387/api/Ads/Create";
 
   const services = [
     {
@@ -169,7 +170,7 @@ const Form = () => {
 
   const data = new FormData();
   const config = {
-    headers: { "content-type": "multipart/form-data" },
+    headers: { "Content-Type": "application/json" },
   };
 
   data.append("Title", AddTitle);
@@ -230,7 +231,7 @@ const Form = () => {
               onChange={(e) => setAddType(e.target.value)}
               value={AddType}
             >
-              <option value="" selected disabled hidden>
+              <option defaultValue="" selected disabled hidden>
                 تصنيف الإعلان
               </option>
 
@@ -250,14 +251,13 @@ const Form = () => {
             <select
               onChange={(e) => setAddSubType(e.target.value)}
               value={AddSubType}
-              defaultValue=""
             >
-              <option value="" selected disabled hidden>
+              <option defaultValue="" selected disabled hidden>
                 التصنيف الفرعي للإعلان
               </option>
               {Subtypes.map((elem, index) => {
                 return (
-                  <option kry={index} value={elem.id}>
+                  <option key={index} value={elem.id}>
                     {elem.title}
                   </option>
                 );

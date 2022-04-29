@@ -93,7 +93,6 @@ function Flags() {
   }, []);
 
   console.log(Countries);
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   return (
     <Wrapper>
@@ -101,12 +100,13 @@ function Flags() {
 
       <Wrap ref={ref}>
         <Suspense fallback={<Spinner />}>
-          {arr.map((elem, index) => {
+          {Countries.map((elem, index) => {
             return (
               <Card key={index}>
                 <img
-                  src={require(`../../../Media/large/${elem}.jpg`)}
+                  src={"https://localhost:44387" + elem.photoPath}
                   alt={elem.altname}
+                  style={{ borderRadius: "50%" }}
                 />
                 <BoldSpan>{elem.name}</BoldSpan>
               </Card>
