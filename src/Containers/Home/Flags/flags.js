@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 0 auto;
+  margin-top: 75px;
 `;
 
 const Wrap = styled.div`
@@ -79,44 +80,26 @@ function Flags() {
     ref.current.scrollLeft += scrollOffset;
   };
 
-  const [Loading, setLoading] = useState(false);
   const [Countries, setCountries] = useState([]);
 
   const fetchData = async () => {
-    setLoading(true);
     const response = await fetch(URL);
     const result = await response.json();
     if (result) setCountries(result.data["$values"]);
-    setLoading(false);
   };
 
   useEffect(() => {
-    setLoading(true);
     fetchData();
-    setLoading(false);
   }, []);
 
   console.log(Countries);
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   return (
     <Wrapper>
       <ArrowForwardIosOutlined onClick={() => scroll(100)} />
 
       <Wrap ref={ref}>
-        {/* {Loading ? (
-          <Spinner />
-        ) : (
-          Countries.map((elem, index) => {
-            return (
-              <Card key={index}>
-                <img src={img} alt={elem.altname} />
-                <BoldSpan>{elem.name}</BoldSpan>
-              </Card>
-            );
-          })
-        )} */}
-
         <Suspense fallback={<Spinner />}>
           {arr.map((elem, index) => {
             return (

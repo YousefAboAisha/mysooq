@@ -57,22 +57,10 @@ const StyledCarousel = styled(Carousel)`
     bottom: 7.5%;
   }
 
-  & .ictPXa,
-  & .fqikaj,
-  & .jdHdoM {
+  & .cPeXhm,
+  & .rec-dot_active {
     background-color: var(--blue);
     box-shadow: unset;
-  }
-
-  & .kAqtYR,
-  & .ictPXa {
-    transform: translateY(-5px);
-  }
-
-  & .ZRTri,
-  & .fqikaj {
-    background: transparent;
-    box-shadow: 0 0 1px 2px rgb(0 0 0 / 50%);
   }
 
   /* round buttons on hover */
