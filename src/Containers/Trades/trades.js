@@ -1,8 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 import styled from "styled-components";
 import PageHeader from "../../Components/PageHeader/pageHeader";
 import PageTitle from "../../Components/PageTitle/pageTitle";
-import Spinner from "../../Components/Spinner/Spinner";
 
 const Wrapper = styled.div`
   position: relative;
@@ -12,12 +11,10 @@ const Wrapper = styled.div`
 function Trades() {
   const id = 1;
   return (
-    <Suspense fallback={<Spinner />}>
-      <Wrapper>
-        <PageTitle title={"تجارة"} />
-        <PageHeader id={id} />
-      </Wrapper>
-    </Suspense>
+    <Wrapper>
+      <PageTitle title={"تجارة"} />
+      <PageHeader id={id} />
+    </Wrapper>
   );
 }
 
