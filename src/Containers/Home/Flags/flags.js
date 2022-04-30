@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState, Suspense } from "react";
-import img from "../../../Media/flag.png";
 import styled from "styled-components";
 import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@mui/icons-material";
 import Spinner from "../../../Components/Spinner/Spinner";
+import { BASE_URL } from "../../../baseURL";
 
-const URL = "https://localhost:44387/api/Countries/GetAll";
+// const URL = "https://localhost:44387/api/Countries/GetAll";
 
 const Wrapper = styled.div`
   position: relative;
@@ -83,7 +83,7 @@ function Flags() {
   const [Countries, setCountries] = useState([]);
 
   const fetchData = async () => {
-    const response = await fetch(URL);
+    const response = await fetch(BASE_URL + "Countries/GetAll");
     const result = await response.json();
     if (result) setCountries(result.data["$values"]);
   };
@@ -93,6 +93,7 @@ function Flags() {
   }, []);
 
   console.log(Countries);
+  console.log(BASE_URL);
 
   return (
     <Wrapper>

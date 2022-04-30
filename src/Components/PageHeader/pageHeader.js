@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Box } from "../../Containers/NewAdd/addForm/form";
+import { BASE_URL } from "../../baseURL";
 
 const Header = styled.div`
   position: relative;
@@ -38,7 +39,7 @@ const Btn = styled.button`
 `;
 
 const PageHeader = ({ id }) => {
-  const URL = `https://localhost:44387/api/SubTupe/GetAllForService?siteServiceID=${id}`;
+  const URL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${id}`;
   const [Subtypes, setSubtypes] = useState([]);
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
@@ -55,8 +56,8 @@ const PageHeader = ({ id }) => {
     fetchData();
   }, []);
 
-  const countryURL = "https://localhost:44387/api/Countries/GetAll";
-  const cityURL = `https://localhost:44387/api/Cities/GetAllForOneCountry?countryId=${Country}`;
+  const countryURL = `${BASE_URL}Countries/GetAll`;
+  const cityURL = `${BASE_URL}Cities/GetAllForOneCountry?countryId=${Country}`;
 
   // Fetching Countries
   const fetchCountriesData = async () => {

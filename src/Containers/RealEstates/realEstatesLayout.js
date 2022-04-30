@@ -22,7 +22,13 @@ const RealEstates = () => {
         <Heading title={"أحدث الإعلانات"} />
       </Grid>
 
-      <Grid container rowSpacing={2} columnSpacing={2} pr={0}></Grid>
+      <Grid
+        container
+        rowSpacing={2}
+        columnSpacing={2}
+        pr={0}
+        minHeight={"400px"}
+      ></Grid>
     </Wrapper>
   );
 };

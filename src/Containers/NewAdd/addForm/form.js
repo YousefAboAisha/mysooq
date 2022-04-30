@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Bluebutton from "../../../Components/BlueButton/blueButton";
+import { BASE_URL } from "../../../baseURL";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -43,6 +44,14 @@ export const Box = styled.div`
     width: 100%;
     transition: all 0.5s linear;
   }
+
+  & button {
+    padding: 4px 10px;
+    width: fit-content;
+    font-size: 14px;
+    margin-top: 7px;
+    border-radius: 7px;
+  }
 `;
 
 export const Halfbox = styled.div`
@@ -81,10 +90,10 @@ const Form = () => {
   const [Cities, setCities] = useState([]);
   const [Subtypes, setSubtypes] = useState([]);
 
-  const countryURL = "https://localhost:44387/api/Countries/GetAll";
-  const cityURL = `https://localhost:44387/api/Cities/GetAllForOneCountry?countryId=${Country}`;
-  const SubtypeURL = `https://localhost:44387/api/SubTupe/GetAllForService?siteServiceID=${AddSubType}`;
-  const createURL = "https://localhost:44387/api/Ads/Create";
+  const countryURL = `${BASE_URL}Countries/GetAll`;
+  const cityURL = `${BASE_URL}Cities/GetAllForOneCountry?countryId=${Country}`;
+  const SubtypeURL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${AddSubType}`;
+  const createURL = `${BASE_URL}Ads/Create`;
 
   const services = [
     {
@@ -111,6 +120,18 @@ const Form = () => {
       name: "وظائف شاغرة",
       id: 5,
     },
+  ];
+
+  const currency = [
+    "الشيكل",
+    "الدولار الأمريكي",
+    "اليورو الأوروبي",
+    "الدينار الكويتي",
+    "الفرنك السويسري",
+    "الجنيه الإسترليني",
+    "الين الياباني",
+    "الريال السعودي",
+    "الروبل الروسي",
   ];
 
   // Fetching Countries
@@ -194,7 +215,7 @@ const Form = () => {
     e.preventDefault();
 
     axios
-      .post("https://localhost:44387/api/Business/Create", data, config)
+      .post("${BASE_URL}api/Business/Create", data, config)
       .then((res) => {
         console.log(res.data);
         setLoading(false);
@@ -289,9 +310,9 @@ const Form = () => {
               <option value="" selected disabled hidden>
                 العملة
               </option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
+              {currency.map((elem, index) => {
+                return <option key={index}>{elem}</option>;
+              })}
             </select>
             <LightSpan>أختر العملة التي تفضل التعامل بها</LightSpan>
           </Box>
@@ -307,6 +328,7 @@ const Form = () => {
             value={mainAddImage}
           />
           <LightSpan>أضف صورة جذابة معبرة عن إعلانك</LightSpan>
+          <button>رفع الصورة</button>
         </Box>
 
         <Box>
@@ -340,7 +362,7 @@ const Form = () => {
               onChange={(e) => setCountry(e.target.value)}
               value={Country}
               defaultValue=""
-              // required
+              required
             >
               <option value="" selected disabled hidden>
                 الدولة
@@ -362,6 +384,7 @@ const Form = () => {
               defaultValue=""
               onChange={(e) => setCity(e.target.value)}
               value={City}
+              required
             >
               <option value="" selected disabled hidden>
                 المدينة
@@ -412,6 +435,7 @@ const Form = () => {
             value={AddImages}
           />
           <LightSpan>أضف صور الإعلان بحد أقصى 5 صور</LightSpan>
+          <button>رفع الصور</button>
         </Box>
 
         <Halfbox>

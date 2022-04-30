@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import Card from "../../../Components/AddCard/addCard";
 import Spinner from "../../../Components/Spinner/Spinner";
+import { BASE_URL } from "../../../baseURL";
 
-const URL = "https://localhost:44387/api/Business/GetLatest";
+// const URL = "https://localhost:44387/api/Business/GetLatest";
 
 function RecentAdds() {
   const [Adds, setAdds] = useState([]);
@@ -11,7 +12,7 @@ function RecentAdds() {
 
   const fetchData = async () => {
     setLoading(true);
-    const response = await fetch(URL);
+    const response = await fetch(`${BASE_URL}Business/GetLatest`);
     const result = await response.json();
     if (result) setAdds(result.data["$values"]);
     setLoading(false);
@@ -30,6 +31,7 @@ function RecentAdds() {
       rowSpacing={{ lg: 4, md: 4, xs: 3 }}
       columnSpacing={{ lg: 4, md: 4, xs: 3 }}
       pr={0}
+      minHeight={"400px"}
     >
       {Loading ? (
         <Spinner />
