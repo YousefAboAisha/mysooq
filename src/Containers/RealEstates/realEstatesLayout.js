@@ -5,7 +5,7 @@ import PageTitle from "../../Components/PageTitle/pageTitle";
 import Heading from "../../Components/Heading/heading";
 import Card from "../../Components/AddCard/addCard";
 import PageHeader from "../../Components/PageHeader/pageHeader";
-import Spinner from "../../Components/Spinner/spinner";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const Wrapper = styled.div`
   position: relative;

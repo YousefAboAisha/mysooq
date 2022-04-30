@@ -8,7 +8,7 @@ import LeftLongAdd from "./Adds/leftLongAdd";
 import Heading from "../../Components/Heading/heading";
 import BlueButton from "../../Components/BlueButton/blueButton";
 import RecentAdds from "./RecentAdds/recentAdds";
-import Spinner from "../../Components/Spinner/spinner";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const Wrapper = styled.div`
   position: relative;

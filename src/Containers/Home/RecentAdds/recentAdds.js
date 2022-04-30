@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import Card from "../../../Components/AddCard/addCard";
-import Spinner from "../../../Components/Spinner/spinner";
+import Spinner from "../../../Components/Spinner/Spinner";
 
 const URL = "https://localhost:44387/api/Business/GetLatest";
 

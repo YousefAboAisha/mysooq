@@ -1,10 +1,11 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import Spinner from "./Components/Spinner/Spinner";
 
 //import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
-  <Suspense>
+  <Suspense fallback={<Spinner />}>
     <App />
   </Suspense>,
   document.getElementById("root")

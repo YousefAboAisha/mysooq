@@ -5,7 +5,7 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@mui/icons-material";
-import Spinner from "../../../Components/Spinner/spinner";
+import Spinner from "../../../Components/Spinner/Spinner";
 
 const URL = "https://localhost:44387/api/Countries/GetAll";
 

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import styled from "styled-components";
 import PageHeader from "../../Components/PageHeader/pageHeader";
 import PageTitle from "../../Components/PageTitle/pageTitle";
-import Spinner from "../../Components/Spinner/spinner";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const Wrapper = styled.div`
   position: relative;
