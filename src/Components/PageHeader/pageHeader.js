@@ -38,11 +38,9 @@ const Btn = styled.button`
   }
 `;
 
-const PageHeader = ({ id }) => {
+const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
   const URL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${id}`;
   const [Subtypes, setSubtypes] = useState([]);
-  const [Country, setCountry] = useState("");
-  const [City, setCity] = useState("");
   const [Countries, setCountries] = useState([]);
   const [Cities, setCities] = useState([]);
 

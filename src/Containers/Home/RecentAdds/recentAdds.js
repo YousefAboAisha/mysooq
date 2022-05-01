@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Grid } from "@mui/material";
 import Card from "../../../Components/AddCard/addCard";
 import Spinner from "../../../Components/Spinner/Spinner";
 import { BASE_URL } from "../../../baseURL";
+import BlueButton from "../../../Components/BlueButton/blueButton";
 
 // const URL = "https://localhost:44387/api/Business/GetLatest";
 
 const RecentAdds = () => {
   const [Adds, setAdds] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [Page, setPage] = useState(0);
 
-  // const fetchData = async () => {
-  //   setLoading(true);
-  //   const response = await fetch(`${BASE_URL}Business/GetLatest`);
-  //   const result = await response.json();
-  //   if (result) setAdds(result.data["$values"]);
-  //   setLoading(false);
-  // };
+  const fetchData = async () => {
+    const response = await fetch(
+      `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${null}&cityId=${null}&serviceId=${null}`
+    );
+    const result = await response.json();
+    if (result) setAdds(result.data["$values"]);
+  };
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   fetchData();
-  //   setLoading(false);
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, [Page]);
 
   console.log(Adds);
+  console.log(Page);
 
   return (
     <Grid
@@ -34,13 +34,21 @@ const RecentAdds = () => {
       pr={0}
       minHeight={"400px"}
     >
-      {/* {Loading ? (
-        <Spinner />
-      ) : (
-        Adds.map((elem, index) => {
+      <Suspense fallback={<Spinner />}>
+        {Adds.map((elem, index) => {
           return <Card key={index} card={elem} />;
-        })
-      )} */}
+        })}
+      </Suspense>
+
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        m={3}
+      >
+        <BlueButton title={"إظهار المزيد"} setPage={setPage} page={Page} />
+      </Grid>
     </Grid>
   );
 };

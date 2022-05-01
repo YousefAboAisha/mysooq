@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material/";
 import styled from "styled-components";
 import Flags from "./Flags/flags";
@@ -58,16 +58,6 @@ const HomeLayout = () => {
 
         {/* Adds Cards */}
         <RecentAdds />
-
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          m={3}
-        >
-          <BlueButton title={"إظهار المزيد"} />
-        </Grid>
       </Grid>
     </Wrapper>
   );

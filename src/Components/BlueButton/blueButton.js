@@ -17,8 +17,12 @@ const Btn = styled.button`
   }
 `;
 
-const BlueButton = ({ title, type }) => {
-  return <Btn type={type ? type : "button"}>{title}</Btn>;
+const BlueButton = ({ title, type, setPage, page }) => {
+  return (
+    <Btn onClick={() => setPage(page + 1)} type={type ? type : "button"}>
+      {title}
+    </Btn>
+  );
 };
 
 export default BlueButton;
