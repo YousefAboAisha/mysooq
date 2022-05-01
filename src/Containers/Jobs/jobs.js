@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   height: 1000px;
 `;
 
-function Jobs() {
+const Jobs = () => {
   const id = 5;
   return (
     <Wrapper>
@@ -23,6 +23,6 @@ function Jobs() {
       </Grid>
     </Wrapper>
   );
-}
+};
 
 export default Jobs;

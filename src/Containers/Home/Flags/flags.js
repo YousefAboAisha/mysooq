@@ -73,7 +73,7 @@ const BoldSpan = styled.span`
   font-size: 13px;
 `;
 
-function Flags() {
+const Flags = () => {
   const ref = useRef();
 
   const scroll = (scrollOffset) => {
@@ -105,7 +105,9 @@ function Flags() {
             return (
               <Card key={index}>
                 <img
-                  src={"https://localhost:44387" + elem.photoPath}
+                  src={
+                    "http://alirafeqpro-001-site1.gtempurl.com" + elem.photoPath
+                  }
                   alt={elem.altname}
                   style={{ borderRadius: "50%" }}
                 />
@@ -119,6 +121,6 @@ function Flags() {
       <ArrowBackIosOutlined onClick={() => scroll(-100)} />
     </Wrapper>
   );
-}
+};
 
 export default Flags;

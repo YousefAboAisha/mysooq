@@ -13,6 +13,7 @@ import {
 } from "@mui/icons-material";
 import img from "../../Media/mainAdd.png";
 import img2 from "../../Media/cardAdd.png";
+import { BASE_URL } from "../../baseURL";
 
 const Wrapper = styled.div`
   position: relative;
@@ -99,12 +100,9 @@ function AddDetails() {
   const { id } = useParams();
 
   const fetchData = async () => {
-    const response = await fetch(
-      `https://localhost:44387/api/Business/GetOne?id=${id}`,
-      {
-        method: "GET",
-      }
-    );
+    const response = await fetch(`${BASE_URL}Business/GetOne?id=${id}`, {
+      method: "GET",
+    });
     const result = await response.json();
     if (result) setAdd(result.data);
   };

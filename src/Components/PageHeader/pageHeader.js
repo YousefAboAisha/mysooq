@@ -87,7 +87,7 @@ const PageHeader = ({ id }) => {
             </option>
             {Subtypes.map((elem, index) => {
               return (
-                <option kry={index} value={elem.id}>
+                <option key={index} value={elem.id}>
                   {elem.title}
                 </option>
               );

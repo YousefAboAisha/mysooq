@@ -10,7 +10,7 @@ import {
 } from "@mui/icons-material/";
 import Links from "../../Links/links";
 
-function Navbar() {
+const Navbar = () => {
   const ref = useRef();
 
   const scroll = (scrollOffset) => {
@@ -58,6 +58,6 @@ function Navbar() {
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;

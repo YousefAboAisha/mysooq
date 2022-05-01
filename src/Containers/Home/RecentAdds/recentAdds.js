@@ -6,25 +6,26 @@ import { BASE_URL } from "../../../baseURL";
 
 // const URL = "https://localhost:44387/api/Business/GetLatest";
 
-function RecentAdds() {
+const RecentAdds = () => {
   const [Adds, setAdds] = useState([]);
   const [Loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await fetch(`${BASE_URL}Business/GetLatest`);
-    const result = await response.json();
-    if (result) setAdds(result.data["$values"]);
-    setLoading(false);
-  };
+  // const fetchData = async () => {
+  //   setLoading(true);
+  //   const response = await fetch(`${BASE_URL}Business/GetLatest`);
+  //   const result = await response.json();
+  //   if (result) setAdds(result.data["$values"]);
+  //   setLoading(false);
+  // };
 
-  useEffect(() => {
-    setLoading(true);
-    fetchData();
-    setLoading(false);
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetchData();
+  //   setLoading(false);
+  // }, []);
 
   console.log(Adds);
+
   return (
     <Grid
       container
@@ -33,15 +34,15 @@ function RecentAdds() {
       pr={0}
       minHeight={"400px"}
     >
-      {Loading ? (
+      {/* {Loading ? (
         <Spinner />
       ) : (
         Adds.map((elem, index) => {
           return <Card key={index} card={elem} />;
         })
-      )}
+      )} */}
     </Grid>
   );
-}
+};
 
 export default RecentAdds;

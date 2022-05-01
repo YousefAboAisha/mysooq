@@ -166,47 +166,48 @@ const Form = () => {
 
   // **************************************
 
-  // const data = {
-  //   userName: AddTitle,
-  //   service: AddType,
-  //   subtype: AddSubType,
-  //   // MainImage: mainAddImage,
-  //   description: AddDetails,
-  //   name: AddPublisher,
-  //   country: Country,
-  //   city: City,
-  //   email: Email,
-  //   phone1: PhoneNumber,
-  //   // Images: AddImages,
-  //   youtube: YLink,
-  //   facebook: FLink,
-  //   twitter: TLink,
-  //   instagram: ILink,
-  //   areaId: 1,
-  //   dstatusId: 1,
-  //   fax: "",
-  //   website: "",
-  //   address: "",
-  // };
-
-  const data = new FormData();
-  const config = {
-    headers: { "Content-Type": "application/json" },
+  const data = {
+    userName: AddTitle,
+    service: AddType,
+    subtype: AddSubType,
+    // MainImage: mainAddImage,
+    description: AddDetails,
+    name: AddPublisher,
+    country: Country,
+    city: City,
+    email: Email,
+    phone1: PhoneNumber,
+    // Images: AddImages,
+    youtube: YLink,
+    facebook: FLink,
+    twitter: TLink,
+    instagram: ILink,
+    areaId: 1,
+    dstatusId: 1,
+    fax: "",
+    website: "",
+    address: "",
   };
 
-  data.append("Title", AddTitle);
-  data.append("Type", AddType);
-  data.append("Subtype", AddSubType);
-  data.append("Details", AddDetails);
-  data.append("Publisher", AddPublisher);
-  data.append("Country", Country);
-  data.append("City", City);
-  data.append("Email", Email);
-  data.append("PhoneNumber", PhoneNumber);
-  data.append("youtube", YLink);
-  data.append("Facebook", FLink);
-  data.append("Twitter", TLink);
-  data.append("Instagram", ILink);
+  // const data = new FormData();
+
+  // data.append("Title", AddTitle);
+  // data.append("Type", AddType);
+  // data.append("Subtype", AddSubType);
+  // data.append("Details", AddDetails);
+  // data.append("Publisher", AddPublisher);
+  // data.append("Country", Country);
+  // data.append("City", City);
+  // data.append("Email", Email);
+  // data.append("PhoneNumber", PhoneNumber);
+  // data.append("youtube", YLink);
+  // data.append("Facebook", FLink);
+  // data.append("Twitter", TLink);
+  // data.append("Instagram", ILink);
+
+  const config = {
+    headers: { "Access-Control-Allow-Origin": "*" },
+  };
 
   console.log(data);
 
@@ -215,7 +216,7 @@ const Form = () => {
     e.preventDefault();
 
     axios
-      .post("${BASE_URL}api/Business/Create", data, config)
+      .post(`${BASE_URL}Business/Create`, data, config)
       .then((res) => {
         console.log(res.data);
         setLoading(false);

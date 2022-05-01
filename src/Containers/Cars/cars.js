@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   height: 1000px;
 `;
 
-function Cars() {
+const Cars = () => {
   const id = 8;
   return (
     <Wrapper>
@@ -23,6 +23,6 @@ function Cars() {
       </Grid>
     </Wrapper>
   );
-}
+};
 
 export default Cars;

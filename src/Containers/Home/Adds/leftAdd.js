@@ -9,7 +9,7 @@ const ImageBox = styled.div`
   align-items: center;
 `;
 
-function LeftAdd() {
+const LeftAdd = () => {
   return (
     <ImageBox>
       <img
@@ -19,6 +19,6 @@ function LeftAdd() {
       />
     </ImageBox>
   );
-}
+};
 
 export default LeftAdd;

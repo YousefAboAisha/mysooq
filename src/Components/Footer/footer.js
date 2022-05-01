@@ -79,7 +79,7 @@ const SocialSection = styled.div`
   }
 `;
 
-function Footer() {
+const Footer = () => {
   return (
     <FooterSection>
       <Grid
@@ -181,6 +181,6 @@ function Footer() {
       </BottomSection>
     </FooterSection>
   );
-}
+};
 
 export default Footer;

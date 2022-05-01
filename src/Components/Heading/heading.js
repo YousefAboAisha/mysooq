@@ -19,8 +19,8 @@ const Head = styled.h3`
   }
 `;
 
-function Heading({ title }) {
+const Heading = ({ title }) => {
   return <Head>{title}</Head>;
-}
+};
 
 export default Heading;

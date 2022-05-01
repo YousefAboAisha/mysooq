@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   height: 1000px;
 `;
 
-function Trades() {
+const Trades = () => {
   const id = 1;
   return (
     <Wrapper>
@@ -23,6 +23,6 @@ function Trades() {
       </Grid>
     </Wrapper>
   );
-}
+};
 
 export default Trades;

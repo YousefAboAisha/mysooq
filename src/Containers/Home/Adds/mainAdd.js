@@ -9,12 +9,12 @@ const ImageBox = styled.div`
   align-items: center;
 `;
 
-function MainAdd() {
+const MainAdd = () => {
   return (
     <ImageBox>
       <Slider />
     </ImageBox>
   );
-}
+};
 
 export default MainAdd;

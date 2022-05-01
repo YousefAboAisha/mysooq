@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../Navbar/navbar";
 import { Add } from "@mui/icons-material";
 
-function UpperNavbar() {
+const UpperNavbar = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.box}>
@@ -23,6 +23,6 @@ function UpperNavbar() {
       <Navbar />
     </div>
   );
-}
+};
 
 export default UpperNavbar;

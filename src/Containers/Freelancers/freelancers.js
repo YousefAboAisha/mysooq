@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   height: 1000px;
 `;
 
-function FreeLancers() {
+const FreeLancers = () => {
   const id = 4;
   return (
     <Wrapper>
@@ -23,6 +23,6 @@ function FreeLancers() {
       </Grid>
     </Wrapper>
   );
-}
+};
 
 export default FreeLancers;

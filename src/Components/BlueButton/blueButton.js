@@ -17,8 +17,8 @@ const Btn = styled.button`
   }
 `;
 
-function BlueButton({ title, type }) {
+const BlueButton = ({ title, type }) => {
   return <Btn type={type ? type : "button"}>{title}</Btn>;
-}
+};
 
 export default BlueButton;

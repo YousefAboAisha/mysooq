@@ -6,7 +6,7 @@ const StyledSpan = styled.span`
   font-family: var(--secondFont);
 `;
 
-function PageTitle({ title }) {
+const PageTitle = ({ title }) => {
   return (
     <div>
       <StyledSpan style={{ fontWeight: "600", marginLeft: "5px" }}>
@@ -15,6 +15,6 @@ function PageTitle({ title }) {
       <StyledSpan style={{ color: "#707070" }}>{title}</StyledSpan>
     </div>
   );
-}
+};
 
 export default PageTitle;

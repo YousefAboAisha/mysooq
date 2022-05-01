@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
-function HomeLayout() {
+const HomeLayout = () => {
   return (
     <Wrapper>
       <Grid container spacing={0}>
@@ -71,6 +71,6 @@ function HomeLayout() {
       </Grid>
     </Wrapper>
   );
-}
+};
 
 export default HomeLayout;

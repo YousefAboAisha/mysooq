@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   height: 1000px;
 `;
 
-function Services() {
+const Services = () => {
   const id = 2;
   return (
     <Wrapper>
@@ -23,6 +23,6 @@ function Services() {
       </Grid>
     </Wrapper>
   );
-}
+};
 
 export default Services;
