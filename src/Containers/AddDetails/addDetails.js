@@ -108,13 +108,8 @@ function AddDetails() {
     axios
       .get(`${BASE_URL}Business/GetOne?id=${id}`)
       .then((res) => {
-        console.log(res.data.data.$values);
-
-        const fetchedData = [];
-        for (let key in res.data.data["$values"]) {
-          fetchedData.push(res.data.data.$values[key]);
-        }
-        setAdd(fetchedData);
+        console.log(res.data.data);
+        setAdd(res.data.data);
         setLoading(false);
       })
       .catch((error) => {
