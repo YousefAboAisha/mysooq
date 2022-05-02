@@ -108,7 +108,7 @@ function AddDetails() {
     axios
       .get(`${BASE_URL}Business/GetOne?id=${id}`)
       .then((res) => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         setAdd(res.data.data);
         setLoading(false);
       })
@@ -118,7 +118,7 @@ function AddDetails() {
       });
   };
 
-  console.log(Add);
+  // console.log(Add);
 
   useEffect(() => {
     fetchData();

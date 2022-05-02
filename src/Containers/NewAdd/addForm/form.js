@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Bluebutton from "../../../Components/BlueButton/blueButton";
 import { BASE_URL } from "../../../baseURL";
 
 export const Wrapper = styled.div`
@@ -64,6 +63,22 @@ export const Halfbox = styled.div`
     & {
       flex-flow: row wrap;
     }
+  }
+`;
+
+const Btn = styled.button`
+  padding: 6px;
+  min-width: 110px;
+  color: var(--white);
+  background-color: var(--blue);
+  border-radius: 3px;
+  font-family: var(--secondFont);
+  font-size: 14px;
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: #01687d;
+    transition: all 0.2s linear;
   }
 `;
 
@@ -161,52 +176,29 @@ const Form = () => {
     fetchSubTypesData();
   }, []);
 
-  console.log(Cities);
-
   // **************************************
 
-  const data = {
-    userName: AddTitle,
-    service: AddType,
-    subtype: AddSubType,
-    // MainImage: mainAddImage,
-    description: AddDetails,
-    name: AddPublisher,
-    country: Country,
-    city: City,
-    email: Email,
-    phone1: PhoneNumber,
-    // Images: AddImages,
-    youtube: YLink,
-    facebook: FLink,
-    twitter: TLink,
-    instagram: ILink,
-    areaId: 1,
-    dstatusId: 1,
-    fax: "",
-    website: "",
-    address: "",
-  };
+  const data = new FormData();
 
-  // const data = new FormData();
-
-  // data.append("Title", AddTitle);
-  // data.append("Type", AddType);
-  // data.append("Subtype", AddSubType);
-  // data.append("Details", AddDetails);
-  // data.append("Publisher", AddPublisher);
-  // data.append("Country", Country);
-  // data.append("City", City);
-  // data.append("Email", Email);
-  // data.append("PhoneNumber", PhoneNumber);
-  // data.append("youtube", YLink);
-  // data.append("Facebook", FLink);
-  // data.append("Twitter", TLink);
-  // data.append("Instagram", ILink);
-
-  const config = {
-    headers: { "Access-Control-Allow-Origin": "*" },
-  };
+  data.append("service", AddType);
+  data.append("country", Country);
+  data.append("subtype", AddSubType);
+  data.append("city", City);
+  data.append("areaId", 0);
+  data.append("description", AddDetails);
+  data.append("phone1", PhoneNumber);
+  data.append("statusId", 0);
+  data.append("name", AddTitle);
+  data.append("fax", "Fax");
+  data.append("email", Email);
+  data.append("website", "Website");
+  data.append("address", "Address");
+  data.append("userName", AddPublisher);
+  data.append("facebook", FLink);
+  data.append("instagram", ILink);
+  data.append("youtube", YLink);
+  data.append("twitter", TLink);
+  data.append("isPaid", false);
 
   console.log(data);
 
@@ -215,7 +207,9 @@ const Form = () => {
     e.preventDefault();
 
     axios
-      .post(`${BASE_URL}Business/Create`, data, config)
+      .post(`${BASE_URL}Business/Create`, data, {
+        headers: "Content-Type: application/json",
+      })
       .then((res) => {
         console.log(res.data);
         setLoading(false);
@@ -225,10 +219,6 @@ const Form = () => {
         setLoading(false);
       });
   };
-
-  console.log(City);
-
-  console.log(Country);
 
   return (
     <form onSubmit={clickHandler}>
@@ -437,7 +427,7 @@ const Form = () => {
 
         <Halfbox>
           <Box>
-            <BoldSpan> فيديو للإعلان *</BoldSpan>
+            <BoldSpan> فيديو للإعلان </BoldSpan>
             <input
               type="url"
               placeholder="https://www.youtube.com/UCrcrGYRlbF"
@@ -448,7 +438,7 @@ const Form = () => {
           </Box>
 
           <Box>
-            <BoldSpan> رابط حساب الفيسبوك *</BoldSpan>
+            <BoldSpan> رابط حساب الفيسبوك </BoldSpan>
             <input
               type="url"
               placeholder="https://www.facebook.com/yousef.aboesha.9"
@@ -461,7 +451,7 @@ const Form = () => {
 
         <Halfbox>
           <Box>
-            <BoldSpan> رابط حساب التويتر *</BoldSpan>
+            <BoldSpan> رابط حساب التويتر </BoldSpan>
             <input
               type="url"
               placeholder="https://twitter.com/_abuAisha"
@@ -472,7 +462,7 @@ const Form = () => {
           </Box>
 
           <Box>
-            <BoldSpan> رابط حساب الإنستغرام *</BoldSpan>
+            <BoldSpan> رابط حساب الإنستغرام </BoldSpan>
             <input
               type="url"
               placeholder="https://www.instagram.com/yousef_aboesha/"
@@ -483,10 +473,9 @@ const Form = () => {
           </Box>
         </Halfbox>
         <div style={{ margin: "0 auto" }}>
-          <Bluebutton
-            type={"submit"}
-            title={Loading ? "جارٍ الحفظ ..." : "حفظ التعديلات"}
-          />
+          <Btn type={"submit"}>
+            {Loading ? "جارٍ الحفظ ..." : "حفظ التعديلات"}
+          </Btn>
         </div>
       </Wrapper>
     </form>

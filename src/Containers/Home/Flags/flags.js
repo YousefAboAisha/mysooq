@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState, Suspense } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@mui/icons-material";
-import Spinner from "../../../Components/Spinner/Spinner";
+// import Spinner from "../../../Components/Spinner/Spinner";
 import { BASE_URL } from "../../../baseURL";
 import axios from "axios";
 
@@ -89,7 +89,7 @@ const Flags = () => {
     axios
       .get(BASE_URL + "Countries/GetAll")
       .then((res) => {
-        console.log(res.data.data.$values);
+        // console.log(res.data.data.$values);
 
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
@@ -117,7 +117,7 @@ const Flags = () => {
 
       <Wrap ref={ref}>
         {Loading ? (
-          <h2> جارٍ جلبُ البيانات </h2>
+          <h4> جارٍ جلبُ البيانات </h4>
         ) : (
           Countries.map((elem, index) => {
             return (

@@ -7,7 +7,8 @@ import Heading from "../../Components/Heading/heading";
 import { BASE_URL } from "../../baseURL";
 import Card from "../../Components/AddCard/addCard";
 import axios from "axios";
-import TextLoading from "../../Components/TextLoading/textLoading";
+import Spinner from "../../Components/Spinner/Spinner";
+import BlueButton from "../../Components/BlueButton/blueButton";
 
 const Wrapper = styled.div`
   position: relative;
@@ -21,6 +22,7 @@ const FreeLancers = () => {
   const [City, setCity] = useState(null);
   const [Page, setPage] = useState(0);
   const [Loading, setLoading] = useState(false);
+  const [AllAdds, setAllAdds] = useState([]);
 
   const fetchData = () => {
     setLoading(true);
@@ -29,13 +31,14 @@ const FreeLancers = () => {
         `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}`
       )
       .then((res) => {
-        console.log(res.data.data.$values);
+        // console.log(res.data.data.$values);
 
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
+        setAllAdds([...AllAdds, ...fetchedData]);
         setLoading(false);
       })
       .catch((error) => {
@@ -71,12 +74,21 @@ const FreeLancers = () => {
         minHeight={"400px"}
       >
         {Loading ? (
-          <TextLoading />
+          <Spinner />
         ) : (
-          Adds.map((elem, index) => {
+          AllAdds.map((elem, index) => {
             return <Card key={index} card={elem} />;
           })
         )}
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        m={3}
+      >
+        <BlueButton title={"إظهار المزيد"} setPage={setPage} page={Page} />
       </Grid>
     </Wrapper>
   );

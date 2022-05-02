@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PageHeader from "../../Components/PageHeader/pageHeader";
 import PageTitle from "../../Components/PageTitle/pageTitle";
@@ -8,7 +8,7 @@ import { BASE_URL } from "../../baseURL";
 import Spinner from "../../Components/Spinner/Spinner";
 import Card from "../../Components/AddCard/addCard";
 import axios from "axios";
-import TextLoading from "../../Components/TextLoading/textLoading";
+import BlueButton from "../../Components/BlueButton/blueButton";
 
 const Wrapper = styled.div`
   position: relative;
@@ -22,6 +22,7 @@ const Cars = () => {
   const [City, setCity] = useState(null);
   const [Page, setPage] = useState(0);
   const [Loading, setLoading] = useState(false);
+  const [AllAdds, setAllAdds] = useState([]);
 
   const fetchData = () => {
     setLoading(true);
@@ -30,13 +31,14 @@ const Cars = () => {
         `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}`
       )
       .then((res) => {
-        console.log(res.data.data.$values);
+        // console.log(res.data.data.$values);
 
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
+        setAllAdds([...AllAdds, ...fetchedData]);
         setLoading(false);
       })
       .catch((error) => {
@@ -74,12 +76,21 @@ const Cars = () => {
         minHeight={"400px"}
       >
         {Loading ? (
-          <TextLoading />
+          <Spinner />
         ) : (
-          Adds.map((elem, index) => {
+          AllAdds.map((elem, index) => {
             return <Card key={index} card={elem} />;
           })
         )}
+      </Grid>
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        m={3}
+      >
+        <BlueButton title={"إظهار المزيد"} setPage={setPage} page={Page} />
       </Grid>
     </Wrapper>
   );
