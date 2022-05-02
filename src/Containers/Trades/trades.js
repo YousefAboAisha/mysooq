@@ -5,8 +5,9 @@ import PageTitle from "../../Components/PageTitle/pageTitle";
 import { Grid } from "@mui/material";
 import Heading from "../../Components/Heading/heading";
 import { BASE_URL } from "../../baseURL";
-import Spinner from "../../Components/Spinner/Spinner";
 import Card from "../../Components/AddCard/addCard";
+import axios from "axios";
+import TextLoading from "../../Components/TextLoading/textLoading";
 
 const Wrapper = styled.div`
   position: relative;
@@ -19,13 +20,28 @@ const Trades = () => {
   const [Country, setCountry] = useState(null);
   const [City, setCity] = useState(null);
   const [Page, setPage] = useState(0);
+  const [Loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
-    const response = await fetch(
-      `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}`
-    );
-    const result = await response.json();
-    if (result) setAdds(result.data["$values"]);
+  const fetchData = () => {
+    setLoading(true);
+    axios
+      .get(
+        `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}`
+      )
+      .then((res) => {
+        console.log(res.data.data.$values);
+
+        const fetchedData = [];
+        for (let key in res.data.data["$values"]) {
+          fetchedData.push(res.data.data.$values[key]);
+        }
+        setAdds(fetchedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -54,11 +70,13 @@ const Trades = () => {
         pr={0}
         minHeight={"400px"}
       >
-        <Suspense fallback={<Spinner />}>
-          {Adds.map((elem, index) => {
+        {Loading ? (
+          <TextLoading />
+        ) : (
+          Adds.map((elem, index) => {
             return <Card key={index} card={elem} />;
-          })}
-        </Suspense>
+          })
+        )}
       </Grid>
     </Wrapper>
   );

@@ -84,19 +84,16 @@ const Flags = () => {
   const [Countries, setCountries] = useState([]);
   const [Loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
-    const response = await fetch(BASE_URL + "Countries/GetAll");
-    const result = await response.json();
-    if (result) setCountries(result.data["$values"]);
-  };
-
-  const fetchedData = () => {
+  const fetchData = () => {
+    setLoading(true);
     axios
       .get(BASE_URL + "Countries/GetAll")
       .then((res) => {
+        console.log(res.data.data.$values);
+
         const fetchedData = [];
-        for (let key in res.data) {
-          fetchedData.push(res.data[key]);
+        for (let key in res.data.data["$values"]) {
+          fetchedData.push(res.data.data.$values[key]);
         }
         setCountries(fetchedData);
         setLoading(false);
@@ -108,40 +105,35 @@ const Flags = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
     fetchData();
-    setLoading(false);
   }, []);
 
-  console.log(Countries);
-  console.log(BASE_URL);
+  // console.log(Countries);
+  // console.log(BASE_URL);
 
   return (
     <Wrapper>
       <ArrowForwardIosOutlined onClick={() => scroll(100)} />
 
       <Wrap ref={ref}>
-        <Suspense fallback={<Spinner />}>
-          {Loading ? (
-            <Spinner />
-          ) : (
-            Countries.map((elem, index) => {
-              return (
-                <Card key={index}>
-                  <img
-                    src={
-                      "http://alirafeqpro-001-site1.gtempurl.com" +
-                      elem.photoPath
-                    }
-                    alt={elem.altname}
-                    style={{ borderRadius: "50%" }}
-                  />
-                  <BoldSpan>{elem.name}</BoldSpan>
-                </Card>
-              );
-            })
-          )}
-        </Suspense>
+        {Loading ? (
+          <h2> جارٍ جلبُ البيانات </h2>
+        ) : (
+          Countries.map((elem, index) => {
+            return (
+              <Card key={index}>
+                <img
+                  src={
+                    "http://alirafeqpro-001-site1.gtempurl.com" + elem.photoPath
+                  }
+                  alt={elem.altname}
+                  style={{ borderRadius: "50%" }}
+                />
+                <BoldSpan>{elem.name}</BoldSpan>
+              </Card>
+            );
+          })
+        )}
       </Wrap>
 
       <ArrowBackIosOutlined onClick={() => scroll(-100)} />

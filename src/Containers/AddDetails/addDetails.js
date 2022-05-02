@@ -14,10 +14,13 @@ import {
 import img from "../../Media/mainAdd.png";
 import img2 from "../../Media/cardAdd.png";
 import { BASE_URL } from "../../baseURL";
+import axios from "axios";
+import TextLoading from "../../Components/TextLoading/textLoading";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const Wrapper = styled.div`
   position: relative;
-  height: auto;
+  min-height: 600px;
 `;
 
 const Icon = styled(LocationOnOutlined)`
@@ -98,13 +101,26 @@ function AddDetails() {
   const [mainImg, setMainImg] = useState(img);
   const [Add, setAdd] = useState([]);
   const { id } = useParams();
+  const [Loading, setLoading] = useState(false);
 
-  const fetchData = async () => {
-    const response = await fetch(`${BASE_URL}Business/GetOne?id=${id}`, {
-      method: "GET",
-    });
-    const result = await response.json();
-    if (result) setAdd(result.data);
+  const fetchData = () => {
+    setLoading(true);
+    axios
+      .get(`${BASE_URL}Business/GetOne?id=${id}`)
+      .then((res) => {
+        console.log(res.data.data.$values);
+
+        const fetchedData = [];
+        for (let key in res.data.data["$values"]) {
+          fetchedData.push(res.data.data.$values[key]);
+        }
+        setAdd(fetchedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   console.log(Add);
@@ -123,98 +139,103 @@ function AddDetails() {
   return (
     <Wrapper>
       <PageTitle title={"تفاصيل الإعلان"} />
-      <Grid container columnSpacing={3}>
-        <Grid item lg={6} xs={12} mt={2}>
-          <Grid item lg={12} md={12} xs={12}>
-            <h3>{Add.name}</h3>
-            <Box>
-              <Icon />
-              <span> {Add.countryName} </span>
+
+      {Loading ? (
+        <Spinner />
+      ) : (
+        <Grid container columnSpacing={3}>
+          <Grid item lg={6} xs={12} mt={2}>
+            <Grid item lg={12} md={12} xs={12}>
+              <h3>{Add.name}</h3>
+              <Box>
+                <Icon />
+                <span> {Add.countryName} </span>
+                <span> - </span>
+                <span> {Add.cityName} </span>
+              </Box>
+            </Grid>
+
+            <Grid item lg={12} xs={12} mt={1.8}>
+              <Heading title={"تفاصيل الإعلان"} />
+              <p>{Add.description}</p>
+            </Grid>
+
+            <Grid item lg={12} xs={12} mt={1.8}>
+              <Heading title={"تصنيف الإعلان"} />
+              <span> {Add.serviceName} </span>
               <span> - </span>
-              <span> {Add.cityName} </span>
-            </Box>
-          </Grid>
-
-          <Grid item lg={12} xs={12} mt={1.8}>
-            <Heading title={"تفاصيل الإعلان"} />
-            <p>{Add.description}</p>
-          </Grid>
-
-          <Grid item lg={12} xs={12} mt={1.8}>
-            <Heading title={"تصنيف الإعلان"} />
-            <span> {Add.serviceName} </span>
-            <span> - </span>
-            <span>{Add.subTypeName} </span>
-          </Grid>
-
-          <Grid container mt={1.8}>
-            <Grid item lg={12} xs={12}>
-              <Heading title={"بيانات المعلن"} />
+              <span>{Add.subTypeName} </span>
             </Grid>
 
-            <Grid item lg={6} md={6} xs={12} mb={1}>
-              <span>اسم المعلن: </span>
-              <span>{Add.userName}</span>
+            <Grid container mt={1.8}>
+              <Grid item lg={12} xs={12}>
+                <Heading title={"بيانات المعلن"} />
+              </Grid>
+
+              <Grid item lg={6} md={6} xs={12} mb={1}>
+                <span>اسم المعلن: </span>
+                <span>{Add.userName}</span>
+              </Grid>
+
+              <Grid item lg={6} md={6} xs={12} mb={1}>
+                <span>رقم الهاتف: </span>
+                <span>{Add.userName}</span>
+              </Grid>
+
+              <Grid item lg={12}>
+                <span>البريد الالكتروني: </span>
+                <span>{Add.email}</span>
+              </Grid>
             </Grid>
 
-            <Grid item lg={6} md={6} xs={12} mb={1}>
-              <span>رقم الهاتف: </span>
-              <span>{Add.userName}</span>
-            </Grid>
-
-            <Grid item lg={12}>
-              <span>البريد الالكتروني: </span>
-              <span>{Add.email}</span>
+            <Grid item lg={12} xs={12} mt={1.8} mb={5}>
+              <Heading title={"رابط فيديو الإعلان"} />
+              <span> {Add.youtube} </span>
             </Grid>
           </Grid>
 
-          <Grid item lg={12} xs={12} mt={1.8} mb={5}>
-            <Heading title={"رابط فيديو الإعلان"} />
-            <span> {Add.youtube} </span>
+          <Grid item lg={6} md={12} xs={12}>
+            <ImagesBox>
+              <img
+                src={mainImg}
+                alt={"main"}
+                width="100%"
+                height={"350px"}
+                style={{ objectFit: "cover", borderRadius: "10px" }}
+              />
+
+              <Images>
+                {extraPhotos.map((elem, index) => {
+                  return (
+                    <div key={index}>
+                      <img
+                        src={elem.src}
+                        onClick={() => setMainImg(elem.src)}
+                        alt="alt"
+                      />
+                    </div>
+                  );
+                })}
+              </Images>
+            </ImagesBox>
+
+            <Social>
+              <a href={Add.instagram}>
+                <Instagram />
+              </a>
+              <a href={Add.facebook}>
+                <FacebookOutlined />
+              </a>
+              <a href={Add.twitter}>
+                <Twitter />
+              </a>
+              <a href={Add.youtube}>
+                <YouTube />
+              </a>
+            </Social>
           </Grid>
         </Grid>
-
-        <Grid item lg={6} md={12} xs={12}>
-          <ImagesBox>
-            <img
-              src={mainImg}
-              alt={"main"}
-              width="100%"
-              height={"350px"}
-              style={{ objectFit: "cover", borderRadius: "10px" }}
-            />
-
-            <Images>
-              {extraPhotos.map((elem, index) => {
-                return (
-                  <div key={index}>
-                    <img
-                      src={elem.src}
-                      onClick={() => setMainImg(elem.src)}
-                      alt="alt"
-                    />
-                  </div>
-                );
-              })}
-            </Images>
-          </ImagesBox>
-
-          <Social>
-            <a href={Add.instagram}>
-              <Instagram />
-            </a>
-            <a href={Add.facebook}>
-              <FacebookOutlined />
-            </a>
-            <a href={Add.twitter}>
-              <Twitter />
-            </a>
-            <a href={Add.youtube}>
-              <YouTube />
-            </a>
-          </Social>
-        </Grid>
-      </Grid>
+      )}
     </Wrapper>
   );
 }
