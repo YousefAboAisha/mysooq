@@ -6,6 +6,7 @@ import {
 } from "@mui/icons-material";
 import Spinner from "../../../Components/Spinner/Spinner";
 import { BASE_URL } from "../../../baseURL";
+import axios from "axios";
 
 // const URL = "https://localhost:44387/api/Countries/GetAll";
 
@@ -81,6 +82,7 @@ const Flags = () => {
   };
 
   const [Countries, setCountries] = useState([]);
+  const [Loading, setLoading] = useState(false);
 
   const fetchData = async () => {
     const response = await fetch(BASE_URL + "Countries/GetAll");
@@ -88,8 +90,27 @@ const Flags = () => {
     if (result) setCountries(result.data["$values"]);
   };
 
+  const fetchedData = () => {
+    axios
+      .get(BASE_URL + "Countries/GetAll")
+      .then((res) => {
+        const fetchedData = [];
+        for (let key in res.data) {
+          fetchedData.push(res.data[key]);
+        }
+        setCountries(fetchedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
+    setLoading(true);
     fetchData();
+    setLoading(false);
   }, []);
 
   console.log(Countries);
@@ -101,20 +122,25 @@ const Flags = () => {
 
       <Wrap ref={ref}>
         <Suspense fallback={<Spinner />}>
-          {Countries.map((elem, index) => {
-            return (
-              <Card key={index}>
-                <img
-                  src={
-                    "http://alirafeqpro-001-site1.gtempurl.com" + elem.photoPath
-                  }
-                  alt={elem.altname}
-                  style={{ borderRadius: "50%" }}
-                />
-                <BoldSpan>{elem.name}</BoldSpan>
-              </Card>
-            );
-          })}
+          {Loading ? (
+            <Spinner />
+          ) : (
+            Countries.map((elem, index) => {
+              return (
+                <Card key={index}>
+                  <img
+                    src={
+                      "http://alirafeqpro-001-site1.gtempurl.com" +
+                      elem.photoPath
+                    }
+                    alt={elem.altname}
+                    style={{ borderRadius: "50%" }}
+                  />
+                  <BoldSpan>{elem.name}</BoldSpan>
+                </Card>
+              );
+            })
+          )}
         </Suspense>
       </Wrap>
 

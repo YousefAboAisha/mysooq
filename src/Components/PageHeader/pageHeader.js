@@ -97,7 +97,6 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
             placeholder="الدولة"
             onChange={(e) => setCountry(e.target.value)}
             value={Country}
-            defaultValue=""
           >
             <option value="" selected disabled hidden>
               الدولة
@@ -113,11 +112,7 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
           </select>
         </Box>
         <Box>
-          <select
-            onChange={(e) => setCity(e.target.value)}
-            value={City}
-            defaultValue=""
-          >
+          <select onChange={(e) => setCity(e.target.value)} value={City}>
             <option value="" selected disabled hidden>
               المدينة
             </option>

@@ -93,7 +93,6 @@ const Form = () => {
   const countryURL = `${BASE_URL}Countries/GetAll`;
   const cityURL = `${BASE_URL}Cities/GetAllForOneCountry?countryId=${Country}`;
   const SubtypeURL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${AddSubType}`;
-  const createURL = `${BASE_URL}Ads/Create`;
 
   const services = [
     {
@@ -253,7 +252,7 @@ const Form = () => {
               onChange={(e) => setAddType(e.target.value)}
               value={AddType}
             >
-              <option defaultValue="" selected disabled hidden>
+              <option value="" disabled hidden>
                 تصنيف الإعلان
               </option>
 
@@ -274,7 +273,7 @@ const Form = () => {
               onChange={(e) => setAddSubType(e.target.value)}
               value={AddSubType}
             >
-              <option defaultValue="" selected disabled hidden>
+              <option value="" disabled hidden>
                 التصنيف الفرعي للإعلان
               </option>
               {Subtypes.map((elem, index) => {
@@ -306,9 +305,8 @@ const Form = () => {
             <select
               onChange={(e) => setCurrency(e.target.value)}
               value={Currency}
-              defaultValue=""
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 العملة
               </option>
               {currency.map((elem, index) => {
@@ -362,10 +360,9 @@ const Form = () => {
               placeholder="الدولة"
               onChange={(e) => setCountry(e.target.value)}
               value={Country}
-              defaultValue=""
               required
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 الدولة
               </option>
               {Countries.map((country, index) => {
@@ -382,12 +379,11 @@ const Form = () => {
           <Box>
             <BoldSpan> المدينة *</BoldSpan>
             <select
-              defaultValue=""
               onChange={(e) => setCity(e.target.value)}
               value={City}
               required
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 المدينة
               </option>
               {Cities.map((city, index) => {
