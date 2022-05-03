@@ -107,7 +107,7 @@ const Form = () => {
 
   const countryURL = `${BASE_URL}Countries/GetAll`;
   const cityURL = `${BASE_URL}Cities/GetAllForOneCountry?countryId=${Country}`;
-  const SubtypeURL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${AddSubType}`;
+  const SubtypeURL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${AddType}`;
 
   const services = [
     {
@@ -174,7 +174,9 @@ const Form = () => {
 
   useEffect(() => {
     fetchSubTypesData();
-  }, []);
+  }, [AddType]);
+
+  console.log("Add Type is " + AddType);
 
   // **************************************
 
@@ -221,6 +223,23 @@ const Form = () => {
     twitter: TLink,
     isPaid: true,
   };
+
+  const emptyForm = () => {
+    setAddType("");
+    setCountry("");
+    setAddType("");
+    setCity("");
+    setAddDetails("");
+    setPhoneNumber("");
+    setAddTitle("");
+    setEmail("");
+    setAddPublisher("");
+    setFLink("");
+    setILink("");
+    setYLink("");
+    setTLink("");
+  };
+
   console.log(data);
 
   const clickHandler = (e) => {
@@ -233,6 +252,7 @@ const Form = () => {
       })
       .then((res) => {
         console.log(res.data);
+        emptyForm();
         setLoading(false);
       })
       .catch((error) => {

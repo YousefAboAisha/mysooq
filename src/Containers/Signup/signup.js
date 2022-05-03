@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Halfbox, BoldSpan } from "../NewAdd/addForm/form";
 import styled from "styled-components";
-import BlueButton from "../../Components/BlueButton/blueButton";
 import { Link } from "react-router-dom";
 import googleIcon from "../../Media/googleIcon.svg";
 import facebookIcon from "../../Media/facebookIcon.svg";
 import Heading from "../../Components/Heading/heading";
+import axios from "axios";
+import Spinner from "../../Components/Spinner/Spinner";
+import { BASE_URL } from "../../baseURL";
 
 const Wrap = styled.div`
   position: relative;
@@ -71,7 +73,7 @@ const BtnBox = styled.div`
   }
 `;
 
-const Btn = styled.div`
+const Btn2 = styled.div`
   position: relative;
   width: 100%;
   margin-top: 10px;
@@ -100,6 +102,22 @@ const Btn = styled.div`
   }
 `;
 
+const Btn = styled.button`
+  padding: 6px;
+  min-width: 110px;
+  color: var(--white);
+  background-color: var(--blue);
+  border-radius: 3px;
+  font-family: var(--secondFont);
+  font-size: 14px;
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: #01687d;
+    transition: all 0.2s linear;
+  }
+`;
+
 const Register = styled.div`
   position: relative;
   display: flex;
@@ -120,101 +138,182 @@ const Signup = () => {
   const [ConfirmedPassword, setConfirmedPassword] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [Country, setCountry] = useState("");
+  const [Loading, setLoading] = useState(false);
+  const [Countries, setCountries] = useState([]);
+
+  const countryURL = `${BASE_URL}Countries/GetAll`;
+
+  const fetchCountriesData = async () => {
+    const response = await fetch(countryURL);
+    const result = await response.json();
+    if (result) setCountries(result.data["$values"]);
+  };
+
+  useEffect(() => {
+    fetchCountriesData();
+  }, []);
+
+  const data = {
+    owner: 0,
+    roW_STATUS: 0,
+    timE_SLOT: 0,
+    username: UserName,
+    fullname: UserName,
+    password: Password,
+    facebook_id: "facebook_id",
+    email: Email,
+    joindate: new Date(),
+    status: 0,
+    address: "address",
+    default_country: Country,
+    cityid: 0,
+    authcode: "authcode",
+  };
+
+  const emptyForm = () => {
+    setUserName("");
+    setEmail("");
+    setPassword("");
+    setConfirmedPassword("");
+    setCountry("");
+  };
+
+  const clickHandler = (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    axios
+      .post(`${BASE_URL}User/Create`, data, {
+        headers: "Content-Type: application/json",
+      })
+      .then((res) => {
+        console.log(res.data);
+        emptyForm();
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
 
   return (
-    <Wrap>
-      <Heading title={"إنشاء حساب"} />
-      <Halfbox>
-        <Box>
-          <BoldSpan>اسم المستخدم</BoldSpan>
-          <input
-            type="text"
-            placeholder="اسم المستخدم"
-            onChange={(e) => setUserName(e.target.value)}
-            value={UserName}
-          />
-        </Box>
+    <form onSubmit={clickHandler}>
+      {Loading ? (
+        <Spinner />
+      ) : (
+        <Wrap>
+          <Heading title={"إنشاء حساب"} />
+          <Halfbox>
+            <Box>
+              <BoldSpan>اسم المستخدم</BoldSpan>
+              <input
+                type="text"
+                placeholder="اسم المستخدم"
+                onChange={(e) => setUserName(e.target.value)}
+                value={UserName}
+                required
+              />
+            </Box>
 
-        <Box>
-          <BoldSpan>البريد الالكتروني</BoldSpan>
-          <input
-            type="email"
-            placeholder="Mysooq@gmail.com"
-            onChange={(e) => setEmail(e.target.value)}
-            value={Email}
-          />
-        </Box>
-      </Halfbox>
+            <Box>
+              <BoldSpan>البريد الالكتروني</BoldSpan>
+              <input
+                type="email"
+                placeholder="Mysooq@gmail.com"
+                onChange={(e) => setEmail(e.target.value)}
+                value={Email}
+                required
+              />
+            </Box>
+          </Halfbox>
 
-      <Halfbox>
-        <Box>
-          <BoldSpan>كلمة المرور</BoldSpan>
-          <input
-            type="password"
-            placeholder="***********"
-            onChange={(e) => setPassword(e.target.value)}
-            value={Password}
-          />
-        </Box>
+          <Halfbox>
+            <Box>
+              <BoldSpan>كلمة المرور</BoldSpan>
+              <input
+                type="password"
+                placeholder="***********"
+                onChange={(e) => setPassword(e.target.value)}
+                value={Password}
+                required
+              />
+            </Box>
 
-        <Box>
-          <BoldSpan>تأكيد كلمة المرور</BoldSpan>
-          <input
-            type="password"
-            placeholder="***********"
-            onChange={(e) => setConfirmedPassword(e.target.value)}
-            value={ConfirmedPassword}
-          />
-        </Box>
-      </Halfbox>
-      <Halfbox>
-        <Box>
-          <BoldSpan>رقم التليفون</BoldSpan>
-          <input
-            type="text"
-            placeholder="0592551405"
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            value={PhoneNumber}
-          />
-        </Box>
+            <Box>
+              <BoldSpan>تأكيد كلمة المرور</BoldSpan>
+              <input
+                type="password"
+                placeholder="***********"
+                onChange={(e) => setConfirmedPassword(e.target.value)}
+                value={ConfirmedPassword}
+                required
+              />
+            </Box>
+          </Halfbox>
+          <Halfbox>
+            <Box>
+              <BoldSpan>رقم التليفون</BoldSpan>
+              <input
+                type="text"
+                placeholder="0592551405"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                value={PhoneNumber}
+                required
+              />
+            </Box>
 
-        <Box>
-          <BoldSpan>الدولة</BoldSpan>
-          <select onChange={(e) => setCountry(e.target.value)} value={Country}>
-            <option value="" disabled selected>
-              اختر دولة
-            </option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
-        </Box>
-      </Halfbox>
+            <Box>
+              <BoldSpan>الدولة</BoldSpan>
+              <select
+                onChange={(e) => setCountry(e.target.value)}
+                value={Country}
+              >
+                <option value="" disabled hidden>
+                  الدولة
+                </option>
 
-      <BlueButton title={"إنشاء حساب"} />
+                {Countries.map((country, index) => {
+                  return (
+                    <option value={country.id} key={index}>
+                      {country.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </Box>
+          </Halfbox>
 
-      <Btn>
-        <h5>إنشاء حساب بواسطة</h5>
-      </Btn>
+          <Btn type={"submit"}>
+            {Loading ? "جارٍ إنشاء الحساب ..." : "إنشاء الحساب"}
+          </Btn>
 
-      <BtnBox>
-        <button>
-          تسجيل الدخول بواسطة جوجل
-          <img src={googleIcon} alt="Google icon" />
-        </button>
-        <button>
-          تسجيل الدخول بواسطة فيسبوك
-          <img src={facebookIcon} alt="Facebook icon" />
-        </button>
-      </BtnBox>
+          <Btn2>
+            <h5>إنشاء حساب بواسطة</h5>
+          </Btn2>
 
-      <Register>
-        <span>لديك حساب بالفعل؟</span>
-        <Link to={"/signin"}>
-          <span style={{ fontWeight: "600", color: "#000" }}>تسجيل الدخول</span>
-        </Link>
-      </Register>
-    </Wrap>
+          <BtnBox>
+            <button>
+              تسجيل الدخول بواسطة جوجل
+              <img src={googleIcon} alt="Google icon" />
+            </button>
+            <button>
+              تسجيل الدخول بواسطة فيسبوك
+              <img src={facebookIcon} alt="Facebook icon" />
+            </button>
+          </BtnBox>
+
+          <Register>
+            <span>لديك حساب بالفعل؟</span>
+            <Link to={"/signin"}>
+              <span style={{ fontWeight: "600", color: "#000" }}>
+                تسجيل الدخول
+              </span>
+            </Link>
+          </Register>
+        </Wrap>
+      )}
+    </form>
   );
 };
 

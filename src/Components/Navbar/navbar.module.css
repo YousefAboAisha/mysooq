@@ -29,26 +29,6 @@
     margin-left: 15px;
 }
 
-.wrapper .firstBox .search input {
-    width: 100%;
-    font-size: 16px;
-}
-
-.wrapper .firstBox .search .searchBtn {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: var(--darkBlue);
-    color: var(--white);
-    height: 100%;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
 .wrapper .firstBox button {
     background: none;
     color: var(--white);

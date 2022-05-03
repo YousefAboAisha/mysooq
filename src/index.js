@@ -7,7 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 //import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Suspense>
+  <Suspense fallback={<Spinner />}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

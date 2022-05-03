@@ -15,8 +15,8 @@ import img from "../../Media/mainAdd.png";
 import img2 from "../../Media/cardAdd.png";
 import { BASE_URL } from "../../baseURL";
 import axios from "axios";
-import TextLoading from "../../Components/TextLoading/textLoading";
 import Spinner from "../../Components/Spinner/Spinner";
+import LongMenu from "../../Components/AddMenu/addMenu";
 
 const Wrapper = styled.div`
   position: relative;
@@ -118,7 +118,7 @@ function AddDetails() {
       });
   };
 
-  // console.log(Add);
+  console.log(Add);
 
   useEffect(() => {
     fetchData();
@@ -190,9 +190,12 @@ function AddDetails() {
           </Grid>
 
           <Grid item lg={6} md={12} xs={12}>
+            <LongMenu setLoading={setLoading} />
+
             <ImagesBox>
               <img
-                src={mainImg}
+                // src={`http://alirafeqpro-001-site1.gtempurl.com${Add.uniqueId}.jpg`}
+                src={img}
                 alt={"main"}
                 width="100%"
                 height={"350px"}

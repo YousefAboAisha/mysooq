@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import googleIcon from "../../Media/googleIcon.svg";
 import facebookIcon from "../../Media/facebookIcon.svg";
 import Heading from "../../Components/Heading/heading";
+import axios from "axios";
+import Spinner from "../../Components/Spinner/Spinner";
+import { BASE_URL } from "../../baseURL";
 
 const Wrap = styled.div`
   position: relative;
@@ -141,7 +144,32 @@ const InnerBox = styled.div`
 const Signin = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [Loading, setLoading] = useState(false);
   const [IsRemembered, setIsRemembered] = useState(false);
+
+  const data = {
+    email: Email,
+    password: Password,
+    remembered: IsRemembered,
+  };
+
+  const clickHandler = (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    axios
+      .post(`${BASE_URL}Business/Create`, data, {
+        headers: "Content-Type: application/json",
+      })
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
 
   console.log(IsRemembered);
 

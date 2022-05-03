@@ -9,9 +9,15 @@ import {
   ArrowBackIosOutlined,
 } from "@mui/icons-material/";
 import Links from "../../Links/links";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const ref = useRef();
+  const navigate = useNavigate();
+
+  const clickHandler = () => {
+    navigate("search");
+  };
 
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
@@ -27,10 +33,10 @@ const Navbar = () => {
         </div>
 
         <div className={classes.search}>
-          <input type={"text"} placeholder="بحث" />
-          <div className={classes.searchBtn}>
+          <button onClick={clickHandler}>
+            البحث عن إعلان
             <SearchOutlined />
-          </div>
+          </button>
         </div>
 
         <Link to={"/signup"}>
