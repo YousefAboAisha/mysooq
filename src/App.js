@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import UpperNavbar from "./Components/Upper-Navbar/upperNavbar";
 import Footer from "./Components/Footer/footer";
 import ScrollTopBtn from "./Components/scrollTopButton/scrollTopBtn";
