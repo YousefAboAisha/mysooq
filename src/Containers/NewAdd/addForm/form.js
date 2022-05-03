@@ -178,28 +178,49 @@ const Form = () => {
 
   // **************************************
 
-  const data = new FormData();
+  // const data = new FormData();
 
-  data.append("service", AddType);
-  data.append("country", Country);
-  data.append("subtype", AddSubType);
-  data.append("city", City);
-  data.append("areaId", 0);
-  data.append("description", AddDetails);
-  data.append("phone1", PhoneNumber);
-  data.append("statusId", 0);
-  data.append("name", AddTitle);
-  data.append("fax", "Fax");
-  data.append("email", Email);
-  data.append("website", "Website");
-  data.append("address", "Address");
-  data.append("userName", AddPublisher);
-  data.append("facebook", FLink);
-  data.append("instagram", ILink);
-  data.append("youtube", YLink);
-  data.append("twitter", TLink);
-  data.append("isPaid", false);
+  // data.append("service", AddType);
+  // data.append("country", Country);
+  // data.append("subtype", AddSubType);
+  // data.append("city", City);
+  // data.append("areaId", 0);
+  // data.append("description", AddDetails);
+  // data.append("phone1", PhoneNumber);
+  // data.append("statusId", 0);
+  // data.append("name", AddTitle);
+  // data.append("fax", "Fax");
+  // data.append("email", Email);
+  // data.append("website", "Website");
+  // data.append("address", "Address");
+  // data.append("userName", AddPublisher);
+  // data.append("facebook", FLink);
+  // data.append("instagram", ILink);
+  // data.append("youtube", YLink);
+  // data.append("twitter", TLink);
+  // data.append("isPaid", false);
 
+  const data = {
+    service: AddType,
+    country: Country,
+    subtype: AddSubType,
+    city: City,
+    areaId: 0,
+    description: AddDetails,
+    phone1: PhoneNumber,
+    statusId: 0,
+    name: AddTitle,
+    fax: "Fax",
+    email: Email,
+    website: "Website",
+    address: "address",
+    userName: AddPublisher,
+    facebook: FLink,
+    instagram: ILink,
+    youtube: YLink,
+    twitter: TLink,
+    isPaid: true,
+  };
   console.log(data);
 
   const clickHandler = (e) => {
@@ -420,6 +441,7 @@ const Form = () => {
             accept="image/*"
             onChange={(e) => setAddImages(e.target.value)}
             value={AddImages}
+            multiple
           />
           <LightSpan>أضف صور الإعلان بحد أقصى 5 صور</LightSpan>
           <button>رفع الصور</button>

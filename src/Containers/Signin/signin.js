@@ -12,8 +12,7 @@ const Wrap = styled.div`
   margin: 5em auto;
   display: flex;
   flex-flow: column wrap;
-  width: 40%;
-  min-width: 450px;
+  width: clamp(40%, 100%, 200px);
   padding: 15px 20px;
   gap: 10px;
   background-color: #fff;
@@ -42,7 +41,7 @@ const Wrap = styled.div`
   }
 
   & button {
-    width: 100%;
+    width: 60%;
     min-width: fit-content;
     margin: 0 auto;
     border-radius: 10px;

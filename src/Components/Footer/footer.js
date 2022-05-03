@@ -112,25 +112,25 @@ const Footer = () => {
           <Sections>
             <h4 style={{ color: "white" }}>أقسام الموقع</h4>
             <Link to={"/"}>الرئيسية</Link>
-            <Link to={"/realEstates"}>عقارات</Link>
-            <Link to={"/cars"}>سيارات</Link>
-            <Link to={"/trades"}>مصالح تجارية</Link>
-            <Link to={"/services"}>خدمات</Link>
-            <Link to={"/freelancers"}>باحثين عن عمل</Link>
-            <Link to={"/jobs"}>وظائف شاغرة</Link>
+            <Link to={"realEstates"}>عقارات</Link>
+            <Link to={"cars"}>سيارات</Link>
+            <Link to={"trades"}>مصالح تجارية</Link>
+            <Link to={"services"}>خدمات</Link>
+            <Link to={"freelancers"}>باحثين عن عمل</Link>
+            <Link to={"jobs"}>وظائف شاغرة</Link>
           </Sections>
         </Grid>
 
         <Grid item lg={3} md={12} xs={12}>
           <Sections>
             <h4 style={{ color: "white" }}>الرئيسية</h4>
-            <Link to={"/"}>إضافة إعلان</Link>
-            <Link to={"/realEstates"}>عن الموقع</Link>
-            <Link to={"/cars"}>اتفاقية الاستخدام</Link>
-            <Link to={"/trades"}>اتصل بنا</Link>
+            <Link to={"newadd"}>إضافة إعلان</Link>
+            <Link to={"about"}>عن الموقع</Link>
+            <Link to={"userpolicy"}>اتفاقية الاستخدام</Link>
+            <Link to={"contact"}>اتصل بنا</Link>
             <Link to={"/services"}>بحث الموقع</Link>
             <Link to={"/freelancers"}>إعلانات مميزة</Link>
-            <Link to={"/jobs"}>أحدث الإعلانات</Link>
+            <Link to={"/"}>أحدث الإعلانات</Link>
           </Sections>
         </Grid>
       </Grid>
