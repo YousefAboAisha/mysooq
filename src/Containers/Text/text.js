@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import PageTitle from "../../Components/PageTitle/pageTitle";
-import { BoldSpan, Box } from "../NewAdd/addForm/form";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
 import Spinner from "../../Components/Spinner/Spinner";
@@ -16,6 +15,10 @@ const Wrapper = styled.div`
     width: 50%;
   }
 
+  & a {
+    color: var(--blue);
+  }
+
   @media only screen and (max-width: 500px) {
     & select {
       width: 100%;
@@ -23,51 +26,17 @@ const Wrapper = styled.div`
   }
 `;
 
-const services = [
-  {
-    name: "عقارات",
-    id: 6,
-  },
-  {
-    name: "سيارات",
-    id: 8,
-  },
-  {
-    name: "مصالح تجارية",
-    id: 1,
-  },
-  {
-    name: "خدمات",
-    id: 2,
-  },
-  {
-    name: "باحثين عن عمل",
-    id: 4,
-  },
-  {
-    name: "وظائف شاغرة",
-    id: 5,
-  },
-];
-
 const Text = () => {
-  const [AddType, setAddType] = useState("");
-  const [Adds, setAdds] = useState([]);
+  const [Data, setData] = useState("");
   const [Loading, setLoading] = useState(false);
 
   const fetchData = () => {
     setLoading(true);
     axios
-      .get(`${BASE_URL}Articles/GetAll?categoty=${AddType}`)
+      .get(`${BASE_URL}Articles/GetPoster`)
       .then((res) => {
-        // console.log(res.data.data.$values);
-
-        const fetchedData = [];
-        for (let key in res.data.data["$values"]) {
-          fetchedData.push(res.data.data.$values[key]);
-        }
-        setAdds(fetchedData);
-
+        // console.log(res.data.data);
+        setData(res.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -78,52 +47,28 @@ const Text = () => {
 
   useEffect(() => {
     fetchData();
-  }, [AddType]);
+  }, []);
+
+  console.log(Data);
 
   return (
     <Wrapper>
       <Grid item lg={12} mb={2}>
-        <PageTitle title={"سياسة الاستخدام"} />
+        <PageTitle title={"لاعلاناتكم"} />
       </Grid>
-
-      <Box style={{ marginTop: "20px" }}>
-        <BoldSpan>تصنيف الإعلان *</BoldSpan>
-        <select onChange={(e) => setAddType(e.target.value)} value={AddType}>
-          <option value="" disabled hidden>
-            تصنيف الإعلان
-          </option>
-
-          {services.map((elem, index) => {
-            return (
-              <option key={index} value={elem.id}>
-                {elem.name}
-              </option>
-            );
-          })}
-        </select>
-      </Box>
 
       <Grid
         container
         rowSpacing={2}
         columnSpacing={2}
         pr={0}
-        minHeight={"400px"}
+        minHeight={"600px"}
         mt={3}
       >
         {Loading ? (
           <Spinner />
-        ) : Adds.length === 0 ? (
-          <h4>لا توجد نتائج للبحث</h4>
         ) : (
-          Adds.map((elem, index) => {
-            return (
-              <div
-                key={index}
-                dangerouslySetInnerHTML={{ __html: elem.body }}
-              />
-            );
-          })
+          <section dangerouslySetInnerHTML={{ __html: Data }} />
         )}
       </Grid>
     </Wrapper>

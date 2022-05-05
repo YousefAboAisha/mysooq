@@ -1,107 +1,40 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import styled from "styled-components";
-import { BASE_URL } from "../../../baseURL";
+import { BASE_URL } from "../../baseURL";
+import {
+  Wrapper,
+  Box,
+  BoldSpan,
+  LightSpan,
+  Halfbox,
+  Btn,
+} from "../NewAdd/addForm/form";
 
-export const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-flow: column wrap;
-  width: 100%;
-  gap: 15px;
-  background-color: var(--white);
-  padding: 15px;
-`;
+const UpdateAdd = () => {
+  const { id } = useParams();
+  const [Add, setAdd] = useState([]);
 
-export const BoldSpan = styled.span`
-  font-weight: 600;
-  margin-bottom: 7px;
-  font-size: 14px;
-`;
-
-export const LightSpan = styled.span`
-  font-weight: 300;
-  color: #707070;
-  font-size: 13px;
-  margin-top: 1px;
-`;
-
-export const Box = styled.div`
-  position: relative;
-  display: flex;
-  flex-flow: column wrap;
-  width: 100%;
-
-  & input:focus,
-  & textarea:focus {
-    border: 1px solid var(--blue);
-    transition: all 0.5s linear;
-  }
-
-  & input,
-  & textarea {
-    width: 100%;
-    transition: all 0.5s linear;
-  }
-
-  & button {
-    padding: 4px 10px;
-    width: fit-content;
-    font-size: 14px;
-    margin-top: 7px;
-    border-radius: 7px;
-  }
-`;
-
-export const Halfbox = styled.div`
-  position: relative;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  @media only screen and (max-width: 600px) {
-    & {
-      flex-flow: row wrap;
-    }
-  }
-`;
-
-export const Btn = styled.button`
-  padding: 6px;
-  min-width: 110px;
-  color: var(--white);
-  background-color: var(--blue);
-  border-radius: 3px;
-  font-family: var(--secondFont);
-  font-size: 14px;
-  transition: all 0.2s linear;
-
-  &:hover {
-    background-color: #01687d;
-    transition: all 0.2s linear;
-  }
-`;
-
-const Form = () => {
   const [AddTitle, setAddTitle] = useState("");
   const [AddType, setAddType] = useState("");
   const [AddSubType, setAddSubType] = useState("");
   const [Price, setPrice] = useState(""); // مش هتبعتو
   const [Currency, setCurrency] = useState(""); // مش هتبعتو
-  const [mainAddImage, setmainAddImage] = useState(null);
+  const [mainAddImage, setmainAddImage] = useState("");
   const [AddDetails, setAddDetails] = useState("");
   const [AddPublisher, setAddPublisher] = useState("");
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
   const [Email, setEmail] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
-  const [AddImages, setAddImages] = useState(null);
+  const [AddImages, setAddImages] = useState("");
   const [YLink, setYLink] = useState("");
   const [FLink, setFLink] = useState("");
   const [TLink, setTLink] = useState("");
   const [ILink, setILink] = useState("");
-  const [Loading, setLoading] = useState();
 
+  const [Loading, setLoading] = useState(false);
   const [Countries, setCountries] = useState([]);
   const [Cities, setCities] = useState([]);
   const [Subtypes, setSubtypes] = useState([]);
@@ -149,6 +82,36 @@ const Form = () => {
     "الروبل الروسي",
   ];
 
+  // Fetch Add Data
+  const fetchAddData = () => {
+    axios
+      .get(`${BASE_URL}Business/GetOne?id=${id}`)
+      .then((res) => {
+        // console.log(res.data.data);
+        setAdd(res.data.data);
+        setFields();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const setFields = () => {
+    setAddType(Add.service);
+    setCountry(Add.country);
+    setAddSubType(Add.subtype);
+    setCity(Add.city);
+    setAddDetails(Add.description);
+    setPhoneNumber(Add.Phone1);
+    setAddTitle(Add.name);
+    setEmail(Add.email);
+    setAddPublisher(Add.userName);
+    setFLink(Add.facebook);
+    setILink(Add.instagram);
+    setYLink(Add.youtube);
+    setTLink(Add.twitter);
+  };
+
   // Fetching Countries
   const fetchCountriesData = async () => {
     const response = await fetch(countryURL);
@@ -175,63 +138,68 @@ const Form = () => {
 
   useEffect(() => {
     fetchSubTypesData();
+    fetchAddData();
   }, [AddType]);
 
-  console.log("Add Type is " + AddType);
+  // useEffect(() => {
+  //   fetchAddData();
+  // }, [AddTitle]);
+
+  // console.log("Add Type is " + AddType);
 
   // **************************************
 
-  const data = new FormData();
+  // const data = new FormData();
 
-  data.append("phone1", PhoneNumber);
-  data.append("Youtube", YLink);
-  data.append("Facebook", FLink);
-  data.append("AREAId", "");
-  data.append("CITY", City);
-  data.append("Name", AddTitle);
-  data.append("TIME_SLOT", "");
-  data.append("Instagram", ILink);
-  data.append("Twitter", TLink);
-  data.append("OWNER", "");
-  data.append("Address", "");
-  data.append("service", AddType);
-  data.append("UserName", AddPublisher);
-  data.append("COUNTRY", Country);
-  data.append("ROW_STATUS", "");
-  data.append("Images", AddImages);
-  data.append("subtype", AddSubType);
-  data.append("Website", "Website");
-  data.append("Image", mainAddImage);
-  data.append("Email", Email);
-  data.append("Description", AddDetails);
-  data.append("Fax", "Fax");
+  // data.append("phone1", PhoneNumber);
+  // data.append("Youtube", YLink);
+  // data.append("Phone2", "");
+  // data.append("Facebook", FLink);
+  // data.append("AREAId", "");
+  // data.append("CITY", City);
+  // data.append("Name", AddTitle);
+  // data.append("uniqueId", "");
+  // data.append("StatusId", "");
+  // data.append("Instagram", ILink);
+  // data.append("Twitter", TLink);
+  // data.append("Address", "Address");
+  // data.append("service", AddType);
+  // data.append("UserName", AddPublisher);
+  // data.append("IsPaid", false);
+  // data.append("COUNTRY", Country);
+  // data.append("subtype", AddSubType);
+  // data.append("website", "Website");
+  // data.append("ID", id);
+  // data.append("image", "");
+  // data.append("Email", Email);
+  // data.append("Description", AddDetails);
+  // data.append("Fax", "Fax");
 
-  console.log(data);
-
-  // const data = {
-  //   Phone1: PhoneNumber,
-  //   Youtube: YLink,
-  //   Facebook: FLink,
-  //   AREAId: "",
-  //   CITY: City,
-  //   Name: AddTitle,
-  //   TIME_SLOTL: "",
-  //   Instagram: ILink,
-  //   Twitter: TLink,
-  //   OWNER: "",
-  //   Address: "",
-  //   service: AddType,
-  //   UserName: AddPublisher,
-  //   COUNTRY: Country,
-  //   ROW_STATUS: "",
-  //   Images: AddImages,
-  //   subtype: AddSubType,
-  //   Website: "",
-  //   Image: mainAddImage,
-  //   Email: Email,
-  //   Description: AddDetails,
-  //   Fax: "",
-  // };
+  const data = {
+    Phone1: PhoneNumber,
+    Youtube: YLink,
+    Phone2: "",
+    Facebook: FLink,
+    AREAId: "",
+    CITY: City,
+    Name: AddTitle,
+    uniqueId: "",
+    StatusId: "",
+    Instagram: ILink,
+    Twitter: TLink,
+    Address: "",
+    service: AddType,
+    UserName: AddPublisher,
+    IsPaid: "",
+    COUNTRY: Country,
+    subtype: AddSubType,
+    Website: "",
+    ID: id,
+    image: "",
+    Email: Email,
+    Description: AddDetails,
+    Fax: "",
+  };
 
   const emptyForm = () => {
     setAddType("");
@@ -249,13 +217,16 @@ const Form = () => {
     setTLink("");
   };
 
-  console.log(data);
+  // console.log(data);
 
   const clickHandler = (e) => {
-    e.preventDefault();
     setLoading(true);
+    e.preventDefault();
+
     axios
-      .post(`${BASE_URL}Business/CreateBusiness`, data)
+      .put(`${BASE_URL}Business/Update`, data, {
+        headers: "Content-Type: application/json",
+      })
       .then((res) => {
         console.log(res.data);
         emptyForm();
@@ -267,11 +238,8 @@ const Form = () => {
       });
   };
 
-  console.log(mainAddImage);
-  console.log(AddImages);
-
   return (
-    <form onSubmit={clickHandler} encType="multipart/form-data">
+    <form onSubmit={clickHandler}>
       <Wrapper>
         <Box>
           <BoldSpan>عنوان الإعلان *</BoldSpan>
@@ -363,8 +331,8 @@ const Form = () => {
             type="file"
             placeholder="اسحب الصورة إلى هنا"
             accept="image/*"
-            onChange={(e) => setmainAddImage(e.target.files[0])}
-            required
+            onChange={(e) => setmainAddImage(e.target.value)}
+            value={mainAddImage}
           />
           <LightSpan>أضف صورة جذابة معبرة عن إعلانك</LightSpan>
           <button>رفع الصورة</button>
@@ -468,9 +436,9 @@ const Form = () => {
             type="file"
             placeholder="اسحب الصورة إلى هنا"
             accept="image/*"
-            onChange={(e) => setAddImages(e.target.files)}
+            onChange={(e) => setAddImages(e.target.value)}
+            value={AddImages}
             multiple
-            required
           />
           <LightSpan>أضف صور الإعلان بحد أقصى 5 صور</LightSpan>
           <button>رفع الصور</button>
@@ -525,7 +493,7 @@ const Form = () => {
         </Halfbox>
         <div style={{ margin: "0 auto" }}>
           <Btn type={"submit"}>
-            {Loading ? "جارٍ الحفظ ..." : "حفظ التعديلات"}
+            {Loading ? "جارٍ الحفظ ..." : "تعديل الإعلان"}
           </Btn>
         </div>
       </Wrapper>
@@ -533,4 +501,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default UpdateAdd;

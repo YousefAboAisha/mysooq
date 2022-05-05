@@ -26,6 +26,7 @@ export const Signup = lazy(() => import("../Containers/Signup/signup"));
 export const Signin = lazy(() => import("../Containers/Signin/signin"));
 export const Search = lazy(() => import("../Containers/Search/search"));
 export const Text = lazy(() => import("../Containers/Text/text"));
+export const Update = lazy(() => import("../Containers/UpdateAdd/updateAdd"));
 
 const Routers = () => {
   return (
@@ -42,6 +43,7 @@ const Routers = () => {
       <Route path="about" element={<About />} />
       <Route path="userpolicy" element={<Policy />} />
       <Route path="add/:id" element={<Add />} />
+      <Route path="update/:id" element={<Update />} />
       <Route path="signup" element={<Signup />} />
       <Route path="signin" element={<Signin />} />
       <Route path="search" element={<Search />} />

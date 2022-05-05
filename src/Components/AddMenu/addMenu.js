@@ -63,8 +63,9 @@ export default function CustomizedMenus({ setLoading }) {
     setAnchorEl(null);
   };
 
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams();
+  console.log(id);
 
   const deleteHandler = () => {
     setLoading(true);
@@ -80,6 +81,11 @@ export default function CustomizedMenus({ setLoading }) {
         console.log(error);
         setLoading(false);
       });
+  };
+
+  const updateHandler = () => {
+    navigate(`/update/${id}`);
+    setAnchorEl(null);
   };
 
   return (
@@ -106,7 +112,7 @@ export default function CustomizedMenus({ setLoading }) {
         onClose={handleClose}
       >
         <MenuItem
-          onClick={handleClose}
+          onClick={updateHandler}
           disableRipple
           sx={{
             fontFamily: "var(--mainFont)",

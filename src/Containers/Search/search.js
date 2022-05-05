@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PageTitle from "../../Components/PageTitle/pageTitle";
 import { Grid } from "@mui/material";
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
       background-color: var(--darkBlue);
       color: var(--white);
       height: 100%;
-      width: 50px;
+      padding: 3px 10px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -93,6 +93,7 @@ const Search = () => {
           value={Val}
         />
         <div className={"searchBtn"} onClick={fetchData}>
+          بحث
           <SearchOutlined />
         </div>
       </div>
