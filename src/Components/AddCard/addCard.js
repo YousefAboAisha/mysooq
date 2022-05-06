@@ -51,7 +51,11 @@ const Card = ({ card }) => {
       <Item>
         <img
           onClick={() => clickHandler(card.id)}
-          src={add}
+          src={
+            card.uniqueId
+              ? `http://alirafeqpro-001-site1.gtempurl.com/Uploads/Images/${card.uniqueId}.jpg`
+              : add
+          }
           alt={"add"}
           width="100%"
           height={"402"}

@@ -1,7 +1,5 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
-import styled from "styled-components";
+import { useNavigate, useParams } from "react-router";
 import { BASE_URL } from "../../baseURL";
 import {
   Wrapper,
@@ -82,19 +80,22 @@ const UpdateAdd = () => {
     "الروبل الروسي",
   ];
 
+  const navigate = useNavigate();
+
   // Fetch Add Data
-  const fetchAddData = () => {
-    axios
-      .get(`${BASE_URL}Business/GetOne?id=${id}`)
-      .then((res) => {
-        // console.log(res.data.data);
-        setAdd(res.data.data);
-        setFields();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const fetchAddData = async () => {
+    const response = await fetch(`${BASE_URL}Business/GetOne?id=${id}`);
+    const result = await response.json();
+    console.log(result.data);
+    if (result) {
+      setAdd(result.data.data);
+      setFields();
+    }
   };
+
+  useEffect(() => {
+    fetchAddData();
+  }, []);
 
   const setFields = () => {
     setAddType(Add.service);
@@ -138,68 +139,35 @@ const UpdateAdd = () => {
 
   useEffect(() => {
     fetchSubTypesData();
-    fetchAddData();
   }, [AddType]);
-
-  // useEffect(() => {
-  //   fetchAddData();
-  // }, [AddTitle]);
 
   // console.log("Add Type is " + AddType);
 
   // **************************************
 
-  // const data = new FormData();
+  const data = new FormData();
 
-  // data.append("phone1", PhoneNumber);
-  // data.append("Youtube", YLink);
-  // data.append("Phone2", "");
-  // data.append("Facebook", FLink);
-  // data.append("AREAId", "");
-  // data.append("CITY", City);
-  // data.append("Name", AddTitle);
-  // data.append("uniqueId", "");
-  // data.append("StatusId", "");
-  // data.append("Instagram", ILink);
-  // data.append("Twitter", TLink);
-  // data.append("Address", "Address");
-  // data.append("service", AddType);
-  // data.append("UserName", AddPublisher);
-  // data.append("IsPaid", false);
-  // data.append("COUNTRY", Country);
-  // data.append("subtype", AddSubType);
-  // data.append("website", "Website");
-  // data.append("ID", id);
-  // data.append("image", "");
-  // data.append("Email", Email);
-  // data.append("Description", AddDetails);
-  // data.append("Fax", "Fax");
-
-  const data = {
-    Phone1: PhoneNumber,
-    Youtube: YLink,
-    Phone2: "",
-    Facebook: FLink,
-    AREAId: "",
-    CITY: City,
-    Name: AddTitle,
-    uniqueId: "",
-    StatusId: "",
-    Instagram: ILink,
-    Twitter: TLink,
-    Address: "",
-    service: AddType,
-    UserName: AddPublisher,
-    IsPaid: "",
-    COUNTRY: Country,
-    subtype: AddSubType,
-    Website: "",
-    ID: id,
-    image: "",
-    Email: Email,
-    Description: AddDetails,
-    Fax: "",
-  };
+  data.append("phone1", PhoneNumber);
+  data.append("Youtube", YLink);
+  data.append("Phone2", PhoneNumber);
+  data.append("Facebook", FLink);
+  data.append("AREAId", "");
+  data.append("CITY", City);
+  data.append("Name", AddTitle);
+  data.append("uniqueId", "");
+  data.append("Instagram", ILink);
+  data.append("Twitter", TLink);
+  data.append("Address", "Address");
+  data.append("service", AddType);
+  data.append("UserName", AddPublisher);
+  data.append("COUNTRY", Country);
+  data.append("subtype", AddSubType);
+  data.append("website", "Website");
+  data.append("ID", id);
+  data.append("image", "");
+  data.append("Email", Email);
+  data.append("Description", AddDetails);
+  data.append("Fax", "Fax");
 
   const emptyForm = () => {
     setAddType("");
@@ -220,17 +188,21 @@ const UpdateAdd = () => {
   // console.log(data);
 
   const clickHandler = (e) => {
-    setLoading(true);
     e.preventDefault();
-
-    axios
-      .put(`${BASE_URL}Business/Update`, data, {
-        headers: "Content-Type: application/json",
+    setLoading(true);
+    fetch(`${BASE_URL}Business/UpdateBusiness`, {
+      method: "PUT",
+      body: data,
+    })
+      .then((response) => {
+        setLoading(true);
+        response.json();
       })
-      .then((res) => {
-        console.log(res.data);
+      .then((data) => {
+        console.log(data);
         emptyForm();
         setLoading(false);
+        navigate(`/add/${id}`);
       })
       .catch((error) => {
         console.log(error);
@@ -335,7 +307,7 @@ const UpdateAdd = () => {
             value={mainAddImage}
           />
           <LightSpan>أضف صورة جذابة معبرة عن إعلانك</LightSpan>
-          <button>رفع الصورة</button>
+          {/* <button>رفع الصورة</button> */}
         </Box>
 
         <Box>
@@ -441,7 +413,7 @@ const UpdateAdd = () => {
             multiple
           />
           <LightSpan>أضف صور الإعلان بحد أقصى 5 صور</LightSpan>
-          <button>رفع الصور</button>
+          {/* <button>رفع الصور</button> */}
         </Box>
 
         <Halfbox>

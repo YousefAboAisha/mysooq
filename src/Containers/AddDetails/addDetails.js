@@ -187,7 +187,12 @@ function AddDetails() {
 
             <Grid item lg={12} xs={12} mt={1.8} mb={5}>
               <Heading title={"رابط فيديو الإعلان"} />
-              <span> {Add.youtube} </span>
+              <span>
+                {" "}
+                {Add.youtube || Add.youtube !== undefined
+                  ? Add.youtube
+                  : "#"}{" "}
+              </span>
             </Grid>
           </Grid>
 
@@ -219,16 +224,40 @@ function AddDetails() {
             </ImagesBox>
 
             <Social>
-              <a href={Add.instagram}>
+              <a
+                target={"_blank"}
+                href={
+                  Add.instagram || Add.instagram !== undefined
+                    ? Add.instagram
+                    : "#"
+                }
+              >
                 <Instagram />
               </a>
-              <a href={Add.facebook}>
+              <a
+                target={"_blank"}
+                href={
+                  Add.facebook || Add.facebook !== undefined
+                    ? Add.facebook
+                    : "#"
+                }
+              >
                 <FacebookOutlined />
               </a>
-              <a href={Add.twitter}>
+              <a
+                target={"_blank"}
+                href={
+                  Add.twitter || Add.twitter !== undefined ? Add.twitter : "#"
+                }
+              >
                 <Twitter />
               </a>
-              <a href={Add.youtube}>
+              <a
+                target={"_blank"}
+                href={
+                  Add.youtube || Add.youtube !== undefined ? Add.youtube : "#"
+                }
+              >
                 <YouTube />
               </a>
             </Social>

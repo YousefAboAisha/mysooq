@@ -33,7 +33,7 @@ const Navbar = () => {
         </div>
 
         <div className={classes.search}>
-          <button>
+          <button onClick={clickHandler}>
             بحث عن إعلانات
             <SearchOutlined />
           </button>
