@@ -1,9 +1,14 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Edit, Delete, MoreVert } from "@mui/icons-material";
+import {
+  Edit,
+  Delete,
+  MoreVert,
+  SettingsInputComponent,
+} from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
@@ -52,7 +57,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function CustomizedMenus({ setLoading }) {
+export default function CustomizedMenus({ setLoading, setIsOpen }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -84,7 +89,7 @@ export default function CustomizedMenus({ setLoading }) {
   };
 
   const updateHandler = () => {
-    navigate(`/update/${id}`);
+    setIsOpen(true);
     setAnchorEl(null);
   };
 

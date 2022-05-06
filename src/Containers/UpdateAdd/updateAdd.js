@@ -9,28 +9,50 @@ import {
   Halfbox,
   Btn,
 } from "../NewAdd/addForm/form";
+import styled from "styled-components";
+import { Clear } from "@mui/icons-material";
 
-const UpdateAdd = () => {
+const SWrapper = styled(Wrapper)`
+  position: fixed;
+  display: flex;
+  flex-flow: column wrap;
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 600px;
+  overflow-y: scroll;
+  padding-top: 50px;
+  border-radius: 10px;
+  z-index: 1000000;
+
+  & svg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+`;
+
+const UpdateAdd = ({ setIsOpen, add }) => {
   const { id } = useParams();
-  const [Add, setAdd] = useState([]);
 
-  const [AddTitle, setAddTitle] = useState("");
-  const [AddType, setAddType] = useState("");
-  const [AddSubType, setAddSubType] = useState("");
+  const [AddTitle, setAddTitle] = useState(add.name || "");
+  const [AddType, setAddType] = useState(add.service || "");
+  const [AddSubType, setAddSubType] = useState(add.subtype || "");
   const [Price, setPrice] = useState(""); // مش هتبعتو
   const [Currency, setCurrency] = useState(""); // مش هتبعتو
-  const [mainAddImage, setmainAddImage] = useState("");
-  const [AddDetails, setAddDetails] = useState("");
-  const [AddPublisher, setAddPublisher] = useState("");
-  const [Country, setCountry] = useState("");
-  const [City, setCity] = useState("");
-  const [Email, setEmail] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
-  const [AddImages, setAddImages] = useState("");
-  const [YLink, setYLink] = useState("");
-  const [FLink, setFLink] = useState("");
-  const [TLink, setTLink] = useState("");
-  const [ILink, setILink] = useState("");
+  const [mainAddImage, setmainAddImage] = useState();
+  const [AddDetails, setAddDetails] = useState(add.description || "");
+  const [AddPublisher, setAddPublisher] = useState(add.userName || "");
+  const [Country, setCountry] = useState(add.country || "");
+  const [City, setCity] = useState(add.city || "");
+  const [Email, setEmail] = useState(add.email || "");
+  const [PhoneNumber, setPhoneNumber] = useState(add.phone1 || "");
+  const [AddImages, setAddImages] = useState();
+  const [YLink, setYLink] = useState(add.youtube || "");
+  const [FLink, setFLink] = useState(add.facebook || "");
+  const [TLink, setTLink] = useState(add.twitter || "");
+  const [ILink, setILink] = useState(add.instagram || "");
 
   const [Loading, setLoading] = useState(false);
   const [Countries, setCountries] = useState([]);
@@ -81,37 +103,6 @@ const UpdateAdd = () => {
   ];
 
   const navigate = useNavigate();
-
-  // Fetch Add Data
-  const fetchAddData = async () => {
-    const response = await fetch(`${BASE_URL}Business/GetOne?id=${id}`);
-    const result = await response.json();
-    console.log(result.data);
-    if (result) {
-      setAdd(result.data.data);
-      setFields();
-    }
-  };
-
-  useEffect(() => {
-    fetchAddData();
-  }, []);
-
-  const setFields = () => {
-    setAddType(Add.service);
-    setCountry(Add.country);
-    setAddSubType(Add.subtype);
-    setCity(Add.city);
-    setAddDetails(Add.description);
-    setPhoneNumber(Add.Phone1);
-    setAddTitle(Add.name);
-    setEmail(Add.email);
-    setAddPublisher(Add.userName);
-    setFLink(Add.facebook);
-    setILink(Add.instagram);
-    setYLink(Add.youtube);
-    setTLink(Add.twitter);
-  };
 
   // Fetching Countries
   const fetchCountriesData = async () => {
@@ -203,6 +194,7 @@ const UpdateAdd = () => {
         emptyForm();
         setLoading(false);
         navigate(`/add/${id}`);
+        setIsOpen(false);
       })
       .catch((error) => {
         console.log(error);
@@ -211,8 +203,9 @@ const UpdateAdd = () => {
   };
 
   return (
-    <form onSubmit={clickHandler}>
-      <Wrapper>
+    <SWrapper>
+      <Clear onClick={() => setIsOpen(false)} />
+      <form onSubmit={clickHandler}>
         <Box>
           <BoldSpan>عنوان الإعلان *</BoldSpan>
           <input
@@ -463,13 +456,13 @@ const UpdateAdd = () => {
             <LightSpan>أدرج رابط حساب الإنستغرام الخاص بك </LightSpan>
           </Box>
         </Halfbox>
-        <div style={{ margin: "0 auto" }}>
+        <div style={{ margin: "20px auto" }}>
           <Btn type={"submit"}>
             {Loading ? "جارٍ الحفظ ..." : "تعديل الإعلان"}
           </Btn>
         </div>
-      </Wrapper>
-    </form>
+      </form>
+    </SWrapper>
   );
 };
 

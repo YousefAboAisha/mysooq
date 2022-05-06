@@ -17,6 +17,8 @@ import { BASE_URL } from "../../baseURL";
 import axios from "axios";
 import Spinner from "../../Components/Spinner/Spinner";
 import LongMenu from "../../Components/AddMenu/addMenu";
+import UpdateAdd from "../UpdateAdd/updateAdd";
+import Modal from "../../Components/Modal/modal";
 
 const Wrapper = styled.div`
   position: relative;
@@ -104,6 +106,7 @@ function AddDetails() {
   );
   const { id } = useParams();
   const [Loading, setLoading] = useState(false);
+  const [IsOpen, setIsOpen] = useState(false);
 
   const fetchData = () => {
     setLoading(true);
@@ -124,7 +127,7 @@ function AddDetails() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [setAdd]);
 
   const extraPhotos = [
     { src: img, id: 1 },
@@ -135,6 +138,12 @@ function AddDetails() {
 
   return (
     <Wrapper>
+      {IsOpen ? (
+        <>
+          <UpdateAdd setIsOpen={setIsOpen} open={IsOpen} add={Add} />
+          <Modal setIsOpen={setIsOpen} open={IsOpen} />
+        </>
+      ) : null}
       <PageTitle title={"تفاصيل الإعلان"} />
 
       {Loading ? (
@@ -176,7 +185,7 @@ function AddDetails() {
 
               <Grid item lg={6} md={6} xs={12} mb={1}>
                 <span>رقم الهاتف: </span>
-                <span>{Add.userName}</span>
+                <span>{Add.phone1}</span>
               </Grid>
 
               <Grid item lg={12}>
@@ -197,7 +206,7 @@ function AddDetails() {
           </Grid>
 
           <Grid item lg={6} md={12} xs={12}>
-            <LongMenu setLoading={setLoading} />
+            <LongMenu setLoading={setLoading} setIsOpen={setIsOpen} />
 
             <ImagesBox>
               <img
