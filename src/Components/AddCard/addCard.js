@@ -44,6 +44,8 @@ const Card = ({ card }) => {
     navigate(`/add/${id}`);
   };
 
+  // console.log(card.uniqueId);
+
   return (
     <Grid item lg={3} md={4} sm={6} xs={12}>
       <Item>

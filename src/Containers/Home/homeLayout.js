@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid } from "@mui/material/";
 import styled from "styled-components";
 import Flags from "./Flags/flags";
@@ -6,7 +6,6 @@ import LeftAdd from "./Adds/leftAdd";
 import MainAdd from "./Adds/mainAdd";
 import LeftLongAdd from "./Adds/leftLongAdd";
 import Heading from "../../Components/Heading/heading";
-import BlueButton from "../../Components/BlueButton/blueButton";
 import RecentAdds from "./RecentAdds/recentAdds";
 
 const Wrapper = styled.div`

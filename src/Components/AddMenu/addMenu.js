@@ -96,9 +96,7 @@ export default function CustomizedMenus({ setLoading }) {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         variant="contained"
-        disableElevation
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
       >
         <MoreVert />
       </IconButton>

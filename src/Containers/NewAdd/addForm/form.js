@@ -88,14 +88,14 @@ const Form = () => {
   const [AddSubType, setAddSubType] = useState("");
   const [Price, setPrice] = useState(""); // مش هتبعتو
   const [Currency, setCurrency] = useState(""); // مش هتبعتو
-  const [mainAddImage, setmainAddImage] = useState(null);
+  const [mainAddImage, setmainAddImage] = useState("");
   const [AddDetails, setAddDetails] = useState("");
   const [AddPublisher, setAddPublisher] = useState("");
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
   const [Email, setEmail] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
-  const [AddImages, setAddImages] = useState(null);
+  const [AddImages, setAddImages] = useState([]);
   const [YLink, setYLink] = useState("");
   const [FLink, setFLink] = useState("");
   const [TLink, setTLink] = useState("");
@@ -177,36 +177,16 @@ const Form = () => {
     fetchSubTypesData();
   }, [AddType]);
 
-  console.log("Add Type is " + AddType);
+  // console.log("Add Type is " + AddType);
+
+  const limitImageNumber = (e) => {
+    if (e.files.length > 5) {
+      alert("Only 5 files accepted.");
+      e.preventDefault();
+    }
+  };
 
   // **************************************
-
-  const data = new FormData();
-
-  data.append("phone1", PhoneNumber);
-  data.append("Youtube", YLink);
-  data.append("Facebook", FLink);
-  data.append("AREAId", "");
-  data.append("CITY", City);
-  data.append("Name", AddTitle);
-  data.append("TIME_SLOT", "");
-  data.append("Instagram", ILink);
-  data.append("Twitter", TLink);
-  data.append("OWNER", "");
-  data.append("Address", "");
-  data.append("service", AddType);
-  data.append("UserName", AddPublisher);
-  data.append("COUNTRY", Country);
-  data.append("ROW_STATUS", "");
-  data.append("Images", AddImages);
-  data.append("subtype", AddSubType);
-  data.append("Website", "Website");
-  data.append("Image", mainAddImage);
-  data.append("Email", Email);
-  data.append("Description", AddDetails);
-  data.append("Fax", "Fax");
-
-  console.log(data);
 
   // const data = {
   //   Phone1: PhoneNumber,
@@ -233,6 +213,43 @@ const Form = () => {
   //   Fax: "",
   // };
 
+  var formData = new FormData();
+
+  formData.append("Phone1", PhoneNumber);
+  formData.append("Youtube", YLink);
+  formData.append("Facebook", FLink);
+  formData.append("AREAId", "1");
+  formData.append("CITY", City);
+  formData.append("Name", AddTitle);
+  formData.append("TIME_SLOT", "1");
+  formData.append("Instagram", ILink);
+  formData.append("Twitter", TLink);
+  formData.append("OWNER", "1");
+  formData.append("Address", "");
+  formData.append("service", AddType);
+  formData.append("UserName", AddPublisher);
+  formData.append("COUNTRY", Country);
+  formData.append("ROW_STATUS", "1");
+  for (const file of AddImages) {
+    formData.append("Images", file);
+    // console.log(file);
+  }
+  formData.append("subtype", AddSubType);
+  formData.append("Website", "Website");
+  formData.append("Image", mainAddImage);
+  formData.append("Email", Email);
+  formData.append("Description", AddDetails);
+  formData.append("Fax", "Fax");
+
+  for (const elem of Array.from(formData)) {
+    console.log(elem);
+  }
+
+  // console.log(formData);
+  // for (var pair of formData.entries()) {
+  //   console.log(pair[0] + ", " + pair[1]);
+  // }
+
   const emptyForm = () => {
     setAddType("");
     setCountry("");
@@ -249,13 +266,14 @@ const Form = () => {
     setTLink("");
   };
 
-  console.log(data);
-
-  const clickHandler = (e) => {
+  const clickHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     axios
-      .post(`${BASE_URL}Business/CreateBusiness`, data)
+      .post(`${BASE_URL}Business/CreateBusiness`, formData, {
+        headers: { "Content-Type": "multipart/form-data", accept: "*/*" },
+      })
       .then((res) => {
         console.log(res.data);
         emptyForm();
@@ -267,11 +285,12 @@ const Form = () => {
       });
   };
 
+  // console.log(formData);
   console.log(mainAddImage);
   console.log(AddImages);
 
   return (
-    <form onSubmit={clickHandler} encType="multipart/form-data">
+    <form onSubmit={clickHandler}>
       <Wrapper>
         <Box>
           <BoldSpan>عنوان الإعلان *</BoldSpan>
@@ -367,7 +386,7 @@ const Form = () => {
             required
           />
           <LightSpan>أضف صورة جذابة معبرة عن إعلانك</LightSpan>
-          <button>رفع الصورة</button>
+          {/* <button>رفع الصورة</button> */}
         </Box>
 
         <Box>
@@ -468,12 +487,13 @@ const Form = () => {
             type="file"
             placeholder="اسحب الصورة إلى هنا"
             accept="image/*"
+            onSelect={(e) => limitImageNumber(e)}
             onChange={(e) => setAddImages(e.target.files)}
             multiple
             required
           />
           <LightSpan>أضف صور الإعلان بحد أقصى 5 صور</LightSpan>
-          <button>رفع الصور</button>
+          {/* <button>رفع الصور</button> */}
         </Box>
 
         <Halfbox>

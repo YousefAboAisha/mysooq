@@ -33,10 +33,19 @@ const Navbar = () => {
         </div>
 
         <div className={classes.search}>
-          <button onClick={clickHandler}>
-            البحث عن إعلان
+          <button>
+            بحث عن إعلانات
             <SearchOutlined />
           </button>
+
+          {/* <input
+            type={"text"}
+            onClick={clickHandler}
+            placeholder="ابحث عن إعلانات"
+          />
+          <div className={classes.searchBtn}>
+            <SearchOutlined />
+          </div> */}
         </div>
 
         <Link to={"/signup"}>

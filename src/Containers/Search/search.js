@@ -81,6 +81,12 @@ const Search = () => {
       });
   };
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      fetchData();
+    }
+  };
+
   return (
     <Wrapper>
       <PageTitle title={"بحث عن إعلان"} />
@@ -91,6 +97,7 @@ const Search = () => {
           autoFocus
           onChange={(e) => setVal(e.target.value)}
           value={Val}
+          onKeyDown={(e) => handleEnter(e)}
         />
         <div className={"searchBtn"} onClick={fetchData}>
           بحث

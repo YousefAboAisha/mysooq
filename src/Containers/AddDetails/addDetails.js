@@ -98,8 +98,10 @@ const Social = styled.div`
 `;
 
 function AddDetails() {
-  const [mainImg, setMainImg] = useState(img);
   const [Add, setAdd] = useState([]);
+  const [mainImg, setMainImg] = useState(
+    "http://alirafeqpro-001-site1.gtempurl.com/Uploads/Images/JxZtiqwCyF.jpg"
+  );
   const { id } = useParams();
   const [Loading, setLoading] = useState(false);
 
@@ -194,8 +196,7 @@ function AddDetails() {
 
             <ImagesBox>
               <img
-                // src={`http://alirafeqpro-001-site1.gtempurl.com${Add.uniqueId}.jpg`}
-                src={img}
+                src={mainImg}
                 alt={"main"}
                 width="100%"
                 height={"350px"}

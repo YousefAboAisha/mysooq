@@ -126,7 +126,7 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
           </select>
         </Box>
 
-        <Btn>بحث</Btn>
+        {/* <Btn>بحث</Btn> */}
       </Header>
     </Grid>
   );

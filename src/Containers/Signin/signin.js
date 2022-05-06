@@ -52,7 +52,24 @@ const Wrap = styled.div`
   }
 `;
 
-const Btn = styled.div`
+const Btn = styled.button`
+  padding: 6px;
+  min-width: 110px;
+  color: var(--white);
+  background-color: var(--blue);
+  border-radius: 3px;
+  font-family: var(--secondFont);
+  font-size: 14px;
+  transition: all 0.2s linear;
+  margin: 0 auto;
+
+  &:hover {
+    background-color: #01687d;
+    transition: all 0.2s linear;
+  }
+`;
+
+const Btn2 = styled.div`
   position: relative;
   width: 100%;
   margin-top: 10px;
@@ -158,9 +175,7 @@ const Signin = () => {
     e.preventDefault();
 
     axios
-      .post(`${BASE_URL}Business/Create`, data, {
-        headers: "Content-Type: application/json",
-      })
+      .get(`${BASE_URL}User/GetOne`)
       .then((res) => {
         console.log(res.data);
         setLoading(false);
@@ -174,64 +189,66 @@ const Signin = () => {
   console.log(IsRemembered);
 
   return (
-    <Wrap>
-      <Heading title={"تسجيل الدخول"} />
-      <Box>
-        <BoldSpan>البريد الالكتروني</BoldSpan>
-        <input
-          type="email"
-          placeholder="Mysooq@gmail.com"
-          onChange={(e) => setEmail(e.target.value)}
-          value={Email}
-        />
-      </Box>
-
-      <Box>
-        <BoldSpan>كلمة المرور</BoldSpan>
-        <input
-          type="password"
-          placeholder="***********"
-          onChange={(e) => setPassword(e.target.value)}
-          value={Password}
-        />
-      </Box>
-
-      <InnerBox>
-        <div>
+    <form onSubmit={clickHandler}>
+      <Wrap>
+        <Heading title={"تسجيل الدخول"} />
+        <Box>
+          <BoldSpan>البريد الالكتروني</BoldSpan>
           <input
-            type="checkbox"
-            onChange={(e) => setIsRemembered(e.target.checked)}
-            value={IsRemembered}
+            type="email"
+            placeholder="Mysooq@gmail.com"
+            onChange={(e) => setEmail(e.target.value)}
+            value={Email}
           />
-          <label>تذكرني لاحقاً</label>
-        </div>
-        <span>هل نسيت كلمة المرور؟</span>
-      </InnerBox>
+        </Box>
 
-      <BlueButton title={"تسجيل الدخول"} />
+        <Box>
+          <BoldSpan>كلمة المرور</BoldSpan>
+          <input
+            type="password"
+            placeholder="***********"
+            onChange={(e) => setPassword(e.target.value)}
+            value={Password}
+          />
+        </Box>
 
-      <Btn>
-        <h5>تسجيل الدخول بواسطة</h5>
-      </Btn>
+        <InnerBox>
+          <div>
+            <input
+              type="checkbox"
+              onChange={(e) => setIsRemembered(e.target.checked)}
+              value={IsRemembered}
+            />
+            <label>تذكرني لاحقاً</label>
+          </div>
+          <span>هل نسيت كلمة المرور؟</span>
+        </InnerBox>
 
-      <BtnBox>
-        <button>
-          تسجيل الدخول بواسطة جوجل
-          <img src={googleIcon} alt="Google icon" />
-        </button>
-        <button>
-          تسجيل الدخول بواسطة فيسبوك
-          <img src={facebookIcon} alt="Facebook icon" />
-        </button>
-      </BtnBox>
+        <Btn>{Loading ? "جارٍ تسجيل الدخول" : "تسجيل الدخول"}</Btn>
 
-      <Register>
-        <span>ليس لديك حساب؟</span>
-        <Link to={"/signup"}>
-          <span style={{ fontWeight: "600", color: "#000" }}>إنشاء حساب</span>
-        </Link>
-      </Register>
-    </Wrap>
+        <Btn2>
+          <h5>تسجيل الدخول بواسطة</h5>
+        </Btn2>
+
+        <BtnBox>
+          <button>
+            تسجيل الدخول بواسطة جوجل
+            <img src={googleIcon} alt="Google icon" />
+          </button>
+          <button>
+            تسجيل الدخول بواسطة فيسبوك
+            <img src={facebookIcon} alt="Facebook icon" />
+          </button>
+        </BtnBox>
+
+        <Register>
+          <span>ليس لديك حساب؟</span>
+          <Link to={"/signup"}>
+            <span style={{ fontWeight: "600", color: "#000" }}>إنشاء حساب</span>
+          </Link>
+        </Register>
+      </Wrap>
+    </form>
   );
 };
 

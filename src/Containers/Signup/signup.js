@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Halfbox, BoldSpan } from "../NewAdd/addForm/form";
+import { Box, Halfbox, BoldSpan, LightSpan } from "../NewAdd/addForm/form";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import googleIcon from "../../Media/googleIcon.svg";
@@ -140,6 +140,7 @@ const Signup = () => {
   const [Country, setCountry] = useState("");
   const [Loading, setLoading] = useState(false);
   const [Countries, setCountries] = useState([]);
+  const [Error, setError] = useState("");
 
   const countryURL = `${BASE_URL}Countries/GetAll`;
 
@@ -176,25 +177,32 @@ const Signup = () => {
     setPassword("");
     setConfirmedPassword("");
     setCountry("");
+    setPhoneNumber("");
   };
 
   const clickHandler = (e) => {
-    setLoading(true);
     e.preventDefault();
+    console.log(data);
 
-    axios
-      .post(`${BASE_URL}User/Create`, data, {
-        headers: "Content-Type: application/json",
-      })
-      .then((res) => {
-        console.log(res.data);
-        emptyForm();
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+    if (Password !== ConfirmedPassword) {
+      setError(" يرجى التأكد من كلمة السر");
+    } else {
+      setError("");
+      setLoading(true);
+      axios
+        .post(`${BASE_URL}User/Create`, data, {
+          headers: "Content-Type: application/json",
+        })
+        .then((res) => {
+          console.log(res.data);
+          emptyForm();
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+    }
   };
 
   return (
@@ -238,10 +246,12 @@ const Signup = () => {
                 value={Password}
                 required
               />
+              <LightSpan style={{ color: "red" }}>{Error}</LightSpan>
             </Box>
 
             <Box>
-              <BoldSpan>تأكيد كلمة المرور</BoldSpan>
+              <BoldSpan> تأكيد كلمة المرور</BoldSpan>
+
               <input
                 type="password"
                 placeholder="***********"
@@ -249,6 +259,7 @@ const Signup = () => {
                 value={ConfirmedPassword}
                 required
               />
+              <LightSpan style={{ color: "red" }}> {Error}</LightSpan>
             </Box>
           </Halfbox>
           <Halfbox>
