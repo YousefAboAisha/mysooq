@@ -8,7 +8,7 @@ import ScrollTop from "./scrollToTop";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ScrollTop />
 
       <div className="wrapper">
@@ -25,7 +25,7 @@ function App() {
         {/* Footer */}
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
