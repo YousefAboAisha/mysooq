@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./upperNavbar.module.css";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/navbar";
-import { Add } from "@mui/icons-material";
+import BasicModal from "../AddModal/addModal";
 
 const UpperNavbar = () => {
   return (
@@ -14,12 +14,8 @@ const UpperNavbar = () => {
           <Link to={"contact"}>اتصل</Link>
           <Link to={"paidadds"}>لاعلاناتكم</Link>
         </div>
-        <Link to={"newadd"}>
-          <button>
-            أضف إعلانك
-            <Add />
-          </button>
-        </Link>
+
+        <BasicModal />
       </div>
       <Navbar />
     </div>

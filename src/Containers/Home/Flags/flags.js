@@ -7,6 +7,7 @@ import {
 // import Spinner from "../../../Components/Spinner/Spinner";
 import { BASE_URL } from "../../../baseURL";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 // const URL = "https://localhost:44387/api/Countries/GetAll";
 
@@ -122,13 +123,16 @@ const Flags = () => {
           Countries.map((elem, index) => {
             return (
               <Card key={index}>
-                <img
-                  src={
-                    "http://alirafeqpro-001-site1.gtempurl.com" + elem.photoPath
-                  }
-                  alt={elem.altname}
-                  style={{ borderRadius: "50%" }}
-                />
+                <Link to={`countriesAdds/${elem.id}`}>
+                  <img
+                    src={
+                      "http://alirafeqpro-001-site1.gtempurl.com" +
+                      elem.photoPath
+                    }
+                    alt={elem.altname}
+                    style={{ borderRadius: "50%" }}
+                  />
+                </Link>
                 <BoldSpan>{elem.name}</BoldSpan>
               </Card>
             );

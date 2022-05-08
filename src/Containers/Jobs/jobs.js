@@ -18,10 +18,10 @@ const Wrapper = styled.div`
 const Jobs = () => {
   const id = 5;
   const [Adds, setAdds] = useState([]);
+  const [AllAdds, setAllAdds] = useState([]);
   const [Country, setCountry] = useState(null);
   const [City, setCity] = useState(null);
   const [Page, setPage] = useState(0);
-  const [AllAdds, setAllAdds] = useState([]);
 
   const [Loading, setLoading] = useState(false);
 
