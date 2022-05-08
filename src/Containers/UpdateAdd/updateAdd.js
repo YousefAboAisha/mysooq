@@ -11,20 +11,22 @@ import {
 } from "../NewAdd/addForm/form";
 import styled from "styled-components";
 import { Clear } from "@mui/icons-material";
+import Snackbar from "../../Components/Snackbar/snackbar";
 
 const SWrapper = styled(Wrapper)`
   position: fixed;
   display: flex;
   flex-flow: column wrap;
-  width: 80%;
+  width: 60%;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  height: 600px;
+  height: 500px;
   overflow-y: scroll;
-  padding-top: 50px;
   border-radius: 10px;
   z-index: 1000000;
+  padding: 20px;
+  padding-top: 40px;
 
   & svg {
     position: absolute;
@@ -33,7 +35,7 @@ const SWrapper = styled(Wrapper)`
   }
 `;
 
-const UpdateAdd = ({ setIsOpen, add }) => {
+const UpdateAdd = ({ setIsOpen, add, open }) => {
   const { id } = useParams();
 
   const [AddTitle, setAddTitle] = useState(add.name || "");
@@ -456,7 +458,13 @@ const UpdateAdd = ({ setIsOpen, add }) => {
             <LightSpan>أدرج رابط حساب الإنستغرام الخاص بك </LightSpan>
           </Box>
         </Halfbox>
-        <div style={{ margin: "20px auto" }}>
+        <div
+          style={{
+            margin: "30px auto",
+            width: "fit-content",
+            marginBottom: "100px !important",
+          }}
+        >
           <Btn type={"submit"}>
             {Loading ? "جارٍ الحفظ ..." : "تعديل الإعلان"}
           </Btn>

@@ -40,9 +40,10 @@
     align-items: center;
     gap: 4px;
     border-radius: 2px;
-    padding: 6px;
+    padding: 10px;
     font-size: 13px;
     transition: all 0.3s linear;
+    height: 85px;
 }
 
 

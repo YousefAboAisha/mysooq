@@ -19,10 +19,23 @@ import Spinner from "../../Components/Spinner/Spinner";
 import LongMenu from "../../Components/AddMenu/addMenu";
 import UpdateAdd from "../UpdateAdd/updateAdd";
 import Modal from "../../Components/Modal/modal";
+import Snackbar from "../../Components/Snackbar/snackbar";
 
 const Wrapper = styled.div`
   position: relative;
   min-height: 600px;
+
+  & p {
+    width: 80%;
+  }
+
+  & .menu {
+    background-color: "#222";
+    position: absolute;
+    right: 47%;
+    top: 7%;
+    transform: rotate(90deg);
+  }
 `;
 
 const Icon = styled(LocationOnOutlined)`
@@ -101,12 +114,13 @@ const Social = styled.div`
 
 function AddDetails() {
   const [Add, setAdd] = useState([]);
-  const [mainImg, setMainImg] = useState(
-    "http://alirafeqpro-001-site1.gtempurl.com/Uploads/Images/JxZtiqwCyF.jpg"
-  );
   const { id } = useParams();
   const [Loading, setLoading] = useState(false);
   const [IsOpen, setIsOpen] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [mainImg, setMainImg] = useState(
+    "http://alirafeqpro-001-site1.gtempurl.com/Uploads/Images/JxZtiqwCyF.jpg"
+  );
 
   const fetchData = () => {
     setLoading(true);
@@ -138,6 +152,8 @@ function AddDetails() {
 
   return (
     <Wrapper>
+      {copySuccess ? <Snackbar msg={"تم نسخ رابط الإعلان بنجاح"} /> : null}
+
       {IsOpen ? (
         <>
           <UpdateAdd setIsOpen={setIsOpen} open={IsOpen} add={Add} />
@@ -194,19 +210,22 @@ function AddDetails() {
               </Grid>
             </Grid>
 
-            <Grid item lg={12} xs={12} mt={1.8} mb={5}>
-              <Heading title={"رابط فيديو الإعلان"} />
-              <span>
-                {" "}
-                {Add.youtube || Add.youtube !== undefined
-                  ? Add.youtube
-                  : "#"}{" "}
-              </span>
-            </Grid>
+            {Add.youtube ? (
+              <Grid item lg={12} xs={12} mt={1.8} mb={5}>
+                <Heading title={"رابط فيديو الإعلان"} />
+                <span> {Add.youtube}</span>
+              </Grid>
+            ) : null}
           </Grid>
 
-          <Grid item lg={6} md={12} xs={12}>
-            <LongMenu setLoading={setLoading} setIsOpen={setIsOpen} />
+          <Grid item lg={6} md={12} xs={12} mt={2}>
+            <div class="menu">
+              <LongMenu
+                setLoading={setLoading}
+                setIsOpen={setIsOpen}
+                setCopySuccess={setCopySuccess}
+              />
+            </div>
 
             <ImagesBox>
               <img
@@ -233,40 +252,16 @@ function AddDetails() {
             </ImagesBox>
 
             <Social>
-              <a
-                target={"_blank"}
-                href={
-                  Add.instagram || Add.instagram !== undefined
-                    ? Add.instagram
-                    : "#"
-                }
-              >
+              <a target={"_blank"} rel="noreferrer" href={Add.instagram}>
                 <Instagram />
               </a>
-              <a
-                target={"_blank"}
-                href={
-                  Add.facebook || Add.facebook !== undefined
-                    ? Add.facebook
-                    : "#"
-                }
-              >
+              <a target={"_blank"} rel="noreferrer" href={Add.facebook}>
                 <FacebookOutlined />
               </a>
-              <a
-                target={"_blank"}
-                href={
-                  Add.twitter || Add.twitter !== undefined ? Add.twitter : "#"
-                }
-              >
+              <a target={"_blank"} rel="noreferrer" href={Add.twitter}>
                 <Twitter />
               </a>
-              <a
-                target={"_blank"}
-                href={
-                  Add.youtube || Add.youtube !== undefined ? Add.youtube : "#"
-                }
-              >
+              <a target={"_blank"} rel="noreferrer" href={Add.youtube}>
                 <YouTube />
               </a>
             </Social>

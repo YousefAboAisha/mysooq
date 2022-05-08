@@ -20,6 +20,7 @@ const Wrap = styled.div`
   gap: 10px;
   background-color: #fff;
   border-radius: 10px;
+  padding-bottom: 30px;
 
   & h3 {
     margin: 0 auto;
@@ -165,9 +166,10 @@ const Signin = () => {
   const [IsRemembered, setIsRemembered] = useState(false);
 
   const data = {
-    email: Email,
+    userName: Email,
     password: Password,
-    remembered: IsRemembered,
+    rememberLogin: IsRemembered,
+    returnUrl: "/",
   };
 
   const clickHandler = (e) => {
@@ -175,7 +177,7 @@ const Signin = () => {
     e.preventDefault();
 
     axios
-      .get(`${BASE_URL}User/GetOne`)
+      .post(`${BASE_URL}LoginAPI/Login`, data)
       .then((res) => {
         console.log(res.data);
         setLoading(false);

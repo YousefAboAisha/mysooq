@@ -49,7 +49,7 @@ const BottomSection = styled.div`
   color: var(--white);
   gap: 10px;
 
-  @media only screen and (max-width: 500px) {
+  /* @media only screen and (max-width: 500px) {
     & {
       margin-bottom: 30px;
     }
@@ -60,7 +60,7 @@ const BottomSection = styled.div`
       left: 50%;
       transform: translateX(-50%);
     }
-  }
+  } */
 
   & h5 {
     font-size: 13px;
@@ -136,11 +136,6 @@ const Footer = () => {
       </Grid>
 
       <BottomSection>
-        <SocialSection>
-          <h5>طرق الدفع :</h5>
-          <img src={paypal} alt="paypal" />
-        </SocialSection>
-
         <span>Sam@mysooq.net</span>
 
         <SocialSection>

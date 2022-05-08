@@ -18,12 +18,12 @@ const HomeLayout = () => {
     <Wrapper>
       <Grid container spacing={0}>
         {/* Flags Section */}
-        <Grid item lg={8} md={12} xs={12} p={1}>
+        <Grid item lg={8} md={12} xs={12}>
           <Flags />
         </Grid>
 
         {/* Left Small Add */}
-        <Grid item lg={4} md={12} xs={12} p={1}>
+        <Grid item lg={4} md={12} xs={12}>
           <LeftAdd />
         </Grid>
 
@@ -33,12 +33,12 @@ const HomeLayout = () => {
         </Grid>
 
         {/* Main Big Add */}
-        <Grid item lg={8} md={12} xs={12} p={1} pr={0} mb={{ xs: 5 }}>
+        <Grid item lg={8} md={12} xs={12} pr={0} mb={{ xs: 5 }}>
           <MainAdd />
         </Grid>
 
         {/* Left Long Add */}
-        <Grid item lg={4} md={12} xs={12} p={1}>
+        <Grid item lg={4} md={12} xs={12}>
           <LeftLongAdd />
         </Grid>
 

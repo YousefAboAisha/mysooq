@@ -68,7 +68,10 @@ const Text = () => {
         {Loading ? (
           <Spinner />
         ) : (
-          <section dangerouslySetInnerHTML={{ __html: Data }} />
+          <section
+            style={{ margin: "0px auto" }}
+            dangerouslySetInnerHTML={{ __html: Data }}
+          />
         )}
       </Grid>
     </Wrapper>

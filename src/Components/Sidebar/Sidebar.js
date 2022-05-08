@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import classes from "./Sidebar.module.css";
+import { Link } from "react-router-dom";
 import {
   HomeOutlined,
   MapsHomeWorkOutlined,
@@ -8,42 +9,11 @@ import {
   MiscellaneousServicesOutlined,
   PersonSearchOutlined,
   PersonPinOutlined,
+  Clear,
+  AccountCircle,
 } from "@mui/icons-material/";
-import styled from "styled-components";
 
-const Wrap = styled.div`
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 3px;
-
-  & a {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    border-radius: 3px;
-    font-weight: 500;
-    gap: 3px;
-    min-width: fit-content;
-    scroll-snap-align: start;
-    transition: all 0.3s linear;
-  }
-
-  & a:hover {
-    color: #222;
-    transition: all 0.3s linear;
-  }
-
-  & a:hover svg {
-    color: #222;
-    transition: all 0.3s linear;
-  }
-`;
-
-const Links = () => {
-  const location = useLocation();
-  // console.log(location.pathname);
-
+const SideBar = ({ toggle, setToggle }) => {
   const links = [
     {
       path: "/",
@@ -83,20 +53,29 @@ const Links = () => {
   ];
 
   return (
-    <Wrap>
+    <div
+      className={classes.nav}
+      style={{
+        transform: toggle ? "translateX(0)" : "translateX(100%)",
+      }}
+    >
+      <Clear onClick={() => setToggle(false)} />
+
+      <div className={classes.profile} onClick={() => setToggle(false)}>
+        <Link to={"/signup"}>
+          <AccountCircle />
+        </Link>
+      </div>
+
       {links.map((elem, index) => {
         return (
-          <Link
-            to={elem.path}
-            key={index}
-            className={`/${elem.path}` === location ? "active" : ""}
-          >
-            {elem.icon} {elem.name}
+          <Link to={elem.path} key={index} onClick={() => setToggle(false)}>
+            {elem.name}
           </Link>
         );
       })}
-    </Wrap>
+    </div>
   );
 };
 
-export default Links;
+export default SideBar;

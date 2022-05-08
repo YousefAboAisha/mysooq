@@ -19,6 +19,7 @@ const Wrap = styled.div`
   gap: 10px;
   background-color: #fff;
   border-radius: 10px;
+  padding-bottom: 30px;
 
   & h3 {
     margin: 0 auto;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PageTitle from "../../Components/PageTitle/pageTitle";
 import { Grid } from "@mui/material";
@@ -7,6 +7,7 @@ import Spinner from "../../Components/Spinner/Spinner";
 import Card from "../../Components/AddCard/addCard";
 import axios from "axios";
 import { SearchOutlined } from "@mui/icons-material";
+import { useParams } from "react-router";
 
 const Wrapper = styled.div`
   position: relative;
@@ -59,12 +60,13 @@ const Wrapper = styled.div`
 const Search = () => {
   const [Adds, setAdds] = useState([]);
   const [Loading, setLoading] = useState(false);
-  const [Val, setVal] = useState("");
+  // const [Val, setVal] = useState("");
+  const { query } = useParams();
 
   const fetchData = () => {
     setLoading(true);
     axios
-      .get(`${BASE_URL}Business/SearchByName?name=${Val}`)
+      .get(`${BASE_URL}Business/SearchByName?name=${query}`)
       .then((res) => {
         // console.log(res.data.data.$values);
 
@@ -81,16 +83,16 @@ const Search = () => {
       });
   };
 
-  const handleEnter = (e) => {
-    if (e.key === "Enter") {
-      fetchData();
-    }
-  };
+  useEffect(() => {
+    fetchData();
+  }, [query]);
 
   return (
     <Wrapper>
-      <PageTitle title={"بحث عن إعلان"} />
-      <div className={"search"}>
+      <Grid mb={3}>
+        <PageTitle title={"بحث عن إعلان"} />
+      </Grid>
+      {/* <div className={"search"}>
         <input
           type={"text"}
           placeholder="بحث"
@@ -103,7 +105,7 @@ const Search = () => {
           بحث
           <SearchOutlined />
         </div>
-      </div>
+      </div> */}
 
       <Grid
         container

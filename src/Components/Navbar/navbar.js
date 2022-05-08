@@ -1,26 +1,30 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import classes from "./navbar.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../Media/logo.svg";
-import {
-  SearchOutlined,
-  ExitToAppOutlined,
-  ArrowForwardIosOutlined,
-  ArrowBackIosOutlined,
-} from "@mui/icons-material/";
+import { SearchOutlined, Menu, ExitToAppOutlined } from "@mui/icons-material/";
 import Links from "../../Links/links";
 import { useNavigate } from "react-router";
+import SideBar from "../Sidebar/Sidebar";
 
 const Navbar = () => {
   const ref = useRef();
   const navigate = useNavigate();
+  const [Value, setValue] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   const clickHandler = () => {
-    navigate("search");
+    navigate(`/search/${Value}`);
   };
 
-  const scroll = (scrollOffset) => {
-    ref.current.scrollLeft += scrollOffset;
+  const toggleHandler = () => {
+    setToggle(!toggle);
+  };
+
+  const enterHandler = (e) => {
+    if (e.key === "Enter") {
+      navigate(`/search/${Value}`);
+    }
   };
 
   return (
@@ -33,22 +37,19 @@ const Navbar = () => {
         </div>
 
         <div className={classes.search}>
-          <button onClick={clickHandler}>
-            بحث عن إعلانات
-            <SearchOutlined />
-          </button>
-
-          {/* <input
+          <input
             type={"text"}
-            onClick={clickHandler}
             placeholder="ابحث عن إعلانات"
+            onChange={(e) => setValue(e.target.value)}
+            value={Value}
+            onKeyDown={(e) => enterHandler(e)}
           />
-          <div className={classes.searchBtn}>
+          <div className={classes.searchBtn} onClick={clickHandler}>
             <SearchOutlined />
-          </div> */}
+          </div>
         </div>
 
-        <Link to={"/signup"}>
+        <Link to={"/signin"} className={classes.signup}>
           <button>
             <ExitToAppOutlined />
             تسجيل الدخول
@@ -57,20 +58,15 @@ const Navbar = () => {
       </div>
 
       <div className={classes.secondBox}>
-        <ArrowForwardIosOutlined
-          className={classes.arrow}
-          onClick={() => scroll(100)}
-        />
+        <div className={classes.toggle} onClick={toggleHandler}>
+          <Menu />
+        </div>
 
         <div ref={ref} className={classes.wrap}>
           <Links />
         </div>
-
-        <ArrowBackIosOutlined
-          className={classes.arrow}
-          onClick={() => scroll(-100)}
-        />
       </div>
+      <SideBar toggle={toggle} setToggle={setToggle} />
     </div>
   );
 };

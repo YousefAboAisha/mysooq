@@ -12,7 +12,7 @@ const UpperNavbar = () => {
           <Link to={"about"}>عن الموقع</Link>
           <Link to={"userpolicy"}>اتفاقية الاستخدام</Link>
           <Link to={"contact"}>اتصل</Link>
-          <Link to={"text"}>لاعلاناتكم</Link>
+          <Link to={"paidadds"}>لاعلاناتكم</Link>
         </div>
         <Link to={"newadd"}>
           <button>

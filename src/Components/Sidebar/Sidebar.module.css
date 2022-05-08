@@ -1,0 +1,65 @@
+.nav {
+  position: fixed;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  padding: 20px;
+  padding-top: 70px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: var(--blue);
+  transition: all 0.3s ease-in-out;
+  display: none;
+  z-index: 1000;
+}
+
+.nav svg {
+  color: var(--white);
+}
+
+
+.nav>svg:nth-of-type(1) {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 25px;
+}
+
+.nav .profile {
+  margin-bottom: 20px;
+}
+
+.nav .profile a svg {
+  font-size: 35px;
+}
+
+
+.nav>a {
+  display: block;
+  text-align: center;
+  display: inline-block;
+  min-width: 180px;
+  padding: 10px;
+  font-weight: 600;
+  margin-bottom: 1px;
+  color: var(--white);
+  transition: all 0.3s linear;
+  width: fit-content;
+  border-radius: 5px;
+  z-index: 100000000;
+  transition: all 0.3s linear;
+}
+
+
+.nav>span {
+  color: var(--white);
+  transform: translateY(130px);
+}
+
+@media screen and (max-width: 850px) {
+  .nav {
+    display: flex;
+  }
+}

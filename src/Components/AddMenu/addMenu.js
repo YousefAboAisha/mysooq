@@ -2,17 +2,11 @@ import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import {
-  Edit,
-  Delete,
-  MoreVert,
-  SettingsInputComponent,
-} from "@mui/icons-material";
+import { Edit, Delete, MoreVert, Share } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
-import { Navigate, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -57,7 +51,11 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function CustomizedMenus({ setLoading, setIsOpen }) {
+export default function CustomizedMenus({
+  setLoading,
+  setIsOpen,
+  setCopySuccess,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -93,6 +91,19 @@ export default function CustomizedMenus({ setLoading, setIsOpen }) {
     setAnchorEl(null);
   };
 
+  const copyToClipBoard = async (copyMe) => {
+    try {
+      await navigator.clipboard.writeText(copyMe);
+      setCopySuccess(true);
+      setAnchorEl(null);
+      setTimeout(() => {
+        setCopySuccess(false);
+      }, 4000);
+    } catch (err) {
+      setCopySuccess(false);
+    }
+  };
+
   return (
     <div>
       <IconButton
@@ -121,10 +132,11 @@ export default function CustomizedMenus({ setLoading, setIsOpen }) {
             fontFamily: "var(--mainFont)",
             display: "flex",
             justifyContent: "space-between",
+            gap: "10px",
           }}
         >
-          <Edit />
           تعديل
+          <Edit />
         </MenuItem>
         <MenuItem
           onClick={deleteHandler}
@@ -133,10 +145,25 @@ export default function CustomizedMenus({ setLoading, setIsOpen }) {
             fontFamily: "var(--mainFont)",
             display: "flex",
             justifyContent: "space-between",
+            gap: "10px",
           }}
         >
-          <Delete />
           حذف
+          <Delete />
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => copyToClipBoard(window.location.href)}
+          disableRipple
+          sx={{
+            fontFamily: "var(--mainFont)",
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "10px",
+          }}
+        >
+          مشاركة
+          <Share />
         </MenuItem>
       </StyledMenu>
     </div>

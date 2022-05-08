@@ -14,6 +14,7 @@ const Modal = ({ setIsOpen, open }) => {
         zIndex: "10",
         visibility: open ? "1" : "0",
         transition: "all 1s linear",
+        overflowY: "hidden",
       }}
     ></div>
   );

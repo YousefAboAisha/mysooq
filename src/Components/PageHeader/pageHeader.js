@@ -73,7 +73,7 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
   useEffect(() => {
     fetchCountriesData();
     fetchCitiesData();
-  }, [Country]);
+  }, [Country, City, Subtypes]);
 
   return (
     <Grid item lg={12} mt={3}>

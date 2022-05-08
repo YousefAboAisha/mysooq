@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   margin: 0 auto;
-  margin-top: 75px;
+  margin-top: 45px;
 `;
 
 const Wrap = styled.div`
