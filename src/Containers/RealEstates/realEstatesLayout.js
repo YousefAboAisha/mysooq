@@ -8,7 +8,6 @@ import PageHeader from "../../Components/PageHeader/pageHeader";
 import { BASE_URL } from "../../baseURL";
 import Spinner from "../../Components/Spinner/Spinner";
 import axios from "axios";
-import BlueButton from "../../Components/BlueButton/blueButton";
 
 const Wrapper = styled.div`
   position: relative;
@@ -16,14 +15,29 @@ const Wrapper = styled.div`
   min-height: 1000px;
 `;
 
+const Btn = styled.button`
+  padding: 6px;
+  min-width: 110px;
+  color: var(--white);
+  background-color: var(--blue);
+  border-radius: 3px;
+  font-family: var(--secondFont);
+  font-size: 14px;
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: #01687d;
+    transition: all 0.2s linear;
+  }
+`;
+
 const RealEstates = () => {
   const id = 6;
   const [Adds, setAdds] = useState([]);
   const [Country, setCountry] = useState("");
   const [City, setCity] = useState("");
-  const [Page, setPage] = useState(0);
+  const [Page, setPage] = useState(1);
   const [Loading, setLoading] = useState(false);
-  const [AllAdds, setAllAdds] = useState([]);
   const [Subtype, setSubtype] = useState("");
 
   const fetchData = () => {
@@ -33,15 +47,11 @@ const RealEstates = () => {
         `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}&subType=${Subtype}`
       )
       .then((res) => {
-        // console.log(res.data.data.$values);
-
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAllAdds([...AllAdds, ...fetchedData]);
-
         setLoading(false);
       })
       .catch((error) => {
@@ -55,6 +65,7 @@ const RealEstates = () => {
   }, [Country, City, Page, Subtype]);
 
   console.log(Page, Country, City, Subtype);
+  console.log("Page Counter", Page);
 
   return (
     <Wrapper>
@@ -84,7 +95,7 @@ const RealEstates = () => {
         {Loading ? (
           <Spinner />
         ) : (
-          AllAdds.map((elem, index) => {
+          Adds.map((elem, index) => {
             return <Card key={index} card={elem} />;
           })
         )}
@@ -97,7 +108,7 @@ const RealEstates = () => {
         alignItems="center"
         m={3}
       >
-        <BlueButton title={"إظهار المزيد"} setPage={setPage} page={Page} />
+        <Btn onClick={() => setPage(Page + 1)}>إظهار المزيد</Btn>
       </Grid>
     </Wrapper>
   );

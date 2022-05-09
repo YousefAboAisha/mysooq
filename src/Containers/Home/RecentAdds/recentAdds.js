@@ -9,14 +9,13 @@ import { Link } from "react-router-dom";
 
 const RecentAdds = () => {
   const [Adds, setAdds] = useState([]);
-  const [Page, setPage] = useState(0);
+  const [Page, setPage] = useState(1);
   const [Loading, setLoading] = useState(false);
-  const [AllAdds, setAllAdds] = useState([]);
 
   const fetchData = () => {
     setLoading(true);
     axios
-      .get(BASE_URL + "Business/GetLatest")
+      .get(`${BASE_URL}Business/GetLatest?&page=${Page}`)
       .then((res) => {
         // console.log(res.data.data.$values);
 
@@ -25,18 +24,16 @@ const RecentAdds = () => {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAllAdds([...AllAdds, ...fetchedData]);
         setLoading(false);
       })
       .catch((error) => {
-        // console.log(error);
+        console.log(error);
         setLoading(false);
       });
   };
 
   useEffect(() => {
     fetchData();
-    // setAllAdds([...AllAdds, ...Adds]);
   }, [Page]);
 
   // console.log(Adds);
@@ -54,7 +51,7 @@ const RecentAdds = () => {
       {Loading ? (
         <Spinner />
       ) : (
-        AllAdds.map((elem, index) => {
+        Adds.map((elem, index) => {
           return <Card key={index} card={elem} />;
         })
       )}

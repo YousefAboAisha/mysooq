@@ -118,17 +118,17 @@ function AddDetails() {
   const [Loading, setLoading] = useState(false);
   const [IsOpen, setIsOpen] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
-  const [mainImg, setMainImg] = useState(
-    "http://alirafeqpro-001-site1.gtempurl.com/Uploads/Images/JxZtiqwCyF.jpg"
-  );
+  const [mainImg, setMainImg] = useState("");
+  const [Imgs, setImgs] = useState([]);
 
   const fetchData = () => {
     setLoading(true);
     axios
       .get(`${BASE_URL}Business/GetOne?id=${id}`)
       .then((res) => {
-        // console.log(res.data.data);
         setAdd(res.data.data);
+        setImgs(res.data.data.images.$values);
+        setMainImg(res.data.data.images.$values[0]);
         setLoading(false);
       })
       .catch((error) => {
@@ -137,18 +137,20 @@ function AddDetails() {
       });
   };
 
+  console.log(mainImg);
+
   console.log(Add);
 
   useEffect(() => {
     fetchData();
   }, [setAdd]);
 
-  const extraPhotos = [
-    { src: img, id: 1 },
-    { src: img2, id: 2 },
-    { src: img, id: 3 },
-    { src: img2, id: 4 },
-  ];
+  // const extraPhotos = [
+  //   { src: img, id: 1 },
+  //   { src: img2, id: 2 },
+  //   { src: img, id: 3 },
+  //   { src: img2, id: 4 },
+  // ];
 
   return (
     <Wrapper>
@@ -229,7 +231,7 @@ function AddDetails() {
 
             <ImagesBox>
               <img
-                src={mainImg}
+                src={`http://alirafeqpro-001-site1.gtempurl.com/${mainImg}`}
                 alt={"main"}
                 width="100%"
                 height={"350px"}
@@ -237,12 +239,19 @@ function AddDetails() {
               />
 
               <Images>
-                {extraPhotos.map((elem, index) => {
-                  return (
+                {Imgs.map((elem, index) => {
+                  return elem ? (
                     <div key={index}>
                       <img
-                        src={elem.src}
-                        onClick={() => setMainImg(elem.src)}
+                        src={`http://alirafeqpro-001-site1.gtempurl.com/${elem}`}
+                        onClick={() => setMainImg(elem)}
+                        alt="alt"
+                      />
+                    </div>
+                  ) : (
+                    <div key={index}>
+                      <img
+                        src={`https://www.publicdomainpictures.net/pictures/280000/nahled/not-found-image-15383864787lu.jpg`}
                         alt="alt"
                       />
                     </div>

@@ -46,6 +46,7 @@ const PageHeader = ({
   City,
   setSubtype,
   Subtype,
+  fetchData,
 }) => {
   const [Subtypes, setSubtypes] = useState([]);
   const [Countries, setCountries] = useState([]);
@@ -141,7 +142,7 @@ const PageHeader = ({
           </select>
         </Box>
 
-        {/* <Btn>بحث</Btn> */}
+        {/* <Btn onClick={fetchData}>بحث</Btn> */}
       </Header>
     </Grid>
   );

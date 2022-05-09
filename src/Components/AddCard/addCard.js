@@ -44,18 +44,12 @@ const Card = ({ card }) => {
     navigate(`/add/${id}`);
   };
 
-  // console.log(card.uniqueId);
-
   return (
     <Grid item lg={3} md={4} sm={6} xs={12}>
       <Item>
         <img
           onClick={() => clickHandler(card.id)}
-          src={
-            card.uniqueId
-              ? `http://alirafeqpro-001-site1.gtempurl.com/Uploads/Images/${card.uniqueId}.jpg`
-              : add
-          }
+          src={`http://alirafeqpro-001-site1.gtempurl.com/${card.image}`}
           alt={"add"}
           width="100%"
           height={"402"}

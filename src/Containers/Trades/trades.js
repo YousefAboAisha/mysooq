@@ -20,15 +20,16 @@ const Trades = () => {
   const [Adds, setAdds] = useState([]);
   const [Country, setCountry] = useState(null);
   const [City, setCity] = useState(null);
-  const [Page, setPage] = useState(0);
+  const [Page, setPage] = useState(1);
   const [Loading, setLoading] = useState(false);
   const [AllAdds, setAllAdds] = useState([]);
+  const [Subtype, setSubtype] = useState("");
 
   const fetchData = () => {
     setLoading(true);
     axios
       .get(
-        `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}`
+        `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}&subType=${Subtype}`
       )
       .then((res) => {
         // console.log(res.data.data.$values);
@@ -38,7 +39,6 @@ const Trades = () => {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAllAdds([...AllAdds, ...fetchedData]);
 
         setLoading(false);
       })
@@ -50,7 +50,7 @@ const Trades = () => {
 
   useEffect(() => {
     fetchData();
-  }, [Country, City, Page]);
+  }, [Country, City, Page, Subtype]);
   return (
     <Wrapper>
       <PageTitle title={"تجارة"} />
@@ -62,6 +62,8 @@ const Trades = () => {
         setPage={setPage}
         Country={Country}
         City={City}
+        setSubtype={setSubtype}
+        Subtype={Subtype}
       />
       <Grid item lg={12} mt={5} mb={2}>
         <Heading title={"أحدث الإعلانات"} />
@@ -77,7 +79,7 @@ const Trades = () => {
         {Loading ? (
           <Spinner />
         ) : (
-          AllAdds.map((elem, index) => {
+          Adds.map((elem, index) => {
             return <Card key={index} card={elem} />;
           })
         )}

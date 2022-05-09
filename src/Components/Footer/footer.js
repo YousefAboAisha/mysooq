@@ -80,6 +80,7 @@ const SocialSection = styled.div`
 `;
 
 const Footer = () => {
+  let date = new Date();
   return (
     <FooterSection>
       <Grid
@@ -136,7 +137,9 @@ const Footer = () => {
       </Grid>
 
       <BottomSection>
-        <span>Sam@mysooq.net</span>
+        <span>
+          All rights reserved © 2011 - <span> {date.getFullYear()} </span>{" "}
+        </span>
 
         <SocialSection>
           <SocialSection style={{ gap: "12px" }}>

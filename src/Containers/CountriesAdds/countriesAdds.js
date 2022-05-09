@@ -64,9 +64,8 @@ const CountriesAdds = () => {
   const [AddSubType, setAddSubType] = useState("");
   const [City, setCity] = useState("");
   const [Adds, setAdds] = useState([]);
-  const [AllAdds, setAllAdds] = useState([]);
   const [Loading, setLoading] = useState(false);
-  const [Page, setPage] = useState(0);
+  const [Page, setPage] = useState(1);
 
   const [Cities, setCities] = useState([]);
   const [Subtypes, setSubtypes] = useState([]);
@@ -92,7 +91,7 @@ const CountriesAdds = () => {
     setLoading(true);
     axios
       .get(
-        `${BASE_URL}Business/GetLatest?page=${Page}&countryId=${cID}&cityId=${City}&serviceId=${AddType}&subType=${AddSubType}`
+        `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${cID}&cityId=${City}&serviceId=${AddType}&subType=${AddSubType}`
       )
       .then((res) => {
         const fetchedData = [];
@@ -100,7 +99,6 @@ const CountriesAdds = () => {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAllAdds([...AllAdds, ...fetchedData]);
         setLoading(false);
       })
       .catch((error) => {
@@ -186,7 +184,7 @@ const CountriesAdds = () => {
         {Loading ? (
           <Spinner />
         ) : (
-          AllAdds.map((elem, index) => {
+          Adds.map((elem, index) => {
             return <Card key={index} card={elem} />;
           })
         )}
