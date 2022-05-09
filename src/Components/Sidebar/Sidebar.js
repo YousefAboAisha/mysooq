@@ -62,7 +62,7 @@ const SideBar = ({ toggle, setToggle }) => {
       <Clear onClick={() => setToggle(false)} />
 
       <div className={classes.profile} onClick={() => setToggle(false)}>
-        <Link to={"/signup"}>
+        <Link to={"/signin"}>
           <AccountCircle />
         </Link>
       </div>

@@ -66,6 +66,7 @@ const BtnBox = styled.div`
     padding: 7px;
     background-color: transparent;
     border: 1px solid #ddd;
+    width: 270px;
 
     & img {
       width: 30px;
@@ -112,6 +113,8 @@ const Btn = styled.button`
   font-family: var(--secondFont);
   font-size: 14px;
   transition: all 0.2s linear;
+  margin-top: 10px;
+  display: block;
 
   &:hover {
     background-color: #01687d;
@@ -207,125 +210,119 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={clickHandler}>
-      {Loading ? (
-        <Spinner />
-      ) : (
-        <Wrap>
-          <Heading title={"إنشاء حساب"} />
-          <Halfbox>
-            <Box>
-              <BoldSpan>اسم المستخدم</BoldSpan>
-              <input
-                type="text"
-                placeholder="اسم المستخدم"
-                onChange={(e) => setUserName(e.target.value)}
-                value={UserName}
-                required
-              />
-            </Box>
+    <Wrap>
+      <form onSubmit={clickHandler}>
+        <Heading title={"إنشاء حساب"} />
+        <Halfbox>
+          <Box>
+            <BoldSpan>اسم المستخدم</BoldSpan>
+            <input
+              type="text"
+              placeholder="اسم المستخدم"
+              onChange={(e) => setUserName(e.target.value)}
+              value={UserName}
+              required
+            />
+          </Box>
 
-            <Box>
-              <BoldSpan>البريد الالكتروني</BoldSpan>
-              <input
-                type="email"
-                placeholder="Mysooq@gmail.com"
-                onChange={(e) => setEmail(e.target.value)}
-                value={Email}
-                required
-              />
-            </Box>
-          </Halfbox>
+          <Box>
+            <BoldSpan>البريد الالكتروني</BoldSpan>
+            <input
+              type="email"
+              placeholder="Mysooq@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+              value={Email}
+              required
+            />
+          </Box>
+        </Halfbox>
 
-          <Halfbox>
-            <Box>
-              <BoldSpan>كلمة المرور</BoldSpan>
-              <input
-                type="password"
-                placeholder="***********"
-                onChange={(e) => setPassword(e.target.value)}
-                value={Password}
-                required
-              />
-              <LightSpan style={{ color: "red" }}>{Error}</LightSpan>
-            </Box>
+        <Halfbox>
+          <Box>
+            <BoldSpan>كلمة المرور</BoldSpan>
+            <input
+              type="password"
+              placeholder="***********"
+              onChange={(e) => setPassword(e.target.value)}
+              value={Password}
+              required
+            />
+            <LightSpan style={{ color: "red" }}>{Error}</LightSpan>
+          </Box>
 
-            <Box>
-              <BoldSpan> تأكيد كلمة المرور</BoldSpan>
+          <Box>
+            <BoldSpan> تأكيد كلمة المرور</BoldSpan>
 
-              <input
-                type="password"
-                placeholder="***********"
-                onChange={(e) => setConfirmedPassword(e.target.value)}
-                value={ConfirmedPassword}
-                required
-              />
-              <LightSpan style={{ color: "red" }}> {Error}</LightSpan>
-            </Box>
-          </Halfbox>
-          <Halfbox>
-            <Box>
-              <BoldSpan>رقم التليفون</BoldSpan>
-              <input
-                type="text"
-                placeholder="0592551405"
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                value={PhoneNumber}
-                required
-              />
-            </Box>
+            <input
+              type="password"
+              placeholder="***********"
+              onChange={(e) => setConfirmedPassword(e.target.value)}
+              value={ConfirmedPassword}
+              required
+            />
+            <LightSpan style={{ color: "red" }}> {Error}</LightSpan>
+          </Box>
+        </Halfbox>
+        <Halfbox>
+          <Box>
+            <BoldSpan>رقم التليفون</BoldSpan>
+            <input
+              type="text"
+              placeholder="0592551405"
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={PhoneNumber}
+              required
+            />
+          </Box>
 
-            <Box>
-              <BoldSpan>الدولة</BoldSpan>
-              <select
-                onChange={(e) => setCountry(e.target.value)}
-                value={Country}
-              >
-                <option value="" disabled hidden>
-                  الدولة
-                </option>
+          <Box>
+            <BoldSpan>الدولة</BoldSpan>
+            <select
+              onChange={(e) => setCountry(e.target.value)}
+              value={Country}
+            >
+              <option value="" disabled hidden>
+                الدولة
+              </option>
 
-                {Countries.map((country, index) => {
-                  return (
-                    <option value={country.id} key={index}>
-                      {country.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </Box>
-          </Halfbox>
+              {Countries.map((country, index) => {
+                return (
+                  <option value={country.id} key={index}>
+                    {country.name}
+                  </option>
+                );
+              })}
+            </select>
+          </Box>
+        </Halfbox>
 
-          <Btn type={"submit"}>
-            {Loading ? "جارٍ إنشاء الحساب ..." : "إنشاء الحساب"}
-          </Btn>
+        <Btn type={"submit"}>
+          {Loading ? "جارٍ إنشاء الحساب ..." : "إنشاء الحساب"}
+        </Btn>
+      </form>
 
-          <Btn2>
-            <h5>إنشاء حساب بواسطة</h5>
-          </Btn2>
+      <Btn2>
+        <h5>إنشاء حساب بواسطة</h5>
+      </Btn2>
 
-          <BtnBox>
-            <button>
-              تسجيل الدخول بواسطة جوجل
-              <img src={googleIcon} alt="Google icon" />
-            </button>
-            <button>
-              تسجيل الدخول بواسطة فيسبوك
-              <img src={facebookIcon} alt="Facebook icon" />
-            </button>
-          </BtnBox>
+      <BtnBox>
+        <button>
+          تسجيل الدخول بواسطة جوجل
+          <img src={googleIcon} alt="Google icon" />
+        </button>
+        <button>
+          تسجيل الدخول بواسطة فيسبوك
+          <img src={facebookIcon} alt="Facebook icon" />
+        </button>
+      </BtnBox>
 
-          <Register>
-            <span>لديك حساب بالفعل؟</span>
-            <Link to={"/signin"}>
-              <span style={{ fontWeight: "600", color: "#000" }}>
-                تسجيل الدخول
-              </span>
-            </Link>
-          </Register>
-        </Wrap>
-      )}
-    </form>
+      <Register>
+        <span>لديك حساب بالفعل؟</span>
+        <Link to={"/signin"}>
+          <span style={{ fontWeight: "600", color: "#000" }}>تسجيل الدخول</span>
+        </Link>
+      </Register>
+    </Wrap>
   );
 };
 

@@ -23,22 +23,44 @@ const HomeLayout = () => {
         </Grid>
 
         {/* Left Small Add */}
-        <Grid item lg={4} md={12} xs={12}>
+        <Grid item lg={4} md={12} xs={12} mt={{ lg: 0, xs: 5 }}>
           <LeftAdd />
         </Grid>
 
         {/* Heading Tag */}
-        <Grid item lg={12} md={12} xs={12} pr={1} mt={{ lg: 0, xs: 5 }}>
+        <Grid
+          item
+          lg={6}
+          md={12}
+          xs={12}
+          pr={1}
+          mt={{ lg: 0, xs: 10 }}
+          sx={{ transform: "translatey(-30px)" }}
+        >
           <Heading title={"إعلانات مميزة"} />
         </Grid>
 
         {/* Main Big Add */}
-        <Grid item lg={8} md={12} xs={12} pr={0} mb={{ xs: 5 }}>
+        <Grid
+          item
+          lg={8}
+          md={12}
+          xs={12}
+          pr={0}
+          mb={{ xs: 5 }}
+          sx={{ transform: "translatey(-30px)" }}
+        >
           <MainAdd />
         </Grid>
 
         {/* Left Long Add */}
-        <Grid item lg={4} md={12} xs={12}>
+        <Grid
+          item
+          lg={4}
+          md={12}
+          xs={12}
+          sx={{ transform: "translatey(-30px)" }}
+        >
           <LeftLongAdd />
         </Grid>
 

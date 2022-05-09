@@ -43,6 +43,7 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
   const [Subtypes, setSubtypes] = useState([]);
   const [Countries, setCountries] = useState([]);
   const [Cities, setCities] = useState([]);
+  const [Subtype, setSubtype] = useState("");
 
   const fetchData = async () => {
     const response = await fetch(URL);
@@ -73,13 +74,13 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
   useEffect(() => {
     fetchCountriesData();
     fetchCitiesData();
-  }, [Country, City, Subtypes]);
+  }, [Country, City, Subtype]);
 
   return (
     <Grid item lg={12} mt={3}>
       <Header>
         <Box>
-          <select>
+          <select onChange={(e) => setSubtype(e.target.value)} value={Subtype}>
             <option value="" selected disabled hidden>
               الأقسام الفرعية
             </option>
@@ -92,6 +93,7 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
             })}
           </select>
         </Box>
+
         <Box>
           <select
             placeholder="الدولة"
@@ -111,6 +113,7 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
             })}
           </select>
         </Box>
+
         <Box>
           <select onChange={(e) => setCity(e.target.value)} value={City}>
             <option value="" selected disabled hidden>

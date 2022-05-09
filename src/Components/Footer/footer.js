@@ -128,8 +128,8 @@ const Footer = () => {
             <Link to={"about"}>عن الموقع</Link>
             <Link to={"userpolicy"}>اتفاقية الاستخدام</Link>
             <Link to={"contact"}>اتصل بنا</Link>
-            <Link to={"/services"}>بحث الموقع</Link>
-            <Link to={"/freelancers"}>إعلانات مميزة</Link>
+            <Link to={"search/a"}>بحث الموقع</Link>
+            <Link to={"paidadds"}>إعلانات مميزة</Link>
             <Link to={"/"}>أحدث الإعلانات</Link>
           </Sections>
         </Grid>

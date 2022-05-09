@@ -12,7 +12,7 @@
   background-color: var(--blue);
   transition: all 0.3s ease-in-out;
   display: none;
-  z-index: 1000;
+  z-index: 100000000000;
 }
 
 .nav svg {

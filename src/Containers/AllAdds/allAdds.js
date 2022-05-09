@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
-import Card from "../../../Components/AddCard/addCard";
-import Spinner from "../../../Components/Spinner/Spinner";
-import { BASE_URL } from "../../../baseURL";
-import BlueButton from "../../../Components/BlueButton/blueButton";
+import Card from "../../Components/AddCard/addCard";
+import Spinner from "../../Components/Spinner/Spinner";
+import { BASE_URL } from "../../baseURL";
+import BlueButton from "../../Components/BlueButton/blueButton";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import PageTitle from "../../Components/PageTitle/pageTitle";
 
-const RecentAdds = () => {
+const AllRecentAdds = () => {
   const [Adds, setAdds] = useState([]);
   const [Page, setPage] = useState(0);
   const [Loading, setLoading] = useState(false);
@@ -29,19 +29,13 @@ const RecentAdds = () => {
         setLoading(false);
       })
       .catch((error) => {
-        // console.log(error);
         setLoading(false);
       });
   };
 
   useEffect(() => {
     fetchData();
-    // setAllAdds([...AllAdds, ...Adds]);
   }, [Page]);
-
-  // console.log(Adds);
-  // console.log(Page);
-  // console.log(AllAdds);
 
   return (
     <Grid
@@ -51,6 +45,10 @@ const RecentAdds = () => {
       pr={0}
       minHeight={"400px"}
     >
+      <Grid item lg={12} md={12} xs={12} pr={1} mt={{ lg: 0, xs: 5 }}>
+        <PageTitle title={"أحدث الإعلانات"} />
+      </Grid>
+
       {Loading ? (
         <Spinner />
       ) : (
@@ -66,12 +64,10 @@ const RecentAdds = () => {
         alignItems="center"
         m={3}
       >
-        <Link to="recentadds">
-          <BlueButton title={"إظهار المزيد"} setPage={setPage} page={Page} />
-        </Link>
+        <BlueButton title={"إظهار المزيد"} setPage={setPage} page={Page} />
       </Grid>
     </Grid>
   );
 };
 
-export default RecentAdds;
+export default AllRecentAdds;

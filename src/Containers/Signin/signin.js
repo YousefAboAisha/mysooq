@@ -54,6 +54,7 @@ const Wrap = styled.div`
 `;
 
 const Btn = styled.button`
+  display: block;
   padding: 6px;
   min-width: 110px;
   color: var(--white);
@@ -63,6 +64,7 @@ const Btn = styled.button`
   font-size: 14px;
   transition: all 0.2s linear;
   margin: 0 auto;
+  margin-top: 10px;
 
   &:hover {
     background-color: #01687d;
@@ -113,7 +115,7 @@ const BtnBox = styled.div`
     padding: 7px;
     background-color: #fff;
     border: 1px solid #ddd;
-    width: 60%;
+    width: 250px;
 
     & img {
       width: 30px;
@@ -141,6 +143,7 @@ const InnerBox = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-flow: row wrap;
+  margin-top: 8px;
 
   & span {
     font-size: 13px;
@@ -191,8 +194,8 @@ const Signin = () => {
   console.log(IsRemembered);
 
   return (
-    <form onSubmit={clickHandler}>
-      <Wrap>
+    <Wrap>
+      <form onSubmit={clickHandler}>
         <Heading title={"تسجيل الدخول"} />
         <Box>
           <BoldSpan>البريد الالكتروني</BoldSpan>
@@ -227,30 +230,30 @@ const Signin = () => {
         </InnerBox>
 
         <Btn>{Loading ? "جارٍ تسجيل الدخول" : "تسجيل الدخول"}</Btn>
+      </form>
 
-        <Btn2>
-          <h5>تسجيل الدخول بواسطة</h5>
-        </Btn2>
+      <Btn2>
+        <h5>تسجيل الدخول بواسطة</h5>
+      </Btn2>
 
-        <BtnBox>
-          <button>
-            تسجيل الدخول بواسطة جوجل
-            <img src={googleIcon} alt="Google icon" />
-          </button>
-          <button>
-            تسجيل الدخول بواسطة فيسبوك
-            <img src={facebookIcon} alt="Facebook icon" />
-          </button>
-        </BtnBox>
+      <BtnBox>
+        <button>
+          تسجيل الدخول بواسطة جوجل
+          <img src={googleIcon} alt="Google icon" />
+        </button>
+        <button>
+          تسجيل الدخول بواسطة فيسبوك
+          <img src={facebookIcon} alt="Facebook icon" />
+        </button>
+      </BtnBox>
 
-        <Register>
-          <span>ليس لديك حساب؟</span>
-          <Link to={"/signup"}>
-            <span style={{ fontWeight: "600", color: "#000" }}>إنشاء حساب</span>
-          </Link>
-        </Register>
-      </Wrap>
-    </form>
+      <Register>
+        <span>ليس لديك حساب؟</span>
+        <Link to={"/signup"}>
+          <span style={{ fontWeight: "600", color: "#000" }}>إنشاء حساب</span>
+        </Link>
+      </Register>
+    </Wrap>
   );
 };
 

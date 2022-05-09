@@ -16,8 +16,13 @@
     border-bottom: 1px solid var(--white);
 }
 
+.wrapper .firstBox .logo {
+    height: fit-content;
+}
+
+
 .wrapper .firstBox .logo img {
-    width: 100px;
+    width: 130px;
 }
 
 .wrapper .firstBox .search {

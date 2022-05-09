@@ -43,6 +43,7 @@ const Navbar = () => {
             onChange={(e) => setValue(e.target.value)}
             value={Value}
             onKeyDown={(e) => enterHandler(e)}
+            autoFocus
           />
           <div className={classes.searchBtn} onClick={clickHandler}>
             <SearchOutlined />

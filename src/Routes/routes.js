@@ -26,6 +26,9 @@ export const Signup = lazy(() => import("../Containers/Signup/signup"));
 export const Signin = lazy(() => import("../Containers/Signin/signin"));
 export const Search = lazy(() => import("../Containers/Search/search"));
 export const PaidAdds = lazy(() => import("../Containers/PaidAdds/paidAdds"));
+export const AllRecentAdds = lazy(() =>
+  import("../Containers/AllAdds/allAdds")
+);
 export const CountriesAdds = lazy(() =>
   import("../Containers/CountriesAdds/countriesAdds")
 );
@@ -52,6 +55,7 @@ const Routers = () => {
       <Route path="search/:query" element={<Search />} />
       <Route path="paidadds" element={<PaidAdds />} />
       <Route path="countriesAdds/:cID" element={<CountriesAdds />} />
+      <Route path="recentadds" element={<AllRecentAdds />} />
       <Route path={"*"} element={<Navigate to="/" />} />
     </Routes>
   );
