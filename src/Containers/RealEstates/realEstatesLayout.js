@@ -19,17 +19,18 @@ const Wrapper = styled.div`
 const RealEstates = () => {
   const id = 6;
   const [Adds, setAdds] = useState([]);
-  const [Country, setCountry] = useState(null);
-  const [City, setCity] = useState(null);
+  const [Country, setCountry] = useState("");
+  const [City, setCity] = useState("");
   const [Page, setPage] = useState(0);
   const [Loading, setLoading] = useState(false);
   const [AllAdds, setAllAdds] = useState([]);
+  const [Subtype, setSubtype] = useState("");
 
   const fetchData = () => {
     setLoading(true);
     axios
       .get(
-        `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}`
+        `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}&subType=${Subtype}`
       )
       .then((res) => {
         // console.log(res.data.data.$values);
@@ -51,7 +52,9 @@ const RealEstates = () => {
 
   useEffect(() => {
     fetchData();
-  }, [Country, City, Page]);
+  }, [Country, City, Page, Subtype]);
+
+  console.log(Page, Country, City, Subtype);
 
   return (
     <Wrapper>
@@ -63,6 +66,8 @@ const RealEstates = () => {
         setPage={setPage}
         Country={Country}
         City={City}
+        setSubtype={setSubtype}
+        Subtype={Subtype}
       />
 
       <Grid item lg={12} mt={5} mb={2}>

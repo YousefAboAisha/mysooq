@@ -38,25 +38,29 @@ const Btn = styled.button`
   }
 `;
 
-const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
-  const URL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${id}`;
+const PageHeader = ({
+  id,
+  setCountry,
+  setCity,
+  Country,
+  City,
+  setSubtype,
+  Subtype,
+}) => {
   const [Subtypes, setSubtypes] = useState([]);
   const [Countries, setCountries] = useState([]);
   const [Cities, setCities] = useState([]);
-  const [Subtype, setSubtype] = useState("");
 
-  const fetchData = async () => {
+  const URL = `${BASE_URL}SubTupe/GetAllForService?siteServiceID=${id}`;
+  const countryURL = `${BASE_URL}Countries/GetAll`;
+  const cityURL = `${BASE_URL}Cities/GetAllForOneCountry?countryId=${Country}`;
+
+  // Fetching Subtypes Data
+  const fetchSubtypesData = async () => {
     const response = await fetch(URL);
     const result = await response.json();
     if (result) setSubtypes(result.data["$values"]);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const countryURL = `${BASE_URL}Countries/GetAll`;
-  const cityURL = `${BASE_URL}Cities/GetAllForOneCountry?countryId=${Country}`;
 
   // Fetching Countries
   const fetchCountriesData = async () => {
@@ -65,6 +69,7 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
     if (result) setCountries(result.data["$values"]);
   };
 
+  // Fetching Cities Data
   const fetchCitiesData = async () => {
     const response = await fetch(cityURL);
     const result = await response.json();
@@ -72,9 +77,16 @@ const PageHeader = ({ id, setCountry, setCity, Country, City }) => {
   };
 
   useEffect(() => {
+    fetchSubtypesData();
     fetchCountriesData();
+  }, []);
+
+  useEffect(() => {
     fetchCitiesData();
-  }, [Country, City, Subtype]);
+  }, [Country]);
+
+  console.log("page Header");
+  console.log(Country, City, Subtype);
 
   return (
     <Grid item lg={12} mt={3}>
