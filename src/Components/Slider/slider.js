@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import Carousel from "react-elastic-carousel";
-import image from "../../Media/mainAdd.png";
 import styled from "styled-components";
 import { BASE_URL } from "../../baseURL";
 import axios from "axios";
@@ -95,56 +94,6 @@ const StyledCarousel = styled(Carousel)`
 const Slider = () => {
   const [Adds, setAdds] = useState([]);
   const [Loading, setLoading] = useState(false);
-  const items = [
-    {
-      id: 1,
-      title: "item #1",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-    {
-      id: 2,
-      title: "item #2",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-    {
-      id: 3,
-      title: "item #3",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-    {
-      id: 4,
-      title: "item #4",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-    {
-      id: 6,
-      title: "item #5",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-    {
-      id: 7,
-      title: "item #5",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-    {
-      id: 8,
-      title: "item #5",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-    {
-      id: 9,
-      title: "item #5",
-      img: image,
-      info: "اسعار طابعات الكروت البلاستيكية بالسعودية",
-    },
-  ];
 
   const carouselRef = useRef(null);
   const totalPages = Math.ceil(Adds.length);

@@ -8,17 +8,28 @@ const Header = styled.div`
   position: relative;
   padding: 10px 5px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-flow: row nowrap;
   gap: 10px;
   background-color: var(--white);
-  width: 100%;
+
+  & div {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 10px;
+    width: 100%;
+
+    & select {
+      width: 100%;
+    }
+  }
 `;
 
 const Btn = styled.button`
   padding: 6px;
-  min-width: 110px;
+  width: 110px;
   color: var(--white);
   background-color: var(--blue);
   border-radius: 3px;
@@ -31,7 +42,7 @@ const Btn = styled.button`
     transition: all 0.2s linear;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 700px) {
     & {
       min-width: 50px;
     }
@@ -92,55 +103,60 @@ const PageHeader = ({
   return (
     <Grid item lg={12} mt={3}>
       <Header>
-        <Box>
-          <select onChange={(e) => setSubtype(e.target.value)} value={Subtype}>
-            <option value="" selected disabled hidden>
-              الأقسام الفرعية
-            </option>
-            {Subtypes.map((elem, index) => {
-              return (
-                <option key={index} value={elem.id}>
-                  {elem.title}
-                </option>
-              );
-            })}
-          </select>
-        </Box>
+        <div>
+          <Box>
+            <select
+              onChange={(e) => setSubtype(e.target.value)}
+              value={Subtype}
+            >
+              <option value="" selected disabled hidden>
+                الأقسام الفرعية
+              </option>
+              {Subtypes.map((elem, index) => {
+                return (
+                  <option key={index} value={elem.id}>
+                    {elem.title}
+                  </option>
+                );
+              })}
+            </select>
+          </Box>
 
-        <Box>
-          <select
-            placeholder="الدولة"
-            onChange={(e) => setCountry(e.target.value)}
-            value={Country}
-          >
-            <option value="" selected disabled hidden>
-              الدولة
-            </option>
+          <Box>
+            <select
+              placeholder="الدولة"
+              onChange={(e) => setCountry(e.target.value)}
+              value={Country}
+            >
+              <option value="" selected disabled hidden>
+                الدولة
+              </option>
 
-            {Countries.map((country, index) => {
-              return (
-                <option value={country.id} key={index}>
-                  {country.name}
-                </option>
-              );
-            })}
-          </select>
-        </Box>
+              {Countries.map((country, index) => {
+                return (
+                  <option value={country.id} key={index}>
+                    {country.name}
+                  </option>
+                );
+              })}
+            </select>
+          </Box>
 
-        <Box>
-          <select onChange={(e) => setCity(e.target.value)} value={City}>
-            <option value="" selected disabled hidden>
-              المدينة
-            </option>
-            {Cities.map((city, index) => {
-              return (
-                <option value={city.id} key={index}>
-                  {city.cityName}
-                </option>
-              );
-            })}
-          </select>
-        </Box>
+          <Box>
+            <select onChange={(e) => setCity(e.target.value)} value={City}>
+              <option value="" selected disabled hidden>
+                المدينة
+              </option>
+              {Cities.map((city, index) => {
+                return (
+                  <option value={city.id} key={index}>
+                    {city.cityName}
+                  </option>
+                );
+              })}
+            </select>
+          </Box>
+        </div>
 
         <Btn onClick={fetchData}>بحث</Btn>
       </Header>
