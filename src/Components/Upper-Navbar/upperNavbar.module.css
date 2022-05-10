@@ -26,6 +26,10 @@
     transition: all 0.3s linear;
 }
 
+.wrapper .box .right a:last-of-type {
+    border-left: none;
+}
+
 .wrapper .box .right a:hover {
     color: #222;
     transition: all 0.3s linear;

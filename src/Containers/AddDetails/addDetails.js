@@ -66,6 +66,10 @@ const ImagesBox = styled.div`
   align-items: center;
   gap: 10px;
   margin-bottom: 30px;
+
+  & img {
+    border: 1px solid #ddd;
+  }
 `;
 
 const Images = styled.div`
@@ -88,6 +92,7 @@ const Images = styled.div`
     min-height: 140px;
     aspect-ratio: 3/3;
     background-position: 50% 50%;
+    border: 1px solid #ddd;
   }
 `;
 
@@ -221,13 +226,15 @@ function AddDetails() {
           </Grid>
 
           <Grid item lg={6} md={12} xs={12} mt={2}>
-            <div class="menu">
-              <LongMenu
-                setLoading={setLoading}
-                setIsOpen={setIsOpen}
-                setCopySuccess={setCopySuccess}
-              />
-            </div>
+            {Add.isUserActiveTheOwner ? (
+              <div class="menu">
+                <LongMenu
+                  setLoading={setLoading}
+                  setIsOpen={setIsOpen}
+                  setCopySuccess={setCopySuccess}
+                />
+              </div>
+            ) : null}
 
             <ImagesBox>
               <img

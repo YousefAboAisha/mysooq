@@ -57,7 +57,7 @@ export const Box = styled.div`
 export const Halfbox = styled.div`
   position: relative;
   display: flex;
-  gap: 10px;
+  gap: 20px;
   justify-content: space-between;
   align-items: center;
   @media only screen and (max-width: 600px) {

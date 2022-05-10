@@ -6,7 +6,6 @@ import googleIcon from "../../Media/googleIcon.svg";
 import facebookIcon from "../../Media/facebookIcon.svg";
 import Heading from "../../Components/Heading/heading";
 import axios from "axios";
-import Spinner from "../../Components/Spinner/Spinner";
 import { BASE_URL } from "../../baseURL";
 
 const Wrap = styled.div`
@@ -20,6 +19,12 @@ const Wrap = styled.div`
   background-color: #fff;
   border-radius: 10px;
   padding-bottom: 30px;
+
+  & form {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 15px;
+  }
 
   & h3 {
     margin: 0 auto;
@@ -211,8 +216,8 @@ const Signup = () => {
 
   return (
     <Wrap>
+      <Heading title={"إنشاء حساب"} />
       <form onSubmit={clickHandler}>
-        <Heading title={"إنشاء حساب"} />
         <Halfbox>
           <Box>
             <BoldSpan>اسم المستخدم</BoldSpan>

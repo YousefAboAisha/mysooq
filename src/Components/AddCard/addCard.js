@@ -1,19 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
-import add from "../../Media/cardAdd.png";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Item = styled.div`
   position: relative;
-  max-height: 400px;
+  height: 402px;
+  max-height: 402px;
   max-width: 340px;
+  width: 300px;
   margin: 0 auto;
-  transition: all 0.5s linear;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #ddd;
+  cursor: pointer;
+
   &:hover {
-    box-shadow: 1px 1px 15px #9e9e9e;
+    box-shadow: 1px 1px 5px #9e9e9e;
     transform: scale(1.008);
-    transition: all 0.5s linear;
+    transition: all 0.3s ease-in-out;
   }
   border-radius: 10px;
 
@@ -37,7 +41,7 @@ const Item = styled.div`
 `;
 
 const Card = ({ card }) => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const navigate = useNavigate();
 
   const clickHandler = (id) => {
@@ -46,9 +50,8 @@ const Card = ({ card }) => {
 
   return (
     <Grid item lg={3} md={4} sm={6} xs={12}>
-      <Item>
+      <Item onClick={() => clickHandler(card.id)}>
         <img
-          onClick={() => clickHandler(card.id)}
           src={`http://alirafeqpro-001-site1.gtempurl.com/${card.image}`}
           alt={"add"}
           width="100%"

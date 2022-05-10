@@ -1,11 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Carousel from "react-elastic-carousel";
 import image from "../../Media/mainAdd.png";
 import styled from "styled-components";
+import { BASE_URL } from "../../baseURL";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 const ImageBox = styled.div`
   position: relative;
   height: 630px;
+  border: 1px solid #ddd;
+  min-width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
 
   & span {
     position: absolute;
@@ -18,6 +25,7 @@ const ImageBox = styled.div`
     bottom: 0;
     left: 0;
     color: var(--white);
+    border-radius: 0 0 10px 10px;
   }
 `;
 
@@ -84,6 +92,8 @@ const StyledCarousel = styled(Carousel)`
 `;
 
 const Slider = () => {
+  const [Adds, setAdds] = useState([]);
+  const [Loading, setLoading] = useState(false);
   const items = [
     {
       id: 1,
@@ -139,6 +149,35 @@ const Slider = () => {
   const totalPages = Math.ceil(items.length);
   let resetTimeout;
 
+  const navigate = useNavigate();
+
+  const clickHandler = (id) => {
+    navigate(`/add/${id}`);
+  };
+
+  const fetchData = () => {
+    setLoading(true);
+    axios
+      .get(`${BASE_URL}Business/GetPaid`)
+      .then((res) => {
+        const fetchedData = [];
+        for (let key in res.data.data["$values"]) {
+          fetchedData.push(res.data.data.$values[key]);
+        }
+        setAdds(fetchedData);
+        setLoading(false);
+        console.log(Adds);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <StyledCarousel
       ref={carouselRef}
@@ -157,10 +196,10 @@ const Slider = () => {
         }
       }}
     >
-      {items.map((item) => (
-        <ImageBox key={item.id}>
-          <Image src={item.img} alt={"Add"} />
-          <span>{item.info}</span>
+      {Adds.map((item) => (
+        <ImageBox key={item.id} onClick={() => clickHandler(item.id)}>
+          <Image src={item.image} alt={"Add"} />
+          <span>{item.name}</span>
         </ImageBox>
       ))}
     </StyledCarousel>

@@ -11,7 +11,7 @@ const UpperNavbar = () => {
         <div className={classes.right}>
           <Link to={"about"}>عن الموقع</Link>
           <Link to={"userpolicy"}>اتفاقية الاستخدام</Link>
-          <Link to={"contact"}>اتصل</Link>
+          <Link to={"contact"}>اتصل بنا</Link>
           <Link to={"paidadds"}>لاعلاناتكم</Link>
         </div>
 
