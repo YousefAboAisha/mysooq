@@ -92,20 +92,6 @@ const Search = () => {
       <Grid mb={3}>
         <PageTitle title={"بحث عن إعلان"} />
       </Grid>
-      {/* <div className={"search"}>
-        <input
-          type={"text"}
-          placeholder="بحث"
-          autoFocus
-          onChange={(e) => setVal(e.target.value)}
-          value={Val}
-          onKeyDown={(e) => handleEnter(e)}
-        />
-        <div className={"searchBtn"} onClick={fetchData}>
-          بحث
-          <SearchOutlined />
-        </div>
-      </div> */}
 
       <Grid
         container

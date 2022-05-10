@@ -62,7 +62,7 @@ const RealEstates = () => {
 
   useEffect(() => {
     fetchData();
-  }, [Country, City, Page, Subtype]);
+  }, [Page]);
 
   console.log(Page, Country, City, Subtype);
   console.log("Page Counter", Page);
@@ -79,6 +79,7 @@ const RealEstates = () => {
         City={City}
         setSubtype={setSubtype}
         Subtype={Subtype}
+        fetchData={fetchData}
       />
 
       <Grid item lg={12} mt={5} mb={2}>
@@ -94,6 +95,14 @@ const RealEstates = () => {
       >
         {Loading ? (
           <Spinner />
+        ) : Adds.length === 0 ? (
+          <h4
+            style={{
+              marginTop: "20px",
+            }}
+          >
+            لا توجد نتائج للبحث
+          </h4>
         ) : (
           Adds.map((elem, index) => {
             return <Card key={index} card={elem} />;

@@ -10,14 +10,14 @@ const Item = styled.div`
   max-width: 340px;
   width: 300px;
   margin: 0 auto;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
   border: 1px solid #ddd;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 1px 1px 5px #9e9e9e;
+    box-shadow: 1px 1px 2px #ddd;
     transform: scale(1.008);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
   border-radius: 10px;
 

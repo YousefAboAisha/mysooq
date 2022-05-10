@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, BoldSpan } from "../NewAdd/addForm/form";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import facebookIcon from "../../Media/facebookIcon.svg";
 import Heading from "../../Components/Heading/heading";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
+import VerifyCodeModal from "../../Components/VerifyCodeModal/verifyCodeModal";
 
 const Wrap = styled.div`
   position: relative;
@@ -170,6 +171,10 @@ const Signin = () => {
   const [Password, setPassword] = useState("");
   const [Loading, setLoading] = useState(false);
   const [IsRemembered, setIsRemembered] = useState(false);
+  const [IsVerified, setIsVerified] = useState(null);
+  const [Code, setCode] = useState("");
+  const [IsSigned, setIsSigned] = useState();
+  const [Error, setError] = useState("");
 
   const data = {
     userName: Email,
@@ -186,6 +191,7 @@ const Signin = () => {
       .post(`${BASE_URL}LoginAPI/Login`, data)
       .then((res) => {
         console.log(res.data);
+        setIsVerified(res.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -194,10 +200,17 @@ const Signin = () => {
       });
   };
 
-  console.log(IsRemembered);
+  let verifyBox = null;
+
+  if (IsVerified === false) {
+    verifyBox = <VerifyCodeModal setCode={setCode} Code={Code} />;
+  }
+
+  // console.log(IsRemembered);
 
   return (
     <Wrap>
+      {verifyBox}
       <Heading title={"تسجيل الدخول"} />
       <form onSubmit={clickHandler}>
         <Box style={{ marginBottom: "18px" }}>
@@ -234,11 +247,9 @@ const Signin = () => {
 
         <Btn>{Loading ? "جارٍ تسجيل الدخول" : "تسجيل الدخول"}</Btn>
       </form>
-
       <Btn2>
         <h5>تسجيل الدخول بواسطة</h5>
       </Btn2>
-
       <BtnBox>
         <button>
           تسجيل الدخول بواسطة جوجل
@@ -249,7 +260,6 @@ const Signin = () => {
           <img src={facebookIcon} alt="Facebook icon" />
         </button>
       </BtnBox>
-
       <Register>
         <span>ليس لديك حساب؟</span>
         <Link to={"/signup"}>

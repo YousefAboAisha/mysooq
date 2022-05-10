@@ -35,6 +35,7 @@ const Image = styled.img`
   object-position: 50% 50%;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
 
   @media only screen and (max-width: 800px) {
     height: 100%;
@@ -146,7 +147,7 @@ const Slider = () => {
   ];
 
   const carouselRef = useRef(null);
-  const totalPages = Math.ceil(items.length);
+  const totalPages = Math.ceil(Adds.length);
   let resetTimeout;
 
   const navigate = useNavigate();
@@ -198,7 +199,10 @@ const Slider = () => {
     >
       {Adds.map((item) => (
         <ImageBox key={item.id} onClick={() => clickHandler(item.id)}>
-          <Image src={item.image} alt={"Add"} />
+          <Image
+            src={`http://alirafeqpro-001-site1.gtempurl.com/${item.image}`}
+            alt={"Add"}
+          />
           <span>{item.name}</span>
         </ImageBox>
       ))}

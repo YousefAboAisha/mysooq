@@ -142,7 +142,7 @@ const PageHeader = ({
           </select>
         </Box>
 
-        {/* <Btn onClick={fetchData}>بحث</Btn> */}
+        <Btn onClick={fetchData}>بحث</Btn>
       </Header>
     </Grid>
   );

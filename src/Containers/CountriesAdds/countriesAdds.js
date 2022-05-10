@@ -32,6 +32,28 @@ const Wrapper = styled.div`
   }
 `;
 
+const Btn = styled.button`
+  padding: 6px;
+  min-width: 110px;
+  color: var(--white);
+  background-color: var(--blue);
+  border-radius: 3px;
+  font-family: var(--secondFont);
+  font-size: 14px;
+  transition: all 0.2s linear;
+
+  &:hover {
+    background-color: #01687d;
+    transition: all 0.2s linear;
+  }
+
+  @media only screen and (max-width: 600px) {
+    & {
+      min-width: 50px;
+    }
+  }
+`;
+
 const services = [
   {
     name: "عقارات",
@@ -109,7 +131,7 @@ const CountriesAdds = () => {
 
   useEffect(() => {
     fetchData();
-  }, [AddType, City, Page, AddSubType]);
+  }, [Page]);
 
   useEffect(() => {
     fetchCitiesData();
@@ -168,6 +190,8 @@ const CountriesAdds = () => {
             );
           })}
         </select>
+
+        <Btn onClick={fetchData}>بحث</Btn>
       </div>
 
       <Grid item lg={12} mt={5} mb={2}>
@@ -183,6 +207,14 @@ const CountriesAdds = () => {
       >
         {Loading ? (
           <Spinner />
+        ) : Adds.length === 0 ? (
+          <h4
+            style={{
+              marginTop: "20px",
+            }}
+          >
+            لا توجد نتائج للبحث
+          </h4>
         ) : (
           Adds.map((elem, index) => {
             return <Card key={index} card={elem} />;
