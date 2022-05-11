@@ -7,6 +7,9 @@ import facebookIcon from "../../Media/facebookIcon.svg";
 import Heading from "../../Components/Heading/heading";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
+import Snackbar from "../../Components/Snackbar/snackbar";
+import { useNavigate } from "react-router";
+import Spinner from "../../Components/Spinner/Spinner";
 
 const Wrap = styled.div`
   position: relative;
@@ -35,6 +38,22 @@ const Wrap = styled.div`
   & select {
     border-radius: 10px;
     padding: 12px;
+  }
+
+  & .countryCode {
+    position: absolute;
+    left: 1px;
+    top: 67%;
+    transform: translateY(-50%);
+    width: 60px;
+    direction: ltr;
+    border-radius: 10px 0 0 10px;
+    border: unset;
+    border-right: 1px solid #ddd;
+
+    &:focus {
+      border: 1px solid #ddd;
+    }
   }
 
   @media only screen and (max-width: 800px) {
@@ -146,10 +165,14 @@ const Signup = () => {
   const [Password, setPassword] = useState("");
   const [ConfirmedPassword, setConfirmedPassword] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
+  const [StateCode, setStateCode] = useState("");
+  const [Success, setSuccess] = useState(false);
   const [Country, setCountry] = useState("");
   const [Loading, setLoading] = useState(false);
   const [Countries, setCountries] = useState([]);
   const [Error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const countryURL = `${BASE_URL}Countries/GetAll`;
 
@@ -187,25 +210,38 @@ const Signup = () => {
     setConfirmedPassword("");
     setCountry("");
     setPhoneNumber("");
+    setStateCode("");
   };
 
-  const clickHandler = (e) => {
+  const clickHandler = async (e) => {
     e.preventDefault();
-    console.log(data);
-
     if (Password !== ConfirmedPassword) {
       setError(" يرجى التأكد من كلمة السر");
     } else {
       setError("");
       setLoading(true);
-      axios
-        .post(`${BASE_URL}User/Create`, data, {
-          headers: "Content-Type: application/json",
-        })
+      fetch(`${BASE_URL}User/Create`, {
+        method: "POST",
+        headers: {
+          contentType: "application/json",
+          accept: "*/*",
+        },
+        body: data,
+      })
         .then((res) => {
           console.log(res.data);
-          emptyForm();
           setLoading(false);
+          setSuccess(true);
+
+          setTimeout(() => {
+            setSuccess(false);
+          }, 4000);
+
+          emptyForm();
+
+          setTimeout(() => {
+            navigate("/signin");
+          }, 4000);
         })
         .catch((error) => {
           console.log(error);
@@ -216,95 +252,107 @@ const Signup = () => {
 
   return (
     <Wrap>
+      {Success ? <Snackbar msg={"تم إنشاء حسابك بنجاح"} /> : null}
+
       <Heading title={"إنشاء حساب"} />
-      <form onSubmit={clickHandler}>
-        <Halfbox>
-          <Box>
-            <BoldSpan>اسم المستخدم</BoldSpan>
-            <input
-              type="text"
-              placeholder="اسم المستخدم"
-              onChange={(e) => setUserName(e.target.value)}
-              value={UserName}
-              required
-            />
-          </Box>
+      {Loading ? (
+        <Spinner />
+      ) : (
+        <form onSubmit={clickHandler}>
+          <Halfbox>
+            <Box>
+              <BoldSpan>اسم المستخدم</BoldSpan>
+              <input
+                type="text"
+                placeholder="اسم المستخدم"
+                onChange={(e) => setUserName(e.target.value)}
+                value={UserName}
+                required
+              />
+            </Box>
 
-          <Box>
-            <BoldSpan>البريد الالكتروني</BoldSpan>
-            <input
-              type="email"
-              placeholder="Mysooq@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
-              value={Email}
-              required
-            />
-          </Box>
-        </Halfbox>
+            <Box>
+              <BoldSpan>البريد الالكتروني</BoldSpan>
+              <input
+                type="email"
+                placeholder="Mysooq@gmail.com"
+                onChange={(e) => setEmail(e.target.value)}
+                value={Email}
+                required
+              />
+            </Box>
+          </Halfbox>
 
-        <Halfbox>
-          <Box>
-            <BoldSpan>كلمة المرور</BoldSpan>
-            <input
-              type="password"
-              placeholder="***********"
-              onChange={(e) => setPassword(e.target.value)}
-              value={Password}
-              required
-            />
-            <LightSpan style={{ color: "red" }}>{Error}</LightSpan>
-          </Box>
+          <Halfbox>
+            <Box>
+              <BoldSpan>كلمة المرور</BoldSpan>
+              <input
+                type="password"
+                placeholder="***********"
+                onChange={(e) => setPassword(e.target.value)}
+                value={Password}
+                required
+              />
+              <LightSpan style={{ color: "red" }}>{Error}</LightSpan>
+            </Box>
 
-          <Box>
-            <BoldSpan> تأكيد كلمة المرور</BoldSpan>
+            <Box>
+              <BoldSpan> تأكيد كلمة المرور</BoldSpan>
 
-            <input
-              type="password"
-              placeholder="***********"
-              onChange={(e) => setConfirmedPassword(e.target.value)}
-              value={ConfirmedPassword}
-              required
-            />
-            <LightSpan style={{ color: "red" }}> {Error}</LightSpan>
-          </Box>
-        </Halfbox>
-        <Halfbox>
-          <Box>
-            <BoldSpan>رقم التليفون</BoldSpan>
-            <input
-              type="text"
-              placeholder="0592551405"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              value={PhoneNumber}
-              required
-            />
-          </Box>
+              <input
+                type="password"
+                placeholder="***********"
+                onChange={(e) => setConfirmedPassword(e.target.value)}
+                value={ConfirmedPassword}
+                required
+              />
+              <LightSpan style={{ color: "red" }}> {Error}</LightSpan>
+            </Box>
+          </Halfbox>
+          <Halfbox>
+            <Box>
+              <input
+                type={"text"}
+                placeholder={"+970"}
+                className={"countryCode"}
+                onChange={(e) => setStateCode(e.target.value)}
+                value={StateCode}
+              />
 
-          <Box>
-            <BoldSpan>الدولة</BoldSpan>
-            <select
-              onChange={(e) => setCountry(e.target.value)}
-              value={Country}
-            >
-              <option value="" disabled hidden>
-                الدولة
-              </option>
+              <BoldSpan>رقم التليفون</BoldSpan>
+              <input
+                type="text"
+                placeholder="0592551405"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                value={PhoneNumber}
+                required
+              />
+            </Box>
 
-              {Countries.map((country, index) => {
-                return (
-                  <option value={country.id} key={index}>
-                    {country.name}
-                  </option>
-                );
-              })}
-            </select>
-          </Box>
-        </Halfbox>
+            <Box>
+              <BoldSpan>الدولة</BoldSpan>
+              <select
+                onChange={(e) => setCountry(e.target.value)}
+                value={Country}
+              >
+                <option value="" disabled hidden>
+                  الدولة
+                </option>
 
-        <Btn type={"submit"}>
-          {Loading ? "جارٍ إنشاء الحساب ..." : "إنشاء الحساب"}
-        </Btn>
-      </form>
+                {Countries.map((country, index) => {
+                  return (
+                    <option value={country.id} key={index}>
+                      {country.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </Box>
+          </Halfbox>
+
+          <Btn type={"submit"}>إنشاء الحساب</Btn>
+        </form>
+      )}
 
       <Btn2>
         <h5>إنشاء حساب بواسطة</h5>

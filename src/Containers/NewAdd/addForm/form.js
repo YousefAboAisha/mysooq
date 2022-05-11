@@ -271,13 +271,16 @@ const Form = () => {
       })
       .then((data) => {
         console.log(data);
-        SuccessMsg(true);
-        emptyForm();
         setLoading(false);
+        setSuccessMsg(true);
+
+        setTimeout(() => {
+          SuccessMsg(false);
+        }, 4000);
 
         setTimeout(() => {
           navigate("/");
-        }, 4000);
+        }, 3000);
       })
       .catch((error) => {
         console.log(error);

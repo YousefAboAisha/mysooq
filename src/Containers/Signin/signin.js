@@ -8,6 +8,9 @@ import Heading from "../../Components/Heading/heading";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
 import VerifyCodeModal from "../../Components/VerifyCodeModal/verifyCodeModal";
+import Spinner from "../../Components/Spinner/Spinner";
+import Snackbar from "../../Components/Snackbar/snackbar";
+import { useNavigate } from "react-router";
 
 const Wrap = styled.div`
   position: relative;
@@ -170,17 +173,26 @@ const Signin = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Loading, setLoading] = useState(false);
+  const [Success, setSuccess] = useState(false);
   const [IsRemembered, setIsRemembered] = useState(false);
   const [IsVerified, setIsVerified] = useState(null);
   const [Code, setCode] = useState("");
   const [IsSigned, setIsSigned] = useState();
   const [Error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   const data = {
     userName: Email,
     password: Password,
     rememberLogin: IsRemembered,
     returnUrl: "/",
+  };
+
+  const emptyForm = () => {
+    setEmail("");
+    setPassword("");
+    setIsRemembered("");
   };
 
   const clickHandler = (e) => {
@@ -193,6 +205,18 @@ const Signin = () => {
         console.log(res.data);
         setIsVerified(res.data);
         setLoading(false);
+
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+        }, 4000);
+
+        emptyForm();
+
+        setTimeout(() => {
+          navigate("/signin");
+        }, 4000);
       })
       .catch((error) => {
         console.log(error);
@@ -211,42 +235,52 @@ const Signin = () => {
   return (
     <Wrap>
       {verifyBox}
+
+      {Success ? <Snackbar msg={"تم تسجيل الدخول بنجاح"} /> : null}
+
       <Heading title={"تسجيل الدخول"} />
-      <form onSubmit={clickHandler}>
-        <Box style={{ marginBottom: "18px" }}>
-          <BoldSpan>البريد الالكتروني</BoldSpan>
-          <input
-            type="email"
-            placeholder="Mysooq@gmail.com"
-            onChange={(e) => setEmail(e.target.value)}
-            value={Email}
-          />
-        </Box>
-
-        <Box>
-          <BoldSpan>كلمة المرور</BoldSpan>
-          <input
-            type="password"
-            placeholder="***********"
-            onChange={(e) => setPassword(e.target.value)}
-            value={Password}
-          />
-        </Box>
-
-        <InnerBox>
-          <div>
+      {Loading ? (
+        <Spinner />
+      ) : (
+        <form onSubmit={clickHandler}>
+          <Box style={{ marginBottom: "18px" }}>
+            <BoldSpan>البريد الالكتروني</BoldSpan>
             <input
-              type="checkbox"
-              onChange={(e) => setIsRemembered(e.target.checked)}
-              value={IsRemembered}
+              type="email"
+              placeholder="Mysooq@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+              value={Email}
+              required
             />
-            <label>تذكرني لاحقاً</label>
-          </div>
-          <span>هل نسيت كلمة المرور؟</span>
-        </InnerBox>
+          </Box>
 
-        <Btn>{Loading ? "جارٍ تسجيل الدخول" : "تسجيل الدخول"}</Btn>
-      </form>
+          <Box>
+            <BoldSpan>كلمة المرور</BoldSpan>
+            <input
+              type="password"
+              placeholder="***********"
+              onChange={(e) => setPassword(e.target.value)}
+              value={Password}
+              required
+            />
+          </Box>
+
+          <InnerBox>
+            <div>
+              <input
+                type="checkbox"
+                onChange={(e) => setIsRemembered(e.target.checked)}
+                value={IsRemembered}
+              />
+              <label>تذكرني لاحقاً</label>
+            </div>
+            <span>هل نسيت كلمة المرور؟</span>
+          </InnerBox>
+
+          <Btn>تسجيل الدخول</Btn>
+        </form>
+      )}
+
       <Btn2>
         <h5>تسجيل الدخول بواسطة</h5>
       </Btn2>

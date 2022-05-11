@@ -38,25 +38,27 @@ const SWrapper = styled(Wrapper)`
 const UpdateAdd = ({ setIsOpen, add, open }) => {
   const { id } = useParams();
 
-  const [AddTitle, setAddTitle] = useState(add.name || "");
-  const [AddType, setAddType] = useState(add.service || "");
-  const [AddSubType, setAddSubType] = useState(add.subtype || "");
+  const [AddTitle, setAddTitle] = useState(add.name);
+  const [AddType, setAddType] = useState(add.service);
+  const [AddSubType, setAddSubType] = useState(add.subtype);
   const [Price, setPrice] = useState(""); // مش هتبعتو
   const [Currency, setCurrency] = useState(""); // مش هتبعتو
   const [mainAddImage, setmainAddImage] = useState();
-  const [AddDetails, setAddDetails] = useState(add.description || "");
-  const [AddPublisher, setAddPublisher] = useState(add.userName || "");
-  const [Country, setCountry] = useState(add.country || "");
-  const [City, setCity] = useState(add.city || "");
-  const [Email, setEmail] = useState(add.email || "");
-  const [PhoneNumber, setPhoneNumber] = useState(add.phone1 || "");
+  const [AddDetails, setAddDetails] = useState(add.description);
+  const [AddPublisher, setAddPublisher] = useState(add.userName);
+  const [Country, setCountry] = useState(add.country);
+  const [City, setCity] = useState(add.city);
+  const [Email, setEmail] = useState(add.email);
+  const [PhoneNumber, setPhoneNumber] = useState(add.phone1);
   const [AddImages, setAddImages] = useState();
-  const [YLink, setYLink] = useState(add.youtube || "");
-  const [FLink, setFLink] = useState(add.facebook || "");
-  const [TLink, setTLink] = useState(add.twitter || "");
-  const [ILink, setILink] = useState(add.instagram || "");
+  const [YLink, setYLink] = useState(add.youtube);
+  const [FLink, setFLink] = useState(add.facebook);
+  const [TLink, setTLink] = useState(add.twitter);
+  const [ILink, setILink] = useState(add.instagram);
 
   const [Loading, setLoading] = useState(false);
+  const [Success, setSuccess] = useState(false);
+
   const [Countries, setCountries] = useState([]);
   const [Cities, setCities] = useState([]);
   const [Subtypes, setSubtypes] = useState([]);
@@ -193,10 +195,18 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
       })
       .then((data) => {
         console.log(data);
-        emptyForm();
         setLoading(false);
-        navigate(`/add/${id}`);
-        setIsOpen(false);
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+        }, 4000);
+
+        emptyForm();
+
+        setTimeout(() => {
+          navigate("/signin");
+        }, 4000);
       })
       .catch((error) => {
         console.log(error);
@@ -206,6 +216,8 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
 
   return (
     <SWrapper>
+      {Success ? <Snackbar msg={"تم تسجيل الدخول بنجاح"} /> : null}
+
       <Clear onClick={() => setIsOpen(false)} />
       <form onSubmit={clickHandler}>
         <Box>
