@@ -201,6 +201,7 @@ const Signup = () => {
     default_country: Country,
     cityid: 0,
     authcode: "authcode",
+    phoneNumber: `+${StateCode}`.concat(PhoneNumber),
   };
 
   const emptyForm = () => {
@@ -312,18 +313,25 @@ const Signup = () => {
           <Halfbox>
             <Box>
               <input
-                type={"text"}
+                type={"tel"}
                 placeholder={"+970"}
                 className={"countryCode"}
-                onChange={(e) => setStateCode(e.target.value)}
+                onChange={(e) =>
+                  setStateCode(e.target.value.replace(/\D/g, ""))
+                }
                 value={StateCode}
+                maxLength={3}
+                minLength={3}
+                required
               />
 
               <BoldSpan>رقم التليفون</BoldSpan>
               <input
-                type="text"
+                type="tel"
                 placeholder="0592551405"
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={(e) =>
+                  setPhoneNumber(e.target.value.replace(/\D/g, ""))
+                }
                 value={PhoneNumber}
                 required
               />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, BoldSpan } from "../NewAdd/addForm/form";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -57,6 +57,13 @@ const Wrap = styled.div`
     margin: 0 auto;
     border-radius: 10px;
     margin-top: 15px;
+  }
+
+  & .error {
+    text-align: center;
+    margin-top: 7px;
+    font-size: 13px;
+    font-weight: 600;
   }
 `;
 
@@ -152,8 +159,9 @@ const InnerBox = styled.div`
   flex-flow: row wrap;
   margin-top: 8px;
 
-  & span {
+  & a span {
     font-size: 13px;
+    color: #000;
   }
 
   & div {
@@ -173,12 +181,13 @@ const Signin = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [Loading, setLoading] = useState(false);
-  const [Success, setSuccess] = useState(false);
+  const [ShowSuccessMsg, setShowSuccessMsg] = useState(false);
   const [IsRemembered, setIsRemembered] = useState(false);
   const [IsVerified, setIsVerified] = useState(null);
   const [Code, setCode] = useState("");
   const [IsSigned, setIsSigned] = useState();
   const [Error, setError] = useState("");
+  const [Open, setOpen] = useState();
 
   const navigate = useNavigate();
 
@@ -186,7 +195,6 @@ const Signin = () => {
     userName: Email,
     password: Password,
     rememberLogin: IsRemembered,
-    returnUrl: "/",
   };
 
   const emptyForm = () => {
@@ -203,19 +211,26 @@ const Signin = () => {
       .post(`${BASE_URL}LoginAPI/Login`, data)
       .then((res) => {
         console.log(res.data);
-        setIsVerified(res.data);
+        if (res.data.message === "الحساب غير محقق") {
+          setIsVerified(false);
+          setOpen(true);
+        }
+
+        if (res.data.message === "تم تسجيل الدخول بنجاح") {
+          setIsSigned(true);
+          setIsVerified(true);
+          setShowSuccessMsg(true);
+
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        } else {
+          setError(res.data.message);
+        }
         setLoading(false);
 
-        setSuccess(true);
-
         setTimeout(() => {
-          setSuccess(false);
-        }, 4000);
-
-        emptyForm();
-
-        setTimeout(() => {
-          navigate("/signin");
+          setShowSuccessMsg(false);
         }, 4000);
       })
       .catch((error) => {
@@ -224,10 +239,20 @@ const Signin = () => {
       });
   };
 
+  console.log(IsVerified);
+  console.log(ShowSuccessMsg);
+
   let verifyBox = null;
 
-  if (IsVerified === false) {
-    verifyBox = <VerifyCodeModal setCode={setCode} Code={Code} />;
+  if (Open === true) {
+    verifyBox = (
+      <VerifyCodeModal
+        setCode={setCode}
+        Code={Code}
+        Open={Open}
+        setOpen={setOpen}
+      />
+    );
   }
 
   // console.log(IsRemembered);
@@ -236,7 +261,7 @@ const Signin = () => {
     <Wrap>
       {verifyBox}
 
-      {Success ? <Snackbar msg={"تم تسجيل الدخول بنجاح"} /> : null}
+      {ShowSuccessMsg ? <Snackbar msg={"تم تسجيل الدخول بنجاح"} /> : null}
 
       <Heading title={"تسجيل الدخول"} />
       {Loading ? (
@@ -274,16 +299,24 @@ const Signin = () => {
               />
               <label>تذكرني لاحقاً</label>
             </div>
-            <span>هل نسيت كلمة المرور؟</span>
+            <Link to={"forgetpassword"}>
+              <span>هل نسيت كلمة المرور؟</span>
+            </Link>
           </InnerBox>
 
           <Btn>تسجيل الدخول</Btn>
+          {!IsVerified ? (
+            <span className="error" style={{ color: "red" }}>
+              {Error}
+            </span>
+          ) : null}
         </form>
       )}
 
       <Btn2>
         <h5>تسجيل الدخول بواسطة</h5>
       </Btn2>
+
       <BtnBox>
         <button>
           تسجيل الدخول بواسطة جوجل
@@ -294,6 +327,7 @@ const Signin = () => {
           <img src={facebookIcon} alt="Facebook icon" />
         </button>
       </BtnBox>
+
       <Register>
         <span>ليس لديك حساب؟</span>
         <Link to={"/signup"}>

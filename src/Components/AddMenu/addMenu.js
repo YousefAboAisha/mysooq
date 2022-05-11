@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const StyledMenu = styled((props) => (
   <Menu

@@ -33,6 +33,12 @@ export const CountriesAdds = lazy(() =>
   import("../Containers/CountriesAdds/countriesAdds")
 );
 // export const Update = lazy(() => import("../Containers/UpdateAdd/updateAdd"));
+export const ForgetPassword = lazy(() =>
+  import("../Containers/Signin/ForgetPassword/forgetPassword")
+);
+export const VerifyCode = lazy(() =>
+  import("../Containers/Signin/VerifyCode/verifyCode")
+);
 
 const Routers = () => {
   return (
@@ -52,6 +58,8 @@ const Routers = () => {
       {/* <Route path="update/:id" element={<Update />} /> */}
       <Route path="signup" element={<Signup />} />
       <Route path="signin" element={<Signin />} />
+      <Route path="signin/forgetpassword" element={<ForgetPassword />} />
+      <Route path="signin/forgetpassword/code" element={<VerifyCode />} />
       <Route path="search/:query" element={<Search />} />
       <Route path="paidadds" element={<PaidAdds />} />
       <Route path="countriesAdds/:cID" element={<CountriesAdds />} />

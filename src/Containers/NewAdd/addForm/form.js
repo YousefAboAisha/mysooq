@@ -103,6 +103,7 @@ const Form = () => {
   const [FLink, setFLink] = useState("");
   const [TLink, setTLink] = useState("");
   const [ILink, setILink] = useState("");
+
   const [Loading, setLoading] = useState(false);
   const [SuccessMsg, setSuccessMsg] = useState(false);
 
@@ -183,8 +184,6 @@ const Form = () => {
     fetchSubTypesData();
   }, [AddType]);
 
-  // console.log("Add Type is " + AddType);
-
   const limitImageNumber = (e) => {
     if (e.files.length > 5) {
       alert("Only 5 files accepted.");
@@ -194,39 +193,27 @@ const Form = () => {
 
   var formData = new FormData();
 
-  formData.append("Phone1", PhoneNumber + "");
-  formData.append("Youtube", YLink + "");
-  formData.append("Facebook", FLink + "");
+  formData.append("Phone1", PhoneNumber);
+  formData.append("Youtube", YLink);
+  formData.append("Facebook", FLink);
   formData.append("AREAId", 23);
-  formData.append("CITY", parseInt(City));
-  formData.append("Name", AddTitle + "");
-  // formData.append("TIME_SLOT", 0);
-  formData.append("Instagram", ILink + "");
-  formData.append("Twitter", TLink + "");
-  // formData.append("OWNER", 1);
+  formData.append("CITY", City);
+  formData.append("Name", AddTitle);
+  formData.append("Instagram", ILink);
+  formData.append("Twitter", TLink);
   formData.append("Address", "");
-  formData.append("service", parseInt(AddType));
-  formData.append("UserName", AddPublisher + "");
-  formData.append("COUNTRY", parseInt(Country));
-  // formData.append("ROW_STATUS", 0);
+  formData.append("service", AddType);
+  formData.append("UserName", AddPublisher);
+  formData.append("COUNTRY", Country);
   for (let file of AddImages) {
     formData.append("Images", file);
   }
-  formData.append("subtype", parseInt(AddSubType));
+  formData.append("subtype", AddSubType);
   formData.append("Website", "https://www.youtube.com/");
   formData.append("Image", mainAddImage);
-  formData.append("Email", Email + "");
-  formData.append("Description", AddDetails + "");
+  formData.append("Email", Email);
+  formData.append("Description", AddDetails);
   formData.append("Fax", "Fax");
-
-  // for (const elem of Array.from(formData)) {
-  //   console.log(elem);
-  // }
-
-  // console.log(formData);
-  // for (var pair of formData.entries()) {
-  //   console.log(pair[0] + typeof pair[1]);
-  // }
 
   const emptyForm = () => {
     setAddType("");
@@ -247,20 +234,7 @@ const Form = () => {
   const clickHandler = (e) => {
     e.preventDefault();
     setLoading(true);
-    //   axios
-    //     .post(`${BASE_URL}Business/CreateBusiness`, {
-    //       body: formData,
-    //     })
-    //     .then((res) => {
-    //       console.log(res.data);
-    //       emptyForm();
-    //       setLoading(false);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //       setLoading(false);
-    //     });
-    // };
+
     fetch(`${BASE_URL}Business/CreateBusiness`, {
       method: "POST",
       body: formData,
@@ -288,9 +262,7 @@ const Form = () => {
       });
   };
 
-  // console.log(formData);
-  // console.log(mainAddImage);
-  // console.log(AddImages);
+  console.log(mainAddImage);
 
   return (
     <form onSubmit={clickHandler}>
@@ -390,7 +362,6 @@ const Form = () => {
             required
           />
           <LightSpan>أضف صورة جذابة معبرة عن إعلانك</LightSpan>
-          {/* <button>رفع الصورة</button> */}
         </Box>
 
         <Box>
@@ -497,7 +468,6 @@ const Form = () => {
             required
           />
           <LightSpan>أضف صور الإعلان بحد أقصى 5 صور</LightSpan>
-          {/* <button>رفع الصور</button> */}
         </Box>
 
         <Halfbox>

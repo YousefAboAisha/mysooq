@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
@@ -71,11 +71,7 @@ const Btn = styled.button`
   }
 `;
 
-export default function VerifyCodeModal({ setCode, Code }) {
-  const [open, setOpen] = React.useState(true);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+export default function VerifyCodeModal({ setCode, Code, Open, setOpen }) {
   const clickHandler = (e) => {
     e.preventDefault();
 
@@ -83,21 +79,16 @@ export default function VerifyCodeModal({ setCode, Code }) {
       .post(`${BASE_URL}User/AuthCode?code=${Code}`, {})
       .then((res) => {
         console.log(res.data);
+        setOpen(false);
       })
       .catch((error) => {
         console.log(error);
-        setOpen(false);
       });
   };
 
-  return (
+  return Open ? (
     <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={Open} onClose={() => setOpen(false)}>
         <Box sx={style}>
           <h2>قم بإدخال كود التحقق</h2>
           <div>
@@ -115,5 +106,5 @@ export default function VerifyCodeModal({ setCode, Code }) {
         </Box>
       </Modal>
     </div>
-  );
+  ) : null;
 }

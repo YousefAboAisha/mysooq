@@ -35,7 +35,7 @@ const SWrapper = styled(Wrapper)`
   }
 `;
 
-const UpdateAdd = ({ setIsOpen, add, open }) => {
+const UpdateAdd = ({ setIsOpen, add, setSuccess }) => {
   const { id } = useParams();
 
   const [AddTitle, setAddTitle] = useState(add.name);
@@ -43,21 +43,20 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
   const [AddSubType, setAddSubType] = useState(add.subtype);
   const [Price, setPrice] = useState(""); // مش هتبعتو
   const [Currency, setCurrency] = useState(""); // مش هتبعتو
-  const [mainAddImage, setmainAddImage] = useState();
+  const [MainAddImage, setMainAddImage] = useState("");
   const [AddDetails, setAddDetails] = useState(add.description);
   const [AddPublisher, setAddPublisher] = useState(add.userName);
   const [Country, setCountry] = useState(add.country);
   const [City, setCity] = useState(add.city);
   const [Email, setEmail] = useState(add.email);
   const [PhoneNumber, setPhoneNumber] = useState(add.phone1);
-  const [AddImages, setAddImages] = useState();
+  const [AddImages, setAddImages] = useState([]);
   const [YLink, setYLink] = useState(add.youtube);
   const [FLink, setFLink] = useState(add.facebook);
   const [TLink, setTLink] = useState(add.twitter);
   const [ILink, setILink] = useState(add.instagram);
 
   const [Loading, setLoading] = useState(false);
-  const [Success, setSuccess] = useState(false);
 
   const [Countries, setCountries] = useState([]);
   const [Cities, setCities] = useState([]);
@@ -136,11 +135,9 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
     fetchSubTypesData();
   }, [AddType]);
 
-  // console.log("Add Type is " + AddType);
-
   // **************************************
 
-  const data = new FormData();
+  var data = new FormData();
 
   data.append("phone1", PhoneNumber);
   data.append("Youtube", YLink);
@@ -151,15 +148,18 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
   data.append("Name", AddTitle);
   data.append("uniqueId", "");
   data.append("Instagram", ILink);
-  data.append("Twitter", TLink);
   data.append("Address", "Address");
   data.append("service", AddType);
   data.append("UserName", AddPublisher);
   data.append("COUNTRY", Country);
+  for (let file of AddImages) {
+    data.append("Images", file);
+  }
   data.append("subtype", AddSubType);
   data.append("website", "Website");
   data.append("ID", id);
-  data.append("image", "");
+  data.append("Twitter", TLink);
+  data.append("Image", MainAddImage);
   data.append("Email", Email);
   data.append("Description", AddDetails);
   data.append("Fax", "Fax");
@@ -180,10 +180,11 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
     setTLink("");
   };
 
-  // console.log(data);
+  console.log(data);
 
   const clickHandler = (e) => {
     e.preventDefault();
+
     setLoading(true);
     fetch(`${BASE_URL}Business/UpdateBusiness`, {
       method: "PUT",
@@ -196,17 +197,16 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
       .then((data) => {
         console.log(data);
         setLoading(false);
+        setIsOpen(false);
         setSuccess(true);
 
         setTimeout(() => {
           setSuccess(false);
         }, 4000);
 
-        emptyForm();
-
         setTimeout(() => {
-          navigate("/signin");
-        }, 4000);
+          window.location.reload(true);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
@@ -214,10 +214,16 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
       });
   };
 
+  const changeHandler = (e) => {
+    let value = e.target.files[0];
+    setMainAddImage(value);
+  };
+
+  console.log("Add Image is " + MainAddImage);
+  console.log("Add Images are " + AddImages);
+
   return (
     <SWrapper>
-      {Success ? <Snackbar msg={"تم تسجيل الدخول بنجاح"} /> : null}
-
       <Clear onClick={() => setIsOpen(false)} />
       <form onSubmit={clickHandler}>
         <Box>
@@ -310,11 +316,10 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
             type="file"
             placeholder="اسحب الصورة إلى هنا"
             accept="image/*"
-            onChange={(e) => setmainAddImage(e.target.value)}
-            value={mainAddImage}
+            onChange={(e) => setMainAddImage(e.target.files[0])}
+            required
           />
           <LightSpan>أضف صورة جذابة معبرة عن إعلانك</LightSpan>
-          {/* <button>رفع الصورة</button> */}
         </Box>
 
         <Box>
@@ -325,7 +330,7 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
             onChange={(e) => setAddDetails(e.target.value)}
             value={AddDetails}
           ></textarea>
-          <LightSpan>أضف صورة جذابة معبرة عن إعلانك</LightSpan>
+          <LightSpan>أضف تفاصيل عن إعلانك</LightSpan>
         </Box>
 
         <Box>
@@ -415,12 +420,11 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
             type="file"
             placeholder="اسحب الصورة إلى هنا"
             accept="image/*"
-            onChange={(e) => setAddImages(e.target.value)}
-            value={AddImages}
+            onChange={(e) => setAddImages(e.target.files)}
             multiple
+            required
           />
           <LightSpan>أضف صور الإعلان بحد أقصى 5 صور</LightSpan>
-          {/* <button>رفع الصور</button> */}
         </Box>
 
         <Halfbox>
@@ -472,9 +476,8 @@ const UpdateAdd = ({ setIsOpen, add, open }) => {
         </Halfbox>
         <div
           style={{
-            margin: "30px auto",
+            margin: "20px auto",
             width: "fit-content",
-            marginBottom: "100px !important",
           }}
         >
           <Btn type={"submit"}>

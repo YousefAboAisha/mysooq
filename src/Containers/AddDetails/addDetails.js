@@ -20,6 +20,7 @@ import LongMenu from "../../Components/AddMenu/addMenu";
 import UpdateAdd from "../UpdateAdd/updateAdd";
 import Modal from "../../Components/Modal/modal";
 import Snackbar from "../../Components/Snackbar/snackbar";
+import UpdateModal from "../../Components/UpdateModal/updateModal";
 
 const Wrapper = styled.div`
   position: relative;
@@ -125,6 +126,9 @@ function AddDetails() {
   const [copySuccess, setCopySuccess] = useState(false);
   const [mainImg, setMainImg] = useState("");
   const [Imgs, setImgs] = useState([]);
+  const [Success, setSuccess] = useState(false);
+  const [MainAddImage, setMainAddImage] = useState("");
+  const [AddImages, setAddImages] = useState([]);
 
   const fetchData = () => {
     setLoading(true);
@@ -150,23 +154,29 @@ function AddDetails() {
     fetchData();
   }, [setAdd]);
 
-  // const extraPhotos = [
-  //   { src: img, id: 1 },
-  //   { src: img2, id: 2 },
-  //   { src: img, id: 3 },
-  //   { src: img2, id: 4 },
-  // ];
-
   return (
     <Wrapper>
       {copySuccess ? <Snackbar msg={"تم نسخ رابط الإعلان بنجاح"} /> : null}
 
+      {Success ? <Snackbar msg={"تم تحديث الإعلان بنجاح"} /> : null}
+
       {IsOpen ? (
         <>
-          <UpdateAdd setIsOpen={setIsOpen} open={IsOpen} add={Add} />
+          <UpdateAdd
+            setIsOpen={setIsOpen}
+            open={IsOpen}
+            add={Add}
+            Success={Success}
+            setSuccess={setSuccess}
+            // MainAddImage={MainAddImage}
+            // setMainAddImage={setMainAddImage}
+            // AddImages={AddImages}
+            // setAddImages={setAddImages}
+          />
           <Modal setIsOpen={setIsOpen} open={IsOpen} />
         </>
       ) : null}
+
       <PageTitle title={"تفاصيل الإعلان"} />
 
       {Loading ? (
@@ -235,6 +245,14 @@ function AddDetails() {
                 />
               </div>
             ) : null}
+
+            {/* <div class="menu">
+              <LongMenu
+                setLoading={setLoading}
+                setIsOpen={setIsOpen}
+                setCopySuccess={setCopySuccess}
+              />
+            </div> */}
 
             <ImagesBox>
               <img
