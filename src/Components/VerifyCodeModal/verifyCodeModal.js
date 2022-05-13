@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import styled from "styled-components";
 import { BASE_URL } from "../../baseURL";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const style = {
   position: "absolute",
@@ -71,7 +72,15 @@ const Btn = styled.button`
   }
 `;
 
-export default function VerifyCodeModal({ setCode, Code, Open, setOpen }) {
+export default function VerifyCodeModal({
+  setCode,
+  Code,
+  Open,
+  setOpen,
+  path,
+}) {
+  const navigate = useNavigate();
+
   const clickHandler = (e) => {
     e.preventDefault();
 
@@ -80,6 +89,9 @@ export default function VerifyCodeModal({ setCode, Code, Open, setOpen }) {
       .then((res) => {
         console.log(res.data);
         setOpen(false);
+        setTimeout(() => {
+          navigate(path);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);

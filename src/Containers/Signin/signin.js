@@ -11,6 +11,8 @@ import VerifyCodeModal from "../../Components/VerifyCodeModal/verifyCodeModal";
 import Spinner from "../../Components/Spinner/Spinner";
 import Snackbar from "../../Components/Snackbar/snackbar";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { GlobalState } from "../../Context/globalState";
 
 const Wrap = styled.div`
   position: relative;
@@ -184,10 +186,13 @@ const Signin = () => {
   const [ShowSuccessMsg, setShowSuccessMsg] = useState(false);
   const [IsRemembered, setIsRemembered] = useState(false);
   const [IsVerified, setIsVerified] = useState(null);
-  const [Code, setCode] = useState("");
   const [IsSigned, setIsSigned] = useState();
   const [Error, setError] = useState("");
+  const [Code, setCode] = useState("");
   const [Open, setOpen] = useState();
+
+  const { user, setUser } = useContext(GlobalState);
+  console.log(user);
 
   const navigate = useNavigate();
 
@@ -215,9 +220,14 @@ const Signin = () => {
           setIsVerified(false);
           setOpen(true);
         } else if (res.data.message === "تم تسجيل الدخول بنجاح") {
+          setUser(res.data.data.userId);
           setIsSigned(true);
           setIsVerified(true);
           setShowSuccessMsg(true);
+
+          setTimeout(() => {
+            setShowSuccessMsg(false);
+          }, 4000);
 
           setTimeout(() => {
             navigate("/");
@@ -226,10 +236,6 @@ const Signin = () => {
           setError(res.data.message);
         }
         setLoading(false);
-
-        setTimeout(() => {
-          setShowSuccessMsg(false);
-        }, 4000);
       })
       .catch((error) => {
         console.log(error);
@@ -249,6 +255,7 @@ const Signin = () => {
         Code={Code}
         Open={Open}
         setOpen={setOpen}
+        path={"/"}
       />
     );
   }

@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import PageTitle from "../../Components/PageTitle/pageTitle";
 import Heading from "../../Components/Heading/heading";
@@ -11,8 +11,6 @@ import {
   Twitter,
   YouTube,
 } from "@mui/icons-material";
-import img from "../../Media/mainAdd.png";
-import img2 from "../../Media/cardAdd.png";
 import { BASE_URL } from "../../baseURL";
 import axios from "axios";
 import Spinner from "../../Components/Spinner/Spinner";
@@ -20,7 +18,7 @@ import LongMenu from "../../Components/AddMenu/addMenu";
 import UpdateAdd from "../UpdateAdd/updateAdd";
 import Modal from "../../Components/Modal/modal";
 import Snackbar from "../../Components/Snackbar/snackbar";
-import UpdateModal from "../../Components/UpdateModal/updateModal";
+import { GlobalState } from "../../Context/globalState";
 
 const Wrapper = styled.div`
   position: relative;
@@ -127,13 +125,13 @@ function AddDetails() {
   const [mainImg, setMainImg] = useState("");
   const [Imgs, setImgs] = useState([]);
   const [Success, setSuccess] = useState(false);
-  const [MainAddImage, setMainAddImage] = useState("");
-  const [AddImages, setAddImages] = useState([]);
+
+  const { user } = useContext(GlobalState);
 
   const fetchData = () => {
     setLoading(true);
     axios
-      .get(`${BASE_URL}Business/GetOne?id=${id}`)
+      .get(`${BASE_URL}Business/GetOne?id=${id}&userId=${user}`)
       .then((res) => {
         setAdd(res.data.data);
         setImgs(res.data.data.images.$values);
@@ -149,6 +147,8 @@ function AddDetails() {
   console.log(mainImg);
 
   console.log(Add);
+
+  // console.log("URL" + window.location.href);
 
   useEffect(() => {
     fetchData();
@@ -168,10 +168,6 @@ function AddDetails() {
             add={Add}
             Success={Success}
             setSuccess={setSuccess}
-            // MainAddImage={MainAddImage}
-            // setMainAddImage={setMainAddImage}
-            // AddImages={AddImages}
-            // setAddImages={setAddImages}
           />
           <Modal setIsOpen={setIsOpen} open={IsOpen} />
         </>
@@ -246,17 +242,9 @@ function AddDetails() {
               </div>
             ) : null}
 
-            {/* <div class="menu">
-              <LongMenu
-                setLoading={setLoading}
-                setIsOpen={setIsOpen}
-                setCopySuccess={setCopySuccess}
-              />
-            </div> */}
-
             <ImagesBox>
               <img
-                src={`http://alirafeqpro-001-site1.gtempurl.com/${mainImg}`}
+                src={`http://mysooqdemo-001-site1.dtempurl.com/${mainImg}`}
                 alt={"main"}
                 width="100%"
                 height={"350px"}
@@ -268,7 +256,7 @@ function AddDetails() {
                   return elem ? (
                     <div key={index}>
                       <img
-                        src={`http://alirafeqpro-001-site1.gtempurl.com/${elem}`}
+                        src={`http://mysooqdemo-001-site1.dtempurl.com/${elem}`}
                         onClick={() => setMainImg(elem)}
                         alt="alt"
                       />

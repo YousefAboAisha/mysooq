@@ -10,6 +10,7 @@ import { BASE_URL } from "../../baseURL";
 import Snackbar from "../../Components/Snackbar/snackbar";
 import { useNavigate } from "react-router";
 import Spinner from "../../Components/Spinner/Spinner";
+import VerifyCodeModal from "../../Components/VerifyCodeModal/verifyCodeModal";
 
 const Wrap = styled.div`
   position: relative;
@@ -166,14 +167,17 @@ const Signup = () => {
   const [ConfirmedPassword, setConfirmedPassword] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [StateCode, setStateCode] = useState("");
-  const [Success, setSuccess] = useState(false);
+  const [SuccessMsg, setSuccessMsg] = useState(false);
   const [Country, setCountry] = useState("");
   const [Loading, setLoading] = useState(false);
   const [Countries, setCountries] = useState([]);
-  const [Error, setError] = useState("");
+  const [PasswordError, setPasswordError] = useState("");
+  const [UserError, setUserError] = useState("");
+  const [Code, setCode] = useState("");
+  const [Open, setOpen] = useState();
+  const [IsSigned, setIsSigned] = useState();
 
   const navigate = useNavigate();
-
   const countryURL = `${BASE_URL}Countries/GetAll`;
 
   const fetchCountriesData = async () => {
@@ -217,26 +221,30 @@ const Signup = () => {
   const clickHandler = async (e) => {
     e.preventDefault();
     if (Password !== ConfirmedPassword) {
-      setError(" يرجى التأكد من كلمة السر");
+      setPasswordError(" يرجى التأكد من كلمة السر");
     } else {
-      setError("");
+      setPasswordError("");
       setLoading(true);
       axios
         .post(`${BASE_URL}User/Create`, data)
         .then((res) => {
           console.log(res.data);
+          if (!res.data.data) {
+            setUserError("اسم المستخدم موجود مسبقا");
+          } else {
+            setSuccessMsg(true);
+            setUserError("");
+            setPasswordError("");
+            setOpen(true);
+
+            setTimeout(() => {
+              setSuccessMsg(false);
+            }, 4000);
+
+            // emptyForm();
+          }
+
           setLoading(false);
-          setSuccess(true);
-
-          setTimeout(() => {
-            setSuccess(false);
-          }, 4000);
-
-          emptyForm();
-
-          setTimeout(() => {
-            navigate("/signin");
-          }, 4000);
         })
         .catch((error) => {
           console.log(error);
@@ -245,9 +253,25 @@ const Signup = () => {
     }
   };
 
+  let verifyBox = null;
+
+  if (Open === true) {
+    verifyBox = (
+      <VerifyCodeModal
+        setCode={setCode}
+        Code={Code}
+        Open={Open}
+        setOpen={setOpen}
+        path={"signin"}
+      />
+    );
+  }
+
   return (
     <Wrap>
-      {Success ? <Snackbar msg={"تم إنشاء حسابك بنجاح"} /> : null}
+      {SuccessMsg ? <Snackbar msg={"تم إنشاء حسابك بنجاح"} /> : null}
+
+      {verifyBox}
 
       <Heading title={"إنشاء حساب"} />
       {Loading ? (
@@ -275,6 +299,7 @@ const Signup = () => {
                 value={Username}
                 required
               />
+              <LightSpan style={{ color: "red" }}>{UserError}</LightSpan>
             </Box>
           </Halfbox>
 
@@ -288,7 +313,7 @@ const Signup = () => {
                 value={Password}
                 required
               />
-              <LightSpan style={{ color: "red" }}>{Error}</LightSpan>
+              <LightSpan style={{ color: "red" }}>{PasswordError}</LightSpan>
             </Box>
 
             <Box>
@@ -301,7 +326,7 @@ const Signup = () => {
                 value={ConfirmedPassword}
                 required
               />
-              <LightSpan style={{ color: "red" }}> {Error}</LightSpan>
+              <LightSpan style={{ color: "red" }}> {PasswordError}</LightSpan>
             </Box>
           </Halfbox>
           <Halfbox>

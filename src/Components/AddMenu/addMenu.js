@@ -7,7 +7,7 @@ import { IconButton } from "@mui/material";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
 import { useNavigate, useParams } from "react-router";
-import { Link } from "react-router-dom";
+import ShareLink from "react-facebook-share-link";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -92,18 +92,18 @@ export default function CustomizedMenus({
     setAnchorEl(null);
   };
 
-  const copyToClipBoard = async (copyMe) => {
-    try {
-      await navigator.clipboard.writeText(copyMe);
-      setCopySuccess(true);
-      setAnchorEl(null);
-      setTimeout(() => {
-        setCopySuccess(false);
-      }, 4000);
-    } catch (err) {
-      setCopySuccess(false);
-    }
-  };
+  // const copyToClipBoard = async (copyMe) => {
+  //   try {
+  //     await navigator.clipboard.writeText(copyMe);
+  //     setCopySuccess(true);
+  //     setAnchorEl(null);
+  //     setTimeout(() => {
+  //       setCopySuccess(false);
+  //     }, 4000);
+  //   } catch (err) {
+  //     setCopySuccess(false);
+  //   }
+  // };
 
   return (
     <div>
@@ -153,19 +153,24 @@ export default function CustomizedMenus({
           <Delete />
         </MenuItem>
 
-        <MenuItem
-          onClick={() => copyToClipBoard(window.location.href)}
-          disableRipple
-          sx={{
-            fontFamily: "var(--mainFont)",
-            display: "flex",
-            justifyContent: "space-between",
-            gap: "10px",
-          }}
-        >
-          مشاركة
-          <Share />
-        </MenuItem>
+        <ShareLink link={window.location.href}>
+          {(link) => (
+            <a href={link} target="_blank" rel="noreferrer">
+              <MenuItem
+                disableRipple
+                sx={{
+                  fontFamily: "var(--mainFont)",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "10px",
+                }}
+              >
+                مشاركة
+                <Share />
+              </MenuItem>
+            </a>
+          )}
+        </ShareLink>
       </StyledMenu>
     </div>
   );

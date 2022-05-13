@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import classes from "./navbar.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../Media/logo.svg";
@@ -6,12 +6,17 @@ import { SearchOutlined, Menu, ExitToAppOutlined } from "@mui/icons-material/";
 import Links from "../../Links/links";
 import { useNavigate } from "react-router";
 import SideBar from "../Sidebar/Sidebar";
+import { GlobalState } from "../../Context/globalState";
+import Snackbar from "../Snackbar/snackbar";
 
 const Navbar = () => {
   const ref = useRef();
   const navigate = useNavigate();
   const [Value, setValue] = useState("");
   const [toggle, setToggle] = useState(false);
+  const [ShowSuccessMsg, setShowSuccessMsg] = useState(false);
+
+  const { user, setUser } = useContext(GlobalState);
 
   const clickHandler = () => {
     navigate(`/search/${Value}`);
@@ -27,8 +32,20 @@ const Navbar = () => {
     }
   };
 
+  const logout = () => {
+    setUser("");
+    setShowSuccessMsg(true);
+    setTimeout(() => {
+      setShowSuccessMsg(false);
+    }, 4000);
+
+    window.location.reload();
+  };
+
   return (
     <div className={classes.wrapper}>
+      {ShowSuccessMsg ? <Snackbar msg={"تم تسجيل الخروج بنجاح"} /> : null}
+
       <div className={classes.firstBox}>
         <div className={classes.logo}>
           <Link to={"/"}>
@@ -50,12 +67,19 @@ const Navbar = () => {
           </div>
         </div>
 
-        <Link to={"/signin"} className={classes.signup}>
-          <button>
+        {user && user !== "" ? (
+          <button onClick={logout}>
             <ExitToAppOutlined />
-            تسجيل الدخول
+            تسجيل الخروج
           </button>
-        </Link>
+        ) : (
+          <Link to={"/signin"} className={classes.signup}>
+            <button>
+              <ExitToAppOutlined />
+              تسجيل الدخول
+            </button>
+          </Link>
+        )}
       </div>
 
       <div className={classes.secondBox}>

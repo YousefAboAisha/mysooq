@@ -1,10 +1,9 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { BASE_URL } from "../../../baseURL";
-import Spinner from "../../../Components/Spinner/Spinner";
 import Snackbar from "../../../Components/Snackbar/snackbar";
 import { useNavigate } from "react-router";
+import { GlobalState } from "../../../Context/globalState";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -106,6 +105,8 @@ const Form = () => {
 
   const [Loading, setLoading] = useState(false);
   const [SuccessMsg, setSuccessMsg] = useState(false);
+
+  const { user } = useContext(GlobalState);
 
   const [Countries, setCountries] = useState([]);
   const [Cities, setCities] = useState([]);
@@ -214,6 +215,7 @@ const Form = () => {
   formData.append("Email", Email);
   formData.append("Description", AddDetails);
   formData.append("Fax", "Fax");
+  formData.append("OWNER", user);
 
   const emptyForm = () => {
     setAddType("");

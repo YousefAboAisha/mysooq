@@ -125,7 +125,10 @@ const Flags = () => {
               <Card key={index}>
                 <Link to={`countriesAdds/${elem.id}`}>
                   <img
-                    src={BASE_URL + "/" + elem.photoPath}
+                    src={
+                      "http://mysooqdemo-001-site1.dtempurl.com/" +
+                      elem.photoPath
+                    }
                     alt={elem.altname}
                     style={{ borderRadius: "50%" }}
                   />
