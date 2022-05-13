@@ -214,9 +214,7 @@ const Signin = () => {
         if (res.data.message === "الحساب غير محقق") {
           setIsVerified(false);
           setOpen(true);
-        }
-
-        if (res.data.message === "تم تسجيل الدخول بنجاح") {
+        } else if (res.data.message === "تم تسجيل الدخول بنجاح") {
           setIsSigned(true);
           setIsVerified(true);
           setShowSuccessMsg(true);
@@ -239,8 +237,8 @@ const Signin = () => {
       });
   };
 
-  console.log(IsVerified);
-  console.log(ShowSuccessMsg);
+  // console.log(IsVerified);
+  // console.log(ShowSuccessMsg);
 
   let verifyBox = null;
 

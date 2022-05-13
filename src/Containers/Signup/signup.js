@@ -223,10 +223,6 @@ const Signup = () => {
       setLoading(true);
       fetch(`${BASE_URL}User/Create`, {
         method: "POST",
-        headers: {
-          contentType: "application/json",
-          accept: "*/*",
-        },
         body: data,
       })
         .then((res) => {

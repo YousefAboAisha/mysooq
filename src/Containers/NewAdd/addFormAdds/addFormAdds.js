@@ -20,7 +20,8 @@ export const Image = styled.img`
   object-fit: "cover";
   object-position: "50% 50%";
   width: 100%;
-  max-width: 485px;
+  width: 390px;
+  height: 630px;
   border-radius: 10px;
   border: 1px solid #ddd;
 `;

@@ -7,9 +7,9 @@ import { useNavigate } from "react-router";
 
 const ImageBox = styled.div`
   position: relative;
-  height: 630px;
-  border: 1px solid #ddd;
+  /* height: 630px;
   min-width: 100%;
+  border: 1px solid #ddd; */
   border-radius: 10px;
   cursor: pointer;
 

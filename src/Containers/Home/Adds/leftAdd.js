@@ -19,7 +19,6 @@ const ImageBox = styled.div`
 
   & img {
     border-radius: 10px;
-    border: 1px solid #ddd;
   }
 `;
 
@@ -67,7 +66,7 @@ const LeftAdd = () => {
     <ImageBox onClick={() => clickHandler(Id)}>
       <img
         src={Add}
-        alt={add}
+        alt={"add"}
         style={{ objectFit: "cover", objectPosition: "50% 50%" }}
         width={"100%"}
       />

@@ -125,10 +125,7 @@ const Flags = () => {
               <Card key={index}>
                 <Link to={`countriesAdds/${elem.id}`}>
                   <img
-                    src={
-                      "http://alirafeqpro-001-site1.gtempurl.com" +
-                      elem.photoPath
-                    }
+                    src={BASE_URL + "/" + elem.photoPath}
                     alt={elem.altname}
                     style={{ borderRadius: "50%" }}
                   />

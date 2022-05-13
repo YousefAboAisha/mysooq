@@ -20,6 +20,7 @@ export default function CustomizedSnackbars(props) {
             direction: "rtl",
             gap: "10px",
             padding: "5px 15px",
+            backgroundColor: "var(--blue) !important",
           }}
         >
           {props.msg}
