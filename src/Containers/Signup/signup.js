@@ -46,15 +46,13 @@ const Wrap = styled.div`
     left: 1px;
     top: 67%;
     transform: translateY(-50%);
-    width: 60px;
+    width: 80px;
     direction: ltr;
-    border-radius: 10px 0 0 10px;
     border: unset;
+    background: transparent;
+    height: 47px;
     border-right: 1px solid #ddd;
-
-    &:focus {
-      border: 1px solid #ddd;
-    }
+    border-radius: 0;
   }
 
   @media only screen and (max-width: 800px) {
@@ -190,6 +188,31 @@ const Signup = () => {
     fetchCountriesData();
   }, []);
 
+  const stateCodes = [
+    "+974",
+    "+973",
+    "+20",
+    "+970",
+    "+249",
+    "+252",
+    "+966",
+    "+968",
+    "+963",
+    "+964",
+    "+213",
+    "+269",
+    "+212",
+    "+965",
+    "+216",
+    "+222",
+    "+967",
+    "+971",
+    "+962",
+    "+218",
+    "+961",
+    "+253",
+  ];
+
   const data = {
     owner: 0,
     roW_STATUS: 0,
@@ -205,7 +228,6 @@ const Signup = () => {
     default_country: Country,
     cityid: 0,
     authcode: "authcode",
-    // phoneNumber: `+${StateCode}`.concat(PhoneNumber),
   };
 
   const emptyForm = () => {
@@ -331,18 +353,23 @@ const Signup = () => {
           </Halfbox>
           <Halfbox>
             <Box>
-              <input
-                type={"tel"}
-                placeholder={"+970"}
-                className={"countryCode"}
-                onChange={(e) =>
-                  setStateCode(e.target.value.replace(/\D/g, ""))
-                }
+              <select
+                onChange={(e) => setStateCode(e.target.value)}
                 value={StateCode}
-                maxLength={3}
-                minLength={3}
-                required
-              />
+                className="countryCode"
+              >
+                <option value="" disabled hidden>
+                  +970
+                </option>
+
+                {stateCodes.map((elem, index) => {
+                  return (
+                    <option key={index} value={elem}>
+                      {elem}
+                    </option>
+                  );
+                })}
+              </select>
 
               <BoldSpan>رقم التليفون</BoldSpan>
               <input

@@ -53,6 +53,20 @@ export const Box = styled.div`
     margin-top: 7px;
     border-radius: 7px;
   }
+
+  & .countryCode {
+    position: absolute;
+    left: 1px;
+    top: 55%;
+    transform: translateY(-50%);
+    width: 80px;
+    direction: ltr;
+    border: unset;
+    background: transparent;
+    height: 39px;
+    border-right: 1px solid #ddd;
+    border-radius: 0;
+  }
 `;
 
 export const Halfbox = styled.div`
@@ -102,6 +116,7 @@ const Form = () => {
   const [FLink, setFLink] = useState("");
   const [TLink, setTLink] = useState("");
   const [ILink, setILink] = useState("");
+  const [StateCode, setStateCode] = useState("");
 
   const [Loading, setLoading] = useState(false);
   const [SuccessMsg, setSuccessMsg] = useState(false);
@@ -157,6 +172,31 @@ const Form = () => {
     "الروبل الروسي",
   ];
 
+  const stateCodes = [
+    "+974",
+    "+973",
+    "+20",
+    "+970",
+    "+249",
+    "+252",
+    "+966",
+    "+968",
+    "+963",
+    "+964",
+    "+213",
+    "+269",
+    "+212",
+    "+965",
+    "+216",
+    "+222",
+    "+967",
+    "+971",
+    "+962",
+    "+218",
+    "+961",
+    "+253",
+  ];
+
   // Fetching Countries
   const fetchCountriesData = async () => {
     const response = await fetch(countryURL);
@@ -194,7 +234,7 @@ const Form = () => {
 
   var formData = new FormData();
 
-  formData.append("Phone1", PhoneNumber);
+  formData.append("Phone1", `${StateCode}`.concat(PhoneNumber));
   formData.append("Youtube", YLink);
   formData.append("Facebook", FLink);
   formData.append("AREAId", 23);
@@ -451,9 +491,28 @@ const Form = () => {
             <input
               type="text"
               placeholder="0592551405"
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              onChange={(e) =>
+                setPhoneNumber(e.target.value.replace(/\D/g, ""))
+              }
               value={PhoneNumber}
             />
+            <select
+              onChange={(e) => setStateCode(e.target.value)}
+              value={StateCode}
+              className="countryCode"
+            >
+              <option value="" disabled hidden>
+                +970
+              </option>
+
+              {stateCodes.map((elem, index) => {
+                return (
+                  <option key={index} value={elem}>
+                    {elem}
+                  </option>
+                );
+              })}
+            </select>
             <LightSpan>أدرج رقم الهاتف الخاص بك</LightSpan>
           </Box>
         </Halfbox>

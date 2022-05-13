@@ -155,7 +155,12 @@ export default function CustomizedMenus({
 
         <ShareLink link={window.location.href}>
           {(link) => (
-            <a href={link} target="_blank" rel="noreferrer">
+            <a
+              href={link}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "rgb(55, 65, 81)" }}
+            >
               <MenuItem
                 disableRipple
                 sx={{
