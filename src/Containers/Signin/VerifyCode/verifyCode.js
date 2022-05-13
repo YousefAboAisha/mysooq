@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Box, BoldSpan } from "../../NewAdd/addForm/form";
+import { BoldSpan } from "../../NewAdd/addForm/form";
 import axios from "axios";
-import { Email } from "@mui/icons-material";
 import { BASE_URL } from "../../../baseURL";
+import Snackbar from "../../../Components/Snackbar/snackbar";
+import { useNavigate } from "react-router";
+import Spinner from "../../../Components/Spinner/Spinner";
 
 const Wrap = styled.div`
   position: relative;
@@ -31,6 +33,13 @@ const Wrap = styled.div`
 
   & span {
     margin-bottom: 0;
+  }
+
+  & .error {
+    margin-top: -5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: red;
   }
 
   @media only screen and (max-width: 800px) {
@@ -65,49 +74,81 @@ const Btn = styled.button`
   }
 `;
 
-const clickHandler = (e) => {
-  e.preventDefault();
-
-  axios
-    .post(`${BASE_URL}User/Forget?username=${Email}`, {})
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
 const VerifyCode = () => {
   const [Code, setCode] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Error, setError] = useState("");
+  const [Loading, setLoading] = useState(false);
+  const [SuccessMsg, setSuccessMsg] = useState("");
+  const navigate = useNavigate();
+
+  const clickHandler = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    axios
+      .post(
+        `${BASE_URL}User/ResetPassword?code=${Code}&newpassword=${Password}`,
+        {}
+      )
+      .then((res) => {
+        if (res.data.data === false) {
+          setError(res.data.message);
+          setLoading(false);
+        } else {
+          setSuccessMsg(true);
+
+          setTimeout(() => {
+            setSuccessMsg(false);
+          }, 4000);
+
+          setLoading(false);
+          setTimeout(() => {
+            navigate("code");
+          }, 3000);
+        }
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <form onSubmit={clickHandler}>
-      <Wrap>
-        <h2>كود التحقق</h2>
-        <div>
-          <BoldSpan> كود التحقق</BoldSpan>
-          <input
-            type={"text"}
-            placeholder="كود التحقق"
-            onChange={(e) => setCode(e.target.value)}
-            value={Code}
-            required
-          />
-        </div>
+      {SuccessMsg ? <Snackbar msg={"تم تغيير كلمة المرور بنجاح"} /> : null}
 
-        <div>
-          <BoldSpan>كلمة المرور الجديدة</BoldSpan>
-          <input
-            type={"text"}
-            placeholder="أدخل كلمةالمرور الجديدة"
-            onChange={(e) => setCode(e.target.value)}
-            value={Code}
-            required
-          />
-        </div>
+      {Loading ? (
+        <Spinner />
+      ) : (
+        <Wrap>
+          <h2>إعادة تعيين كلمة المرور</h2>
+          <div>
+            <BoldSpan> كود التحقق</BoldSpan>
+            <input
+              type={"text"}
+              placeholder="كود التحقق"
+              onChange={(e) => setCode(e.target.value)}
+              value={Code}
+              required
+            />
+            <span className="error">{Error}</span>
+          </div>
 
-        <Btn>تأكيد</Btn>
-      </Wrap>
+          <div>
+            <BoldSpan>كلمة المرور الجديدة</BoldSpan>
+            <input
+              type={"password"}
+              placeholder="أدخل كلمةالمرور الجديدة"
+              onChange={(e) => setPassword(e.target.value)}
+              value={Password}
+              required
+            />
+          </div>
+
+          <Btn>تأكيد</Btn>
+        </Wrap>
+      )}
     </form>
   );
 };

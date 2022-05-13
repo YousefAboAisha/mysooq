@@ -149,8 +149,8 @@ const Slider = () => {
       {Adds.map((item) => (
         <ImageBox key={item.id} onClick={() => clickHandler(item.id)}>
           <Image
-            src={`http://alirafeqpro-001-site1.gtempurl.com/${item.image}`}
-            alt={"Add"}
+            src={`http://mysooqdemo-001-site1.dtempurl.com/${item.image}`}
+            alt={item.image ? item.image : "null"}
           />
           <span>{item.name}</span>
         </ImageBox>

@@ -5,6 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "../../../baseURL";
 import { useNavigate } from "react-router";
 import Spinner from "../../../Components/Spinner/Spinner";
+import Snackbar from "../../../Components/Snackbar/snackbar";
 
 const Wrap = styled.div`
   position: relative;
@@ -26,6 +27,13 @@ const Wrap = styled.div`
 
   & span {
     margin-bottom: 0;
+  }
+
+  & .error {
+    margin-top: -5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: red;
   }
 
   @media only screen and (max-width: 800px) {
@@ -63,6 +71,8 @@ const Btn = styled.button`
 const ForgetPassword = () => {
   const [Email, setEmail] = useState("");
   const [Loading, setLoading] = useState(false);
+  const [Error, setError] = useState("");
+  const [SuccessMsg, setSuccessMsg] = useState("");
   const navigate = useNavigate();
 
   const clickHandler = (e) => {
@@ -73,8 +83,22 @@ const ForgetPassword = () => {
       .post(`${BASE_URL}User/Forget?username=${Email}`, {})
       .then((res) => {
         console.log(res.data);
-        setLoading(false);
-        navigate("code");
+
+        if (res.data.data === false) {
+          setError(res.data.message);
+          setLoading(false);
+        } else {
+          setSuccessMsg(true);
+
+          setTimeout(() => {
+            setSuccessMsg(false);
+          }, 4000);
+
+          setLoading(false);
+          setTimeout(() => {
+            navigate("code");
+          }, 3000);
+        }
       })
       .catch((error) => {
         setLoading(false);
@@ -84,6 +108,10 @@ const ForgetPassword = () => {
 
   return (
     <form onSubmit={clickHandler}>
+      {SuccessMsg ? (
+        <Snackbar msg={"تم إرسال كود التحقق إلي الإيميل الخاص بك"} />
+      ) : null}
+
       {Loading ? (
         <Spinner />
       ) : (
@@ -97,6 +125,7 @@ const ForgetPassword = () => {
             value={Email}
             required
           />
+          <span className="error">{Error}</span>
           <Btn>إرسال</Btn>
         </Wrap>
       )}
