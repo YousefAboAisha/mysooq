@@ -160,8 +160,8 @@ const Register = styled.div`
 `;
 
 const Signup = () => {
-  const [UserName, setUserName] = useState("");
-  const [Email, setEmail] = useState("");
+  const [Fullname, setFullname] = useState("");
+  const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmedPassword, setConfirmedPassword] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
@@ -190,23 +190,23 @@ const Signup = () => {
     owner: 0,
     roW_STATUS: 0,
     timE_SLOT: 0,
-    username: UserName,
-    fullname: UserName,
+    username: Username,
+    fullname: Fullname,
     password: Password,
     facebook_id: "facebook_id",
-    email: Email,
+    Username: Username,
     joindate: new Date(),
     status: 0,
     address: "address",
     default_country: Country,
     cityid: 0,
     authcode: "authcode",
-    phoneNumber: `+${StateCode}`.concat(PhoneNumber),
+    // phoneNumber: `+${StateCode}`.concat(PhoneNumber),
   };
 
   const emptyForm = () => {
-    setUserName("");
-    setEmail("");
+    setFullname("");
+    setUsername("");
     setPassword("");
     setConfirmedPassword("");
     setCountry("");
@@ -221,10 +221,8 @@ const Signup = () => {
     } else {
       setError("");
       setLoading(true);
-      fetch(`${BASE_URL}User/Create`, {
-        method: "POST",
-        body: data,
-      })
+      axios
+        .post(`${BASE_URL}User/Create`, data)
         .then((res) => {
           console.log(res.data);
           setLoading(false);
@@ -262,8 +260,8 @@ const Signup = () => {
               <input
                 type="text"
                 placeholder="اسم المستخدم"
-                onChange={(e) => setUserName(e.target.value)}
-                value={UserName}
+                onChange={(e) => setFullname(e.target.value)}
+                value={Fullname}
                 required
               />
             </Box>
@@ -271,10 +269,10 @@ const Signup = () => {
             <Box>
               <BoldSpan>البريد الالكتروني</BoldSpan>
               <input
-                type="email"
+                type="Username"
                 placeholder="Mysooq@gmail.com"
-                onChange={(e) => setEmail(e.target.value)}
-                value={Email}
+                onChange={(e) => setUsername(e.target.value)}
+                value={Username}
                 required
               />
             </Box>
