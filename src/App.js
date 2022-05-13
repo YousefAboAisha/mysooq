@@ -10,7 +10,7 @@ import { GlobalProvider } from "./Context/globalState";
 function App() {
   return (
     <GlobalProvider>
-      <BrowserRouter>
+      <HashRouter>
         <ScrollTop />
 
         <div className="wrapper">
@@ -27,7 +27,7 @@ function App() {
           {/* Footer */}
           <Footer />
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </GlobalProvider>
   );
 }
