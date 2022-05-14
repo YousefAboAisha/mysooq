@@ -50,7 +50,7 @@ const ConactAdds = () => {
         }
         setAdds(fetchedData);
         setAdd(
-          `http://alirafeqpro-001-site1.gtempurl.com/${fetchedData[2].image}`
+          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[2].image}`
         );
         setId(fetchedData[2].id);
         setLoading(false);

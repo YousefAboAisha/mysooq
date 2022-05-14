@@ -44,7 +44,7 @@ const LeftAdd = () => {
         }
         setAdds(fetchedData);
         setAdd(
-          `http://alirafeqpro-001-site1.gtempurl.com/${fetchedData[1].image}`
+          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[1].image}`
         );
         setId(fetchedData[1].id);
         setLoading(false);
