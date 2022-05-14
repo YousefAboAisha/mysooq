@@ -116,7 +116,6 @@ const Slider = () => {
         }
         setAdds(fetchedData);
         setLoading(false);
-        console.log(Adds);
       })
       .catch((error) => {
         console.log(error);

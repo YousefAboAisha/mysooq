@@ -6,7 +6,6 @@ import { useNavigate, useParams } from "react-router";
 import { BASE_URL } from "../../baseURL";
 import {
   Wrapper,
-  //   Box,
   BoldSpan,
   LightSpan,
   Halfbox,
@@ -219,8 +218,6 @@ export default function UpdateModal({ add, setSuccess }) {
     setTLink("");
   };
 
-  console.log(data);
-
   const clickHandler = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -233,9 +230,7 @@ export default function UpdateModal({ add, setSuccess }) {
         response.json();
       })
       .then((data) => {
-        console.log(data);
         setLoading(false);
-        // setIsOpen(false);
         setSuccess(true);
 
         setTimeout(() => {
@@ -251,9 +246,6 @@ export default function UpdateModal({ add, setSuccess }) {
         setLoading(false);
       });
   };
-
-  console.log("Add Image is " + MainAddImage);
-  console.log("Add Images are " + AddImages);
 
   return (
     <div>

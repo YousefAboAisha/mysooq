@@ -18,8 +18,6 @@ const AllRecentAdds = () => {
     axios
       .get(`${BASE_URL}Business/GetLatest?&page=${Page}`)
       .then((res) => {
-        // console.log(res.data.data.$values);
-
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);

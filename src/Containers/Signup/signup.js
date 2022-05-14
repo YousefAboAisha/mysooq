@@ -8,7 +8,6 @@ import Heading from "../../Components/Heading/heading";
 import axios from "axios";
 import { BASE_URL } from "../../baseURL";
 import Snackbar from "../../Components/Snackbar/snackbar";
-import { useNavigate } from "react-router";
 import Spinner from "../../Components/Spinner/Spinner";
 import VerifyCodeModal from "../../Components/VerifyCodeModal/verifyCodeModal";
 
@@ -173,9 +172,7 @@ const Signup = () => {
   const [UserError, setUserError] = useState("");
   const [Code, setCode] = useState("");
   const [Open, setOpen] = useState();
-  const [IsSigned, setIsSigned] = useState();
 
-  const navigate = useNavigate();
   const countryURL = `${BASE_URL}Countries/GetAll`;
 
   const fetchCountriesData = async () => {
@@ -250,7 +247,6 @@ const Signup = () => {
       axios
         .post(`${BASE_URL}User/Create`, data)
         .then((res) => {
-          console.log(res.data);
           if (!res.data.data) {
             setUserError("اسم المستخدم موجود مسبقا");
           } else {

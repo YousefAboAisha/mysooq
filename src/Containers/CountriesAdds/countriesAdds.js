@@ -141,8 +141,6 @@ const CountriesAdds = () => {
     fetchSubTypesData();
   }, [AddType]);
 
-  console.log(cID, AddType, City, Page, AddSubType);
-
   return (
     <Wrapper>
       <PageTitle title={"الدول"} />

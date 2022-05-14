@@ -16,9 +16,9 @@ const Wrapper = styled.div`
 const HomeLayout = () => {
   return (
     <Wrapper>
-      <Grid container spacing={0}>
+      <Grid container spacing={0} mt={5}>
         {/* Flags Section */}
-        <Grid item lg={8} md={12} xs={12}>
+        <Grid item lg={8} md={12} xs={12} mt={3}>
           <Flags />
         </Grid>
 

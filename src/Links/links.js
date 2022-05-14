@@ -42,7 +42,6 @@ const Wrap = styled.div`
 
 const Links = () => {
   const location = useLocation();
-  // console.log(location.pathname);
 
   const links = [
     {

@@ -180,8 +180,6 @@ const UpdateAdd = ({ setIsOpen, add, setSuccess }) => {
     setTLink("");
   };
 
-  console.log(data);
-
   const clickHandler = (e) => {
     e.preventDefault();
 
@@ -195,7 +193,6 @@ const UpdateAdd = ({ setIsOpen, add, setSuccess }) => {
         response.json();
       })
       .then((data) => {
-        console.log(data);
         setLoading(false);
         setIsOpen(false);
         setSuccess(true);
@@ -218,9 +215,6 @@ const UpdateAdd = ({ setIsOpen, add, setSuccess }) => {
     let value = e.target.files[0];
     setMainAddImage(value);
   };
-
-  console.log("Add Image is " + MainAddImage);
-  console.log("Add Images are " + AddImages);
 
   return (
     <SWrapper>

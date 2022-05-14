@@ -32,8 +32,6 @@ const Services = () => {
         `${BASE_URL}Business/GetLatest?&page=${Page}&countryId=${Country}&cityId=${City}&serviceId=${id}&subType=${Subtype}`
       )
       .then((res) => {
-        // console.log(res.data.data.$values);
-
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);

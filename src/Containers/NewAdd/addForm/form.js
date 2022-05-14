@@ -286,7 +286,6 @@ const Form = () => {
         response.json();
       })
       .then((data) => {
-        console.log(data);
         setLoading(false);
         setSuccessMsg(true);
 
@@ -303,8 +302,6 @@ const Form = () => {
         setLoading(false);
       });
   };
-
-  console.log(mainAddImage);
 
   return (
     <form onSubmit={clickHandler}>

@@ -107,7 +107,6 @@ const VerifyCode = () => {
             navigate("code");
           }, 3000);
         }
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);

@@ -35,7 +35,6 @@ const Text = () => {
     axios
       .get(`${BASE_URL}Articles/GetPoster`)
       .then((res) => {
-        // console.log(res.data.data);
         setData(res.data.data);
         setLoading(false);
       })
@@ -48,8 +47,6 @@ const Text = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log(Data);
 
   return (
     <Wrapper>

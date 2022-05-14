@@ -144,12 +144,6 @@ function AddDetails() {
       });
   };
 
-  console.log(mainImg);
-
-  console.log(Add);
-
-  // console.log("URL" + window.location.href);
-
   useEffect(() => {
     fetchData();
   }, [setAdd]);

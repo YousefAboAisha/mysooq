@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
-import { useParams, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../baseURL";
+import { useNavigate } from "react-router-dom";
 
 const Item = styled.div`
   position: relative;

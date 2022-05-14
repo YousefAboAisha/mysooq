@@ -97,9 +97,6 @@ const PageHeader = ({
     fetchCitiesData();
   }, [Country]);
 
-  console.log("page Header");
-  console.log(Country, City, Subtype);
-
   return (
     <Grid item lg={12} mt={3}>
       <Header>

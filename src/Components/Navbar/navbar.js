@@ -15,6 +15,7 @@ const Navbar = () => {
   const [Value, setValue] = useState("");
   const [toggle, setToggle] = useState(false);
   const [ShowSuccessMsg, setShowSuccessMsg] = useState(false);
+  const [SerachToggle, setSearchToggle] = useState(false);
 
   const { user, setUser } = useContext(GlobalState);
 
@@ -67,6 +68,22 @@ const Navbar = () => {
           </div>
         </div>
 
+        {SerachToggle ? (
+          <div className={classes.mobileSearch}>
+            <input
+              type={"text"}
+              placeholder="ابحث عن إعلانات"
+              onChange={(e) => setValue(e.target.value)}
+              value={Value}
+              onKeyDown={(e) => enterHandler(e)}
+              autoFocus
+            />
+            <div className={classes.searchBtn} onClick={clickHandler}>
+              <SearchOutlined />
+            </div>
+          </div>
+        ) : null}
+
         {user && user !== "" ? (
           <button onClick={logout}>
             <ExitToAppOutlined />
@@ -80,6 +97,16 @@ const Navbar = () => {
             </button>
           </Link>
         )}
+
+        <div
+          className={classes.toggleSearch}
+          onClick={() => setSearchToggle(!SerachToggle)}
+        >
+          <button>
+            بحث عن إعلان
+            <SearchOutlined />
+          </button>
+        </div>
       </div>
 
       <div className={classes.secondBox}>

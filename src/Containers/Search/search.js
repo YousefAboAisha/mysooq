@@ -6,7 +6,6 @@ import { BASE_URL } from "../../baseURL";
 import Spinner from "../../Components/Spinner/Spinner";
 import Card from "../../Components/AddCard/addCard";
 import axios from "axios";
-import { SearchOutlined } from "@mui/icons-material";
 import { useParams } from "react-router";
 
 const Wrapper = styled.div`
@@ -68,8 +67,6 @@ const Search = () => {
     axios
       .get(`${BASE_URL}Business/SearchByName?name=${query}`)
       .then((res) => {
-        // console.log(res.data.data.$values);
-
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);

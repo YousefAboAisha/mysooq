@@ -82,8 +82,6 @@ const ForgetPassword = () => {
     axios
       .post(`${BASE_URL}User/Forget?username=${Email}`, {})
       .then((res) => {
-        console.log(res.data);
-
         if (res.data.data === false) {
           setError(res.data.message);
           setLoading(false);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import BlueButton from "../../../Components/BlueButton/blueButton";
 import { Wrapper, Box, BoldSpan, Halfbox } from "../../NewAdd/addForm/form";
 import styled from "styled-components";
 import Spinner from "../../../Components/Spinner/Spinner";
@@ -66,7 +65,6 @@ const Form = () => {
     axios
       .post(`${BASE_URL}LoginAPI/Login`, data)
       .then((res) => {
-        console.log(res.data);
         setLoading(false);
         setSuccess(true);
         setTimeout(() => {

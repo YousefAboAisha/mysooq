@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     background-color: var(--blue);
-    margin-bottom: 20px;
+    margin-bottom: 70px;
 }
 
 .wrapper .firstBox {
@@ -12,8 +12,8 @@
     align-items: center;
     width: 90%;
     margin: 0 auto;
-    height: auto;
     border-bottom: 1px solid var(--white);
+    gap: 10px;
 }
 
 .wrapper .firstBox .logo {
@@ -33,7 +33,12 @@
     width: 70%;
 }
 
-.wrapper .firstBox .search input {
+.wrapper .firstBox .mobileSearch {
+    display: none;
+}
+
+.wrapper .firstBox .search input,
+.wrapper .firstBox .mobileSearch input {
     width: 100%;
     font-size: 16px;
     transition: all 0.3s linear;
@@ -41,7 +46,8 @@
     transition: all 0.3s linear;
 }
 
-.wrapper .firstBox .search .searchBtn {
+.wrapper .firstBox .search .searchBtn,
+.wrapper .firstBox .mobileSearch .searchBtn {
     position: absolute;
     left: 0;
     top: 50%;
@@ -74,6 +80,28 @@
     background-color: var(--white);
     color: var(--blue);
     transition: all 0.3s linear;
+}
+
+.wrapper .firstBox .toggleSearch {
+    display: none;
+}
+
+.wrapper .firstBox .toggleSearch button {
+    background: none;
+    color: var(--white);
+    border: 1px solid var(--white);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s linear;
+    gap: 5px;
+    padding: 6px;
+    min-width: fit-content;
+    font-size: 13px;
+}
+
+.wrapper .firstBox .toggleSearch svg {
+    color: var(--white);
 }
 
 .wrapper .secondBox {
@@ -142,9 +170,29 @@
         display: none;
     }
 
-    .wrapper .firstBox .search {
+    .wrapper .firstBox .mobileSearch {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        margin-right: 10px;
+        top: 160px;
+    }
+
+    .wrapper .firstBox .mobileSearch input {
+        width: 100%;
+    }
+
+    .wrapper .firstBox .search {
+        display: none;
+    }
+
+    .wrapper .firstBox .toggleSearch {
+        display: block;
+    }
+
+    .wrapper .firstBox .logo img {
+        width: 100px;
     }
 }
 

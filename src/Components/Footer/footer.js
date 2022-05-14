@@ -3,7 +3,6 @@ import { Grid } from "@mui/material/";
 import styled from "styled-components";
 import logo from "../../Media/logo.svg";
 import { Link } from "react-router-dom";
-import paypal from "../../Media/paypal.svg";
 
 const FooterSection = styled.div`
   position: relative;

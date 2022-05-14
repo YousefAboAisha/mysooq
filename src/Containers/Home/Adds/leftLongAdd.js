@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import add from "../../../Media/leftAdd2.png";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router";

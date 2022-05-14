@@ -64,9 +64,6 @@ const RealEstates = () => {
     fetchData();
   }, [Page]);
 
-  console.log(Page, Country, City, Subtype);
-  console.log("Page Counter", Page);
-
   return (
     <Wrapper>
       <PageTitle title={"عقارات"} />

@@ -36,10 +36,6 @@ const RecentAdds = () => {
     fetchData();
   }, [Page]);
 
-  // console.log(Adds);
-  // console.log(Page);
-  // console.log(AllAdds);
-
   return (
     <Grid
       container

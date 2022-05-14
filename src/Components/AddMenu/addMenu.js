@@ -69,14 +69,12 @@ export default function CustomizedMenus({
 
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log(id);
 
   const deleteHandler = () => {
     setLoading(true);
     axios
       .delete(`${BASE_URL}Business/Delete?id=${id}`)
       .then((res) => {
-        console.log(res.data);
         setAnchorEl(null);
         setLoading(false);
         navigate("/");

@@ -4,12 +4,9 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@mui/icons-material";
-// import Spinner from "../../../Components/Spinner/Spinner";
 import { BASE_URL } from "../../../baseURL";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-// const URL = "https://localhost:44387/api/Countries/GetAll";
 
 const Wrapper = styled.div`
   position: relative;
@@ -90,8 +87,6 @@ const Flags = () => {
     axios
       .get(BASE_URL + "Countries/GetAll")
       .then((res) => {
-        // console.log(res.data.data.$values);
-
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);
@@ -108,9 +103,6 @@ const Flags = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  // console.log(Countries);
-  // console.log(BASE_URL);
 
   return (
     <Wrapper>

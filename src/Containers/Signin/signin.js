@@ -192,7 +192,6 @@ const Signin = () => {
   const [Open, setOpen] = useState();
 
   const { user, setUser } = useContext(GlobalState);
-  console.log(user);
 
   const navigate = useNavigate();
 
@@ -215,7 +214,6 @@ const Signin = () => {
     axios
       .post(`${BASE_URL}LoginAPI/Login`, data)
       .then((res) => {
-        console.log(res.data);
         if (res.data.message === "الحساب غير محقق") {
           setIsVerified(false);
           setOpen(true);
@@ -243,9 +241,6 @@ const Signin = () => {
       });
   };
 
-  // console.log(IsVerified);
-  // console.log(ShowSuccessMsg);
-
   let verifyBox = null;
 
   if (Open === true) {
@@ -259,8 +254,6 @@ const Signin = () => {
       />
     );
   }
-
-  // console.log(IsRemembered);
 
   return (
     <Wrap>

@@ -87,7 +87,6 @@ export default function VerifyCodeModal({
     axios
       .post(`${BASE_URL}User/AuthCode?code=${Code}`, {})
       .then((res) => {
-        console.log(res.data);
         setOpen(false);
         setTimeout(() => {
           navigate(path);
