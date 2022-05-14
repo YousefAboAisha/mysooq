@@ -28,9 +28,11 @@ export const Image = styled.img`
 
 const Adds = () => {
   const [Adds, setAdds] = useState([]);
-  const [Add, setAdd] = useState("");
+  const [Add1, setAdd1] = useState("");
+  const [Add2, setAdd2] = useState("");
   const [Loading, setLoading] = useState(false);
-  const [Id, setId] = useState("");
+  const [Id1, setId1] = useState("");
+  const [Id2, setId2] = useState("");
 
   const navigate = useNavigate();
 
@@ -48,10 +50,14 @@ const Adds = () => {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAdd(
+        setAdd1(
           `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[2].image}`
         );
-        setId(fetchedData[2].id);
+        setAdd2(
+          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[3].image}`
+        );
+        setId1(fetchedData[2].id);
+        setId2(fetchedData[3].id);
         setLoading(false);
       })
       .catch((error) => {
@@ -67,9 +73,9 @@ const Adds = () => {
   return Loading ? (
     <Spinner />
   ) : (
-    <ImageBox onClick={() => clickHandler(Id)}>
-      <Image src={Add} alt="Add" />
-      <Image src={Add} alt="Add" />
+    <ImageBox>
+      <Image src={Add1} alt="Add" onClick={() => clickHandler(Id1)} />
+      <Image src={Add2} alt="Add" onClick={() => clickHandler(Id2)} />
     </ImageBox>
   );
 };

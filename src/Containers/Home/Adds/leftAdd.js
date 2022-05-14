@@ -44,9 +44,9 @@ const LeftAdd = () => {
         }
         setAdds(fetchedData);
         setAdd(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[1].image}`
+          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[0].image}`
         );
-        setId(fetchedData[1].id);
+        setId(fetchedData[0].id);
         setLoading(false);
       })
       .catch((error) => {

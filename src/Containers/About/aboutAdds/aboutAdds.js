@@ -48,9 +48,9 @@ const AboutAdds = () => {
         }
         setAdds(fetchedData);
         setAdd(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[2].image}`
+          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[4].image}`
         );
-        setId(fetchedData[2].id);
+        setId(fetchedData[4].id);
         setLoading(false);
       })
       .catch((error) => {

@@ -41,11 +41,12 @@ const LeftLongAdd = () => {
         for (let key in res.data.data["$values"]) {
           fetchedData.push(res.data.data.$values[key]);
         }
+        console.log(fetchedData);
         setAdds(fetchedData);
         setAdd(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[2].image}`
+          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[1].image}`
         );
-        setId(fetchedData[2].id);
+        setId(fetchedData[1].id);
         setLoading(false);
       })
       .catch((error) => {

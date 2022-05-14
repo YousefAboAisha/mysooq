@@ -50,9 +50,9 @@ const ConactAdds = () => {
         }
         setAdds(fetchedData);
         setAdd(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[2].image}`
+          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[5].image}`
         );
-        setId(fetchedData[2].id);
+        setId(fetchedData[5].id);
         setLoading(false);
       })
       .catch((error) => {
