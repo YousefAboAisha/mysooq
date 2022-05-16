@@ -42,13 +42,16 @@ const Form = () => {
   const [Loading, setLoading] = useState(false);
   const [Success, setSuccess] = useState(false);
 
-  const navigate = useNavigate();
-
   const data = {
+    owner: 0,
+    roW_STATUS: 0,
+    timE_SLOT: 0,
     name: Name,
     email: Email,
-    title: Title,
-    details: Details,
+    phone: "",
+    ip: "",
+    body: Details,
+    tittle: Title,
   };
 
   const emptyForm = () => {
@@ -63,8 +66,9 @@ const Form = () => {
     e.preventDefault();
 
     axios
-      .post(`${BASE_URL}LoginAPI/Login`, data)
+      .post(`${BASE_URL}IncomingApi/Create`, data)
       .then((res) => {
+        console.log(res.data);
         setLoading(false);
         setSuccess(true);
         setTimeout(() => {
@@ -102,7 +106,7 @@ const Form = () => {
               <BoldSpan> الاسم كامل*</BoldSpan>
               <input
                 type="text"
-                placeholder="يوسف رشاد ابو عيشة"
+                placeholder="أدخل اسمك هنا"
                 onChange={(e) => setName(e.target.value)}
                 value={Name}
                 required

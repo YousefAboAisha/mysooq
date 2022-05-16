@@ -418,7 +418,7 @@ const Form = () => {
           <BoldSpan> اسم المُعلن *</BoldSpan>
           <input
             type="text"
-            placeholder="محمد سامي"
+            placeholder=" اسم المُعلن"
             onChange={(e) => setAddPublisher(e.target.value)}
             value={AddPublisher}
             required
@@ -487,7 +487,7 @@ const Form = () => {
             <BoldSpan> رقم الهاتف *</BoldSpan>
             <input
               type="text"
-              placeholder="0592551405"
+              placeholder="أدخل رقم الهاتف"
               onChange={(e) =>
                 setPhoneNumber(e.target.value.replace(/\D/g, ""))
               }
@@ -533,7 +533,7 @@ const Form = () => {
             <BoldSpan> فيديو للإعلان </BoldSpan>
             <input
               type="url"
-              placeholder="https://www.youtube.com/UCrcrGYRlbF"
+              placeholder="https://www.youtube.com"
               onChange={(e) => setYLink(e.target.value)}
               value={YLink}
             />
@@ -544,7 +544,7 @@ const Form = () => {
             <BoldSpan> رابط حساب الفيسبوك </BoldSpan>
             <input
               type="url"
-              placeholder="https://www.facebook.com/yousef.aboesha.9"
+              placeholder="https://www.facebook.com"
               onChange={(e) => setFLink(e.target.value)}
               value={FLink}
             />
@@ -557,7 +557,7 @@ const Form = () => {
             <BoldSpan> رابط حساب التويتر </BoldSpan>
             <input
               type="url"
-              placeholder="https://twitter.com/_abuAisha"
+              placeholder="https://twitter.com"
               onChange={(e) => setTLink(e.target.value)}
               value={TLink}
             />
@@ -568,7 +568,7 @@ const Form = () => {
             <BoldSpan> رابط حساب الإنستغرام </BoldSpan>
             <input
               type="url"
-              placeholder="https://www.instagram.com/yousef_aboesha/"
+              placeholder="https://www.instagram.com"
               onChange={(e) => setILink(e.target.value)}
               value={ILink}
             />

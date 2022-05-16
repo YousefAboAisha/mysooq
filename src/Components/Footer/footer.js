@@ -48,19 +48,6 @@ const BottomSection = styled.div`
   color: var(--white);
   gap: 10px;
 
-  /* @media only screen and (max-width: 500px) {
-    & {
-      margin-bottom: 30px;
-    }
-
-    & span {
-      position: absolute;
-      bottom: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  } */
-
   & h5 {
     font-size: 13px;
   }
@@ -97,8 +84,8 @@ const Footer = () => {
         {/* Right Grid  */}
         <Grid item lg={6} md={12} xs={12} alignItems="center">
           <Sections>
-            <img src={logo} alt={"logo"} width="120" height="120" />
-            <h2 style={{ color: "white", marginBottom: "10px" }}> ماي سوق</h2>
+            <img src={logo} alt={"logo"} width="150" height="150" />
+            <h2 style={{ color: "white", marginBottom: "5px" }}> ماي سوق</h2>
             <p style={{ color: "white", width: "90%" }}>
               مـاي سوق ، مجـاني 100% للـبيع والشراء السيـارات والـعقارات
               والاثـاث والحيوانات وقسم خاص بالاسر المنتجه ،، . الموقع بدون عمولة
