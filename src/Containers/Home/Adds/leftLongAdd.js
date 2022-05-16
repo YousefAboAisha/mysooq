@@ -37,15 +37,14 @@ const LeftLongAdd = () => {
     axios
       .get(`${BASE_URL}Business/GetPaid`)
       .then((res) => {
-        const fetchedData = [];
-        for (let key in res.data.data["$values"]) {
-          fetchedData.push(res.data.data.$values[key]);
+        for (let key in res.data.data.$values) {
+          if (res.data.data.$values[key].showing == 3) {
+            setAdd(res.data.data.$values[key].image);
+            setId(res.data.data.$values[key].id);
+          }
         }
-        console.log(fetchedData);
-        setAdds(fetchedData);
-        setAdd(`${IMAGE_BASE_URL}${fetchedData[1].image}`);
-        setId(fetchedData[1].id);
         setLoading(false);
+        console.log(Add);
       })
       .catch((error) => {
         console.log(error);
@@ -62,7 +61,7 @@ const LeftLongAdd = () => {
   ) : (
     <ImageBox onClick={() => clickHandler(Id)}>
       <img
-        src={Add}
+        src={`${IMAGE_BASE_URL}${Add}`}
         alt={"add"}
         width={"390"}
         height="630"

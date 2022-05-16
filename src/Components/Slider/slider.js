@@ -112,7 +112,9 @@ const Slider = () => {
       .then((res) => {
         const fetchedData = [];
         for (let key in res.data.data["$values"]) {
-          fetchedData.push(res.data.data.$values[key]);
+          if (res.data.data.$values[key].showing == 1) {
+            fetchedData.push(res.data.data.$values[key]);
+          }
         }
         setAdds(fetchedData);
         setLoading(false);

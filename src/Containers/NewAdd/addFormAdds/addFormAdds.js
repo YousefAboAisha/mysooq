@@ -28,11 +28,9 @@ export const Image = styled.img`
 
 const Adds = () => {
   const [Adds, setAdds] = useState([]);
-  const [Add1, setAdd1] = useState("");
-  const [Add2, setAdd2] = useState("");
+  const [Add, setAdd] = useState("");
   const [Loading, setLoading] = useState(false);
-  const [Id1, setId1] = useState("");
-  const [Id2, setId2] = useState("");
+  const [Id, setId] = useState("");
 
   const navigate = useNavigate();
 
@@ -45,15 +43,12 @@ const Adds = () => {
     axios
       .get(`${BASE_URL}Business/GetPaid`)
       .then((res) => {
-        const fetchedData = [];
-        for (let key in res.data.data["$values"]) {
-          fetchedData.push(res.data.data.$values[key]);
+        for (let key in res.data.data.$values) {
+          if (res.data.data.$values[key].showing == 3) {
+            setAdd(res.data.data.$values[key].image);
+            setId(res.data.data.$values[key].id);
+          }
         }
-        setAdds(fetchedData);
-        setAdd1(`${IMAGE_BASE_URL}${fetchedData[2].image}`);
-        setAdd2(`${IMAGE_BASE_URL}${fetchedData[3].image}`);
-        setId1(fetchedData[2].id);
-        setId2(fetchedData[3].id);
         setLoading(false);
       })
       .catch((error) => {
@@ -70,8 +65,16 @@ const Adds = () => {
     <Spinner />
   ) : (
     <ImageBox>
-      <Image src={Add1} alt="Add" onClick={() => clickHandler(Id1)} />
-      <Image src={Add2} alt="Add" onClick={() => clickHandler(Id2)} />
+      <Image
+        src={`${IMAGE_BASE_URL}${Add}`}
+        alt="Add"
+        onClick={() => clickHandler(Id)}
+      />
+      <Image
+        src={`${IMAGE_BASE_URL}${Add}`}
+        alt="Add"
+        onClick={() => clickHandler(Id)}
+      />
     </ImageBox>
   );
 };

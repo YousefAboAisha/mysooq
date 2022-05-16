@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import leftAdd from "../../../Media/leftAdd2.png";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { BASE_URL, IMAGE_BASE_URL } from "../../../baseURL";
@@ -44,13 +43,12 @@ const ConactAdds = () => {
     axios
       .get(`${BASE_URL}Business/GetPaid`)
       .then((res) => {
-        const fetchedData = [];
-        for (let key in res.data.data["$values"]) {
-          fetchedData.push(res.data.data.$values[key]);
+        for (let key in res.data.data.$values) {
+          if (res.data.data.$values[key].showing == 4) {
+            setAdd(res.data.data.$values[key].image);
+            setId(res.data.data.$values[key].id);
+          }
         }
-        setAdds(fetchedData);
-        setAdd(`${IMAGE_BASE_URL}${fetchedData[5].image}`);
-        setId(fetchedData[5].id);
         setLoading(false);
       })
       .catch((error) => {
@@ -66,7 +64,7 @@ const ConactAdds = () => {
     <Spinner />
   ) : (
     <ImageBox onClick={() => clickHandler(Id)}>
-      <Image src={Add} alt="Add" />
+      <Image src={`${IMAGE_BASE_URL}${Add}`} alt="Add" />
     </ImageBox>
   );
 };
