@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { IMAGE_BASE_URL } from "../../baseURL";
 
 const Item = styled.div`
   position: relative;
@@ -52,7 +53,7 @@ const Card = ({ card }) => {
     <Grid item lg={3} md={4} sm={6} xs={12}>
       <Item onClick={() => clickHandler(card.id)}>
         <img
-          src={`http://mysooqdemo-001-site1.dtempurl.com/${card.image}`}
+          src={`${IMAGE_BASE_URL}${card.image}`}
           alt={"add"}
           width="100%"
           height={"402"}

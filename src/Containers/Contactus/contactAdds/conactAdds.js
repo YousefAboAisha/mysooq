@@ -3,7 +3,7 @@ import styled from "styled-components";
 import leftAdd from "../../../Media/leftAdd2.png";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { BASE_URL } from "../../../baseURL";
+import { BASE_URL, IMAGE_BASE_URL } from "../../../baseURL";
 import Spinner from "../../../Components/Spinner/Spinner";
 
 export const ImageBox = styled.div`
@@ -49,9 +49,7 @@ const ConactAdds = () => {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAdd(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[5].image}`
-        );
+        setAdd(`${IMAGE_BASE_URL}${fetchedData[5].image}`);
         setId(fetchedData[5].id);
         setLoading(false);
       })

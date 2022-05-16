@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { BASE_URL } from "../../../baseURL";
+import { BASE_URL, IMAGE_BASE_URL } from "../../../baseURL";
 import Spinner from "../../../Components/Spinner/Spinner";
 
 export const ImageBox = styled.div`
@@ -50,12 +50,8 @@ const Adds = () => {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAdd1(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[2].image}`
-        );
-        setAdd2(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[3].image}`
-        );
+        setAdd1(`${IMAGE_BASE_URL}${fetchedData[2].image}`);
+        setAdd2(`${IMAGE_BASE_URL}${fetchedData[3].image}`);
         setId1(fetchedData[2].id);
         setId2(fetchedData[3].id);
         setLoading(false);

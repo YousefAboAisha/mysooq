@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import Carousel from "react-elastic-carousel";
 import styled from "styled-components";
-import { BASE_URL } from "../../baseURL";
+import { BASE_URL, IMAGE_BASE_URL } from "../../baseURL";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
@@ -148,7 +148,7 @@ const Slider = () => {
       {Adds.map((item) => (
         <ImageBox key={item.id} onClick={() => clickHandler(item.id)}>
           <Image
-            src={`http://mysooqdemo-001-site1.dtempurl.com/${item.image}`}
+            src={`${IMAGE_BASE_URL}${item.image}`}
             alt={item.image ? item.image : "null"}
           />
           <span>{item.name}</span>

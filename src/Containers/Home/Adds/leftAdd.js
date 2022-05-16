@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { BASE_URL } from "../../../baseURL";
+import { BASE_URL, IMAGE_BASE_URL } from "../../../baseURL";
 import Spinner from "../../../Components/Spinner/Spinner";
 
 const ImageBox = styled.div`
@@ -43,9 +43,7 @@ const LeftAdd = () => {
           fetchedData.push(res.data.data.$values[key]);
         }
         setAdds(fetchedData);
-        setAdd(
-          `http://mysooqdemo-001-site1.dtempurl.com/${fetchedData[0].image}`
-        );
+        setAdd(`${IMAGE_BASE_URL}${fetchedData[0].image}`);
         setId(fetchedData[0].id);
         setLoading(false);
       })
