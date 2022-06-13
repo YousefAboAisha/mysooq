@@ -131,7 +131,7 @@ const Footer = () => {
           <SocialSection style={{ gap: "12px" }}>
             <a
               target="_blank"
-              href="https://www.facebook.com/yousef.aboesha.9/"
+              href="https://m.facebook.com/mysooq/"
               rel="noreferrer"
             >
               <i className="fab fa-facebook"></i>
@@ -139,7 +139,7 @@ const Footer = () => {
 
             <a
               target="_blank"
-              href="https://www.linkedin.com/in/yousef-aboesha-9b40b4193/"
+              href="https://www.linkedin.com/mwlite/in/%D8%AD%D8%B3%D9%8A%D9%86-%D9%8A%D9%88%D9%86%D8%B3-219b20241"
               rel="noreferrer"
             >
               <i className="fab fa-linkedin"></i>
@@ -147,7 +147,7 @@ const Footer = () => {
 
             <a
               target="_blank"
-              href="https://twitter.com/_abuAisha"
+              href="https://twitter.com/mysooq?t=kzqC5QUxvSXe62I4iIh67Q&s=09"
               rel="noreferrer"
             >
               <i className="fab fa-twitter"></i>
@@ -155,10 +155,10 @@ const Footer = () => {
 
             <a
               target="_blank"
-              href="https://github.com/YousefAboAisha"
+              href="https://instagram.com/mysooqnet?igshid=YmMyMTA2M2Y="
               rel="noreferrer"
             >
-              <i className="fab fa-github"></i>
+              <i className="fab fa-instagram"></i>
             </a>
           </SocialSection>
         </SocialSection>

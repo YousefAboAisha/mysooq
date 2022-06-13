@@ -4,7 +4,7 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@mui/icons-material";
-import { BASE_URL } from "../../../baseURL";
+import { BASE_URL, IMAGE_BASE_URL } from "../../../baseURL";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -117,10 +117,7 @@ const Flags = () => {
               <Card key={index}>
                 <Link to={`countriesAdds/${elem.id}`}>
                   <img
-                    src={
-                      "http://mysooqdemo-001-site1.dtempurl.com/" +
-                      elem.photoPath
-                    }
+                    src={IMAGE_BASE_URL + elem.photoPath}
                     alt={elem.altname}
                     style={{ borderRadius: "50%" }}
                   />
